@@ -1,16 +1,13 @@
 from django.contrib import admin
-from .models import Image, LicensePlateDetection
+from .models import LicenseNumberDetection
 
 
-@admin.register(Image)
-class ImageAdmin(admin.ModelAdmin):
-    list_display = ("uploaded_by", "image_file", "uploaded_at")
-    search_fields = ("uploaded_by__username",)
-    list_filter = ("uploaded_at",)
-
-
-@admin.register(LicensePlateDetection)
-class LicensePlateDetectionAdmin(admin.ModelAdmin):
-    list_display = ("image", "detected_plate", "detected_at")
-    search_fields = ("detected_plate", "image__uploaded_by__username")
+class LicenseNumberDetectionAdmin(admin.ModelAdmin):
+    list_display = ("detected_number", "detected_at", "image_file")
+    search_fields = ("detected_number",)
     list_filter = ("detected_at",)
+    readonly_fields = ("detected_at",)
+    ordering = ("-detected_at",)
+
+
+admin.site.register(LicenseNumberDetection, LicenseNumberDetectionAdmin)

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Search</title>
+</head>
+<body>
+    <h1>Car Search</h1>
+    <form method="GET" action="{% url 'app_car_moderation:search_car' %}">
+        <label for="license_number">Enter License Number:</label>
+        <input type="text" id="license_number" name="license_number" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if result %}
+        <h2>Search Results</h2>
+        <p>License Number: {{ result.license_number }}</p>
+        <p>Is Blacklisted: {{ result.is_blacklisted }}</p>
+        <h3>Owner Information</h3>
+        <p>Username: {{ owner.username }}</p>
+        <p>Full Name: {{ owner.first_name }} {{ owner.last_name }}</p>
+        <p>Email: {{ owner.email }}</p>
+        <p>Phone Number: {{ owner.phone_number }}</p>
+        <p>Address: {{ owner.address }}</p>
+    {% else %}
+        <p>No vehicle found with the given license number.</p>
+    {% endif %}
+</body>
+</html>
