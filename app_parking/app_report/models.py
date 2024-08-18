@@ -14,4 +14,4 @@ class Report(models.Model):
     file_path = models.FileField(upload_to="reports/")
 
     def __str__(self):
-        return f"{self.get_report_type_display()} generated at {self.generated_at}"
+        return f"{self.report_type} generated at {self.generated_at}"

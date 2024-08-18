@@ -4,28 +4,31 @@ from django.utils import timezone
 
 
 class User(AbstractUser):
+    RATE_CHOICES = [
+        ("basic", "Basic"),
+        ("premium", "Premium"),
+        ("standard", "Standard"),
+    ]
+
     email = models.EmailField(unique=True)
     role = models.CharField(
         max_length=10, choices=[("admin", "Admin"), ("user", "User")], default="user"
     )
     is_active = models.BooleanField(default=True)
-
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
+    full_name = models.CharField(max_length=60)
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     address = models.CharField(max_length=255, blank=True, null=True)
+    license_number = models.CharField(max_length=20, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    # Налаштування related_name для уникнення конфліктів
+    # Custom related_name settings to avoid conflicts
     groups = models.ManyToManyField(
         Group,
-        related_name="custom_user_set",  # нове ім'я для реверсного доступу
+        related_name="custom_user_set",
         blank=True,
     )
     user_permissions = models.ManyToManyField(
         Permission,
-        related_name="custom_user_set",  # нове ім'я для реверсного доступу
+        related_name="custom_user_set",
         blank=True,
     )
-
-    def __str__(self):
-        return self.username
