@@ -1,0 +1,94 @@
+/* parking_history.css */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn-secondary {
+    background: #6c757d;
+}
+
+.btn-primary {
+    background: #007bff;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.parking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.parking-table th,
+.parking-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.parking-table th {
+    background: #f7f7f7;
+    font-weight: bold;
+}
+
+.parking-table tr:hover {
+    background: #f1f1f1;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.status.paid {
+    background: #28a745;
+    color: #fff;
+}
+
+.status.unpaid {
+    background: #dc3545;
+    color: #fff;
+}
