@@ -123,6 +123,7 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "app_home", "images"),  # Путь к вашей папке с изображениями
+    # os.path.join(BASE_DIR, "app_home", "images", "about_project", "images"),  # Путь к вашей папке с изображениями
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
