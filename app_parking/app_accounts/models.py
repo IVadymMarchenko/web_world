@@ -1,7 +1,8 @@
 from django.contrib.auth.models import AbstractUser, Group, Permission
-from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
-
+from django.db import models
 
 class User(AbstractUser):
     RATE_CHOICES = [
@@ -20,6 +21,9 @@ class User(AbstractUser):
     address = models.CharField(max_length=255, blank=True, null=True)
     license_number = models.CharField(max_length=20, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    bio = models.TextField(max_length=500, blank=True)
+    location = models.CharField(max_length=30, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
 
     # Custom related_name settings to avoid conflicts
     groups = models.ManyToManyField(
@@ -32,3 +36,33 @@ class User(AbstractUser):
         related_name="custom_user_set",
         blank=True,
     )
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(max_length=500, blank=True)
+    location = models.CharField(max_length=30, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+
+    
+    def __str__(self):
+        return self.user.username
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+class ParkingHistory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    location = models.CharField(max_length=255)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    is_paid = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user.full_name} - {self.location} - {self.date}"
