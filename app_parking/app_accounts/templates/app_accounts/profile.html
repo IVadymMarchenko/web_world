@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app_accounts/profile.css' %}">
+</head>
+
+<body>
+    <div class="background">
+        <div class="profile-container">
+            <header class="profile-header">
+                <div class="avatar-section">
+                    <img id="avatar" src="{{ user.profile_image.url }}" alt="Аватар пользователя">
+                    <input type="file" id="avatar-upload" accept="image/*" onchange="loadAvatar(event)" style="display: none;">
+                    <label for="avatar-upload" class="upload-button">Изменить аватарку</label>
+                </div>
+                <div class="user-details">
+                    <h1 id="username">{{ user.full_name }}</h1>
+                    <p id="email">{{ user.email }}</p>
+                    <p id="car-number">Номер машины: {{ user.license_number }}</p>
+                </div>
+            </header>
+
+            <section class="car-details">
+                <h2>Информация о машине</h2>
+                <!-- Пример, как можно отобразить информацию о машине -->
+                <div class="info-item">
+                    <strong>Марка:</strong> <span id="car-make">{{ user.car_make }}</span>
+                </div>
+                <div class="info-item">
+                    <strong>Модель:</strong> <span id="car-model">{{ user.car_model }}</span>
+                </div>
+                <div class="info-item">
+                    <strong>Год выпуска:</strong> <span id="car-year">{{ user.car_year }}</span>
+                </div>
+                <div class="info-item">
+                    <strong>Время стоянки:</strong> <span id="parking-time">{{ user.parking_time }}</span>
+                </div>
+                <div class="info-item">
+                    <strong>Цена парковки:</strong> <span id="parking-price">{{ user.parking_price }} у.е.</span>
+                </div>
+            </section>
+            <section class="car-details">
+                <h2>Информация о машине</h2>
+                <div class="info-item">
+                    <strong>Марка:</strong> <span id="car-make">{{ user.car_make }}</span>
+                </div>
+                <div class="info-item">
+                    <strong>Модель:</strong> <span id="car-model">{{ user.car_model }}</span>
+                </div>
+                <div class="info-item">
+                    <strong>Номерной знак:</strong> <span id="car-number">{{ user.license_number }}</span>
+                </div>
+            </section>
+            
+            <!-- <section class="parking-history">
+                <h2>История парковок</h2>
+                <table>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Локация</th>
+                        <th>Оплачено</th>
+                        <th>Длительность</th>
+                    </tr>
+                    {% for entry in user.parking_history.all %}
+                    <tr>
+                        <td>{{ entry.date }}</td>
+                        <td>{{ entry.location }}</td>
+                        <td>{{ entry.amount_paid }} у.е.</td>
+                        <td>{{ entry.duration }} мин.</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </section> -->
+            
+            <!-- <section class="payment-section">
+                <h2>Оплата парковки</h2>
+                <button class="btn btn-primary">Оплатить парковку</button>
+            </section> -->
+            <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:parking_history' %}'">История парковок</button>
+            <section class="photo-upload">
+                <h2>Фото авто</h2>
+                <div id="uploaded-car-photos" class="uploaded-photos-container">
+                    {% for photo in user.car_photos.all %}
+                        <img src="{{ photo.url }}" alt="Фото машины" class="uploaded-car-photo">
+                    {% endfor %}
+                </div>
+                <input type="file" id="car-photo-upload" accept="image/*" multiple onchange="uploadCarPhotos(event)" style="display: none;">
+                <label for="car-photo-upload" class="upload-button">Загрузить фото машины</label>
+            </section>
+            <footer class="profile-footer">
+                <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:edit_profile' %}'">Изменить информацию</button>
+                <button class="btn btn-secondary" onclick="location.href='{% url 'app_accounts:logout' %}'">Logout</button>
+                <a href="{% url 'app_home:index' %}" class="btn btn-default"><i class="fas fa-arrow-left me-1"></i> Back to main</a>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function loadAvatar(event) {
+            const avatar = document.getElementById('avatar');
+            avatar.src = URL.createObjectURL(event.target.files[0]);
+        }
+
+        function uploadCarPhotos(event) {
+            const uploadedCarPhotosContainer = document.getElementById('uploaded-car-photos');
+            uploadedCarPhotosContainer.innerHTML = '';
+
+            Array.from(event.target.files).forEach(file => {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.alt = 'Uploaded Car Photo';
+                img.className = 'uploaded-car-photo';
+                uploadedCarPhotosContainer.appendChild(img);
+            });
+        }
+    </script>
+</body>
+
+</html>

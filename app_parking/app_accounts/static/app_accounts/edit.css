@@ -1,0 +1,162 @@
+/* Основные стили контейнера */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок */
+h4 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Стили карточки */
+.card {
+    border: none;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+/* Стили для бокового меню */
+.account-settings-links {
+    background-color: #e9ecef;
+    border-radius: 10px 0 0 10px;
+}
+
+.account-settings-links a {
+    color: #495057;
+    padding: 15px 20px;
+    font-weight: 500;
+}
+
+.account-settings-links a:hover,
+.account-settings-links a.active {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+/* Стили для вкладок */
+.tab-content .tab-pane {
+    padding: 20px;
+}
+
+.tab-content .tab-pane .form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Стили для полей ввода */
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Кнопки */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-default {
+    background-color: #f8f9fa;
+    border-color: #ced4da;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+.btn-default:hover {
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+
+/* Стиль изображения профиля */
+.ui-w-80 {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.media-body label {
+    cursor: pointer;
+}
+
+.account-settings-fileinput {
+    display: none;
+}
+
+/* Мелкие стили и отступы */
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.text-light {
+    color: #6c757d !important;
+}
+
+.border-light {
+    border-color: #e9ecef !important;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* Стили для предупреждающих сообщений */
+.alert {
+    margin-top: 10px;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+    color: #856404;
+}
+
+.alert-warning a {
+    color: #856404;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.alert-warning a:hover {
+    text-decoration: none;
+}

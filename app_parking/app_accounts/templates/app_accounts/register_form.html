@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+	{% load static %}
+    <link rel="stylesheet" href="{% static 'app_accounts/register.css' %}">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="form-container">
+            <h2>Sign Up</h2>
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="input-group">
+                    <label for="{{ form.username.id_for_label }}">Login</label>
+                    <span class="icon"><ion-icon name="person-sharp"></ion-icon></span>
+                    {{ form.username }}
+                </div>
+                
+                <div class="input-group">
+                    <label for="{{ form.email.id_for_label }}">Email Address</label>
+                    <span class="icon"><ion-icon name="mail-sharp"></ion-icon></span>
+                    {{ form.email }}
+                </div>
+                
+                <div class="input-group">
+                    <label for="{{ form.password1.id_for_label }}">Password</label>
+                    <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
+                    {{ form.password1 }}
+                </div>
+                
+                <div class="input-group">
+                    <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                    <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
+                    {{ form.password2 }}
+                </div>
+                
+                <div class="input-group">
+                    <label for="{{ form.full_name.id_for_label }}">Full Name</label>
+                    <span class="icon"><ion-icon name="person-sharp"></ion-icon></span>
+                    {{ form.full_name }}
+                </div>
+                
+                <div class="input-group">
+                    <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
+                    <span class="icon"><ion-icon name="call-sharp"></ion-icon></span>
+                    {{ form.phone_number }}
+                </div>
+                
+                <div class="input-group">
+                    <label for="{{ form.address.id_for_label }}">Address</label>
+                    <span class="icon"><ion-icon name="home-sharp"></ion-icon></span>
+                    {{ form.address }}
+                </div>
+                
+                <div class="input-group">
+                    <label for="{{ form.license_number.id_for_label }}">License Number</label>
+                    <span class="icon"><ion-icon name="card-sharp"></ion-icon></span>
+                    {{ form.license_number }}
+                </div>
+                
+                <button type="submit">Register Now</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -20,7 +20,7 @@ def home(request):
         },
         {
             "quote": "Fantastic service with very user-friendly online booking. I felt my car was safe and secure. Will definitely use again.",
-            "name": "Sofiya Kovalenko",
+            "name": "Sofiya Kovalenko", 
             "position": "Odesa",
             "image": "c3.jpg",
         },
@@ -84,18 +84,3 @@ def about_us_detail(request):
         request, "app_home/about_index.html", context={"msg": "About Us"}
     )
 
-
-def profile(request):
-    return render(request, "app_home/profile.html", context={"msg": "Your Profile"})
-
-
-def registration(request):
-    return render(
-        request, "app_home/register_form.html", context={"msg": "Registration"}
-    )
-
-
-def edit_profile(request):
-    return render(
-        request, "app_home/edit_profile.html", context={"msg": "Edit Profile"}
-    )
