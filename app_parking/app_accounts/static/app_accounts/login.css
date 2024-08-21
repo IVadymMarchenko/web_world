@@ -1,5 +1,8 @@
+/* Importing Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+
+/* Defining root variables for consistent theming */
 :root {
     --white: #ffffff;
     --text-clr: #1c1e21;
@@ -9,13 +12,17 @@
     --btn-hvr: #0056b3;
 }
 
+
+/* Global styles for resetting margins and padding, setting the box model, and applying the font */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Using Poppins font for the entire page */
 }
 
+
+/* Body styles for background gradient, centering content, and setting text color */
 body {
     background: linear-gradient(to bottom right, #6a11cb, #2575fc);
     display: flex;
@@ -25,35 +32,45 @@ body {
     color: var(--text-clr);
 }
 
+
+/* Wrapper styles for form layout, with a transparent background and shadow */
 .wrapper {
     width: 100%;
     max-width: 400px;
     padding: 20px;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1); /* Light transparent background */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    backdrop-filter: blur(10px); /* Applying blur effect behind the wrapper */
 }
 
+
+/* Form container with padding, background color, and shadow */
 .form-container {
     background: var(--input-bg);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
+
+/* Header styles within the form */
 .form-container h2 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 24px;
-    color: var(--primary);
+    color: var(--primary); /* Using primary color for the heading */
 }
 
+
+/* Input group for organizing label, icon, and input together */
 .input-group {
     position: relative;
     margin-bottom: 15px;
 }
 
+
+/* Styling the label above the input */
 .input-group label {
     display: block;
     margin-bottom: 5px;
@@ -61,29 +78,37 @@ body {
     color: var(--text-clr);
 }
 
+
+/* Styling the icon within the input group */
 .input-group .icon {
     position: absolute;
     top: 50%;
     left: 10px;
-    transform: translateY(10%);
+    transform: translateY(10%); /* Aligning the icon vertically */
     color: var(--primary);
     font-size: 18px;
 }
 
+
+/* Input field styling */
 input {
     width: 100%;
-    padding: 10px 40px;
+    padding: 10px 40px; /* Adding padding to make space for the icon */
     border-radius: 5px;
     border: 1px solid var(--secondary);
     background: var(--input-bg);
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease; /* Smooth transition on focus */
 }
 
+
+/* Focus state for input fields */
 input:focus {
-    border-color: var(--primary);
+    border-color: var(--primary); /* Highlighting the border on focus */
     outline: none;
 }
 
+
+/* Button styling for submission */
 button {
     width: 100%;
     padding: 12px;
@@ -93,18 +118,22 @@ button {
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease; /* Smooth transition on hover */
 }
 
+
+/* Hover state for the button */
 button:hover {
     background: var(--btn-hvr);
-	background-color: #29a744;
+	background-color: #29a744; /* Adding a new green hover color */
     border-color: #29a744;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Добавление тени при наведении */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Adding a shadow on hover */
 }
 
+
+/* Message styling for displaying validation or error messages */
 .messages {
     margin-bottom: 15px;
-    color: red;
+    color: red; /* Red text for warnings or errors */
     font-size: 14px;
 }

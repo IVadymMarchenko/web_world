@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>История парковок</title>
+    <title>History of parking</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'app_accounts/parking_history.css' %}">
 </head>
@@ -12,19 +12,19 @@
 <body>
     <div class="container">
         <header>
-            <h2>История парковок</h2>
+            <h2>History of parking</h2>
             <a href="{% url 'app_accounts:profile' user.username %}" class="btn btn-secondary">Back</a>
         </header>
         
         <table class="parking-table">
             <thead>
                 <tr>
-                    <th>Дата</th>
-                    <th>Место</th>
-                    <th>Время парковки</th>
-                    <th>Стоимость</th>
-                    <th>Статус</th>
-                    <th>Действие</th>
+                    <th>Date</th>
+                    <th>Place</th>
+                    <th>Parking time</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,24 +32,24 @@
                 <tr>
                     <td>{{ record.date }}</td>
                     <td>{{ record.location }}</td>
-                    <td>{{ record.parking_duration }} ч</td> <!-- Новая колонка -->
+                    <td>{{ record.parking_duration }} ч</td> 
                     <td>{{ record.amount }} у.е.</td>
                     <td>
                         {% if record.is_paid %}
-                        <span class="status paid">Оплачено</span>
+                        <span class="status paid">Paid</span>
                         {% else %}
-                        <span class="status unpaid">Не оплачено</span>
+                        <span class="status unpaid">Not paid</span>
                         {% endif %}
                     </td>
                     <td>
                         {% if not record.is_paid %}
-                        <a href="{% url 'pay_parking' record.id %}" class="btn btn-primary">Оплатить</a>
+                        <a href="{% url 'pay_parking' record.id %}" class="btn btn-primary">Pay</a>
                         {% endif %}
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="6">История парковок пуста.</td>
+                    <td colspan="6">The history of parking is empty.</td>
                 </tr>
                 {% endfor %}
             </tbody>

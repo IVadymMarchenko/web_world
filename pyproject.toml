@@ -2,7 +2,7 @@
 name = "finallproject"
 version = "0.1.0"
 package-mode = false
-description = ""
+description = "app_parking"
 authors = ["IVadymMarchenko <topim31@gmail.com>"]
 readme = "README.md"
 
@@ -12,6 +12,8 @@ django = "^5.1"
 pillow = "^10.4.0"
 psycopg2 = "^2.9.9"
 python-dotenv = "^1.0.1"
+cloudinary = "^1.41.0"
+django-cloudinary-storage = "^0.3.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,7 +1,11 @@
 from django.urls import path
+
+
 from . import views
 
+
 app_name = "app_accounts"
+
 
 urlpatterns = [
     path("register_form/", views.sign_up_user, name="register_form"),
