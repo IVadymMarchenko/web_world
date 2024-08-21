@@ -1155,3 +1155,49 @@
  .footer_section p a {
    color: inherit;
  }
+
+ .scroll-to-top {
+   position: fixed;
+   bottom: 30px;
+   right: 30px;
+   display: none;
+   width: 75px;
+   /* Ширина кнопки */
+   height: 75px;
+   /* Высота кнопки */
+   background-color: #333;
+   color: white;
+   text-align: center;
+   line-height: 75px;
+   /* Подгоните высоту линии под высоту кнопки */
+   border-radius: 50%;
+   z-index: 1000;
+   cursor: pointer;
+   opacity: 0.7;
+   transition: opacity 0.3s ease;
+   font-size: 32px;
+   /* Размер символа */
+ }
+
+ .scroll-to-top:hover {
+   background: linear-gradient(135deg, #d16e1e, #80582b);
+   /* Gradient change on hover */
+   transform: scale(1.1);
+   /* Slight enlargement on hover */
+   opacity: 1;
+   color: #fff;
+ }
+
+ .scroll-to-top i {
+   font-size: 110px;
+   /* Увеличен размер стрелки */
+ }
+
+ .scroll-to-top.show {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   opacity: 0;
+   animation: fadeIn 0.5s forwards;
+   /* Smooth appearance */
+ }
