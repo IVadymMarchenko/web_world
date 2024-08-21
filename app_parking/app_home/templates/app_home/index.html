@@ -506,7 +506,7 @@
   <!-- custom js -->
   <!-- <script src="js/custom.js"></script> -->
 
-  <a href="#" class="back-to-top">
+  {% comment %} <a href="#" class="back-to-top">
     <i class="fas fa-arrow-up"></i>
   </a>
 
@@ -527,7 +527,50 @@
         $('html, body').animate({scrollTop: 0}, 100);
       });
     });
+  </script> {% endcomment %}
+
+  <a href="#" class="scroll-to-top" id="scrollToTopBtn">
+  &#8679;
+  </a>
+  
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+  var scrollToTopBtn = document.getElementById("scrollToTopBtn");
+  var targetSection = document.getElementById("about");
+
+  function toggleScrollToTopBtn() {
+    var sectionPosition = targetSection.offsetTop;
+    var scrollPosition = window.scrollY + window.innerHeight;
+    
+    // Показываем кнопку, если пользователь прокрутил страницу ниже целевой секции
+    if (scrollPosition >= sectionPosition + 100) { // +100px для небольшой прокрутки вниз от секции
+      scrollToTopBtn.style.display = "block";
+    } else {
+      scrollToTopBtn.style.display = "none";
+    }
+  }
+
+  window.addEventListener("scroll", toggleScrollToTopBtn);
+
+  scrollToTopBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+    
+    // После завершения анимации перемещения наверх проверяем видимость кнопки
+    setTimeout(toggleScrollToTopBtn, 500);
+  });
+
+  // Инициализируем видимость кнопки при загрузке страницы
+  toggleScrollToTopBtn();
+});
+
+
   </script>
+
+
 
 </body>
 
