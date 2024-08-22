@@ -48,14 +48,40 @@
             </section>
             <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:parking_history' %}'">History of parking</button>
             <section class="photo-upload">
-                <h2>Photo car</h2>
-                <div id="uploaded-car-photos" class="uploaded-photos-container">
-                    {% for photo in user.car_photos.all %}
-                        <img src="{{ photo.url }}" alt="Фото машины" class="uploaded-car-photo">
-                    {% endfor %}
-                </div>
-                <input type="file" id="car-photo-upload" accept="image/*" multiple onchange="uploadCarPhotos(event)" style="display: none;">
-                <label for="car-photo-upload" class="upload-button">Upload a photo of the car</label>
+                <h2>Фото авто</h2>
+                <form method="POST" enctype="multipart/form-data" action="{% url 'app_photo:upload' %}">
+                    {% csrf_token %}
+
+                    <!-- Выводим ошибки формы -->
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    <div id="uploaded-car-photos" class="uploaded-photos-container">
+                        {% if car_photos %}
+                            {% for photo in car_photos %}
+                                <img src="{{ photo.image }}" alt="Фото машины" class="uploaded-car-photo">
+                            {% endfor %}
+                        {% else %}
+                            <p>Нет загруженных фотографий.</p>
+                        {% endif %}
+                    </div>
+
+                    <input type="file" id="car-photo-upload" name="image" accept="image/*" class="form-control">
+                    <label for="car-photo-upload" class="upload-button">Загрузить фото машины</label>
+                    <button type="submit" class="upload-button">Сохранить</button>
+                </form>
             </section>
             <footer class="profile-footer">
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:edit_profile' %}'">Change information</button>
