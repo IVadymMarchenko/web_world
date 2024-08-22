@@ -15,4 +15,15 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-      
+
+  web:
+    build: .
+    command: sh -c "python app_parking/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB_NAME}
