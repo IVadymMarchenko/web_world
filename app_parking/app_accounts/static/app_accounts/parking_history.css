@@ -1,4 +1,4 @@
-/* parking_history.css */
+/* General body styling */
 body {
     font-family: 'Open Sans', sans-serif;
     background-color: #f4f4f9;
@@ -7,6 +7,8 @@ body {
     padding: 0;
 }
 
+
+/* Container for main content */
 .container {
     max-width: 1200px;
     margin: 20px auto;
@@ -16,6 +18,8 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+
+/* Header styling */
 header {
     display: flex;
     justify-content: space-between;
@@ -23,12 +27,15 @@ header {
     margin-bottom: 20px;
 }
 
+
 header h2 {
     margin: 0;
     font-size: 24px;
     color: #333;
 }
 
+
+/* Button styling */
 .btn {
     display: inline-block;
     padding: 10px 15px;
@@ -40,26 +47,33 @@ header h2 {
     transition: background 0.3s ease;
 }
 
+
 .btn-secondary {
     background: #6c757d;
 }
+
 
 .btn-primary {
     background: #007bff;
 }
 
+
 .btn-secondary:hover {
     background: #5a6268;
 }
+
 
 .btn-primary:hover {
     background: #0056b3;
 }
 
+
+/* Parking history table styling */
 .parking-table {
     width: 100%;
     border-collapse: collapse;
 }
+
 
 .parking-table th,
 .parking-table td {
@@ -68,25 +82,31 @@ header h2 {
     border-bottom: 1px solid #ddd;
 }
 
+
 .parking-table th {
     background: #f7f7f7;
     font-weight: bold;
 }
 
+
 .parking-table tr:hover {
     background: #f1f1f1;
 }
 
+
+/* Status badge styling */
 .status {
     padding: 5px 10px;
     border-radius: 4px;
     font-weight: bold;
 }
 
+
 .status.paid {
     background: #28a745;
     color: #fff;
 }
+
 
 .status.unpaid {
     background: #dc3545;
