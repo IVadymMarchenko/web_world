@@ -1,5 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
+
+
 from .models import User
 
 
@@ -39,3 +41,4 @@ class UserProfileForm(UserChangeForm):
         widgets = {
             'birth_date': forms.DateInput(attrs={'type': 'date'}),
         }
+        
