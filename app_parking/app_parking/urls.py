@@ -25,4 +25,5 @@ urlpatterns = [
     path("", include("app_home.urls")),
     path("", include("app_accounts.urls")),
     path("", include("app_car_moderation.urls")),
+    path('', include('app_photo.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -54,8 +54,10 @@ INSTALLED_APPS = [
     "app_home",
     "app_accounts",
     "app_car_moderation",
-    "app_optical_detect",
+    "app_photo",
     "app_report",
+     "cloudinary",
+    "cloudinary_storage",
 ]
 
 
@@ -198,3 +200,16 @@ STATICFILES_DIRS = [
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+cloudinary.config(cloud_name='dozl7iemt',
+    api_key='828841675812886',
+    api_secret='LqE8T3BpI1spWSj_bDAipypzMm8')
+
+
+
+CLOUDINARY_STORAGE={'CLOUD_NAME': 'abc',
+                     "API_KEY":'828841675812886',
+                     "API_SECRET":'LqE8T3BpI1spWSj_bDAipypzMm8'}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
