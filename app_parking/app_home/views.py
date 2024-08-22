@@ -9,7 +9,7 @@ def home(request):
 
 
 def profile(request):
-    return render(request,'app_home/profile.html',context={'msg':'Your Profile'}) 
+    return render(request,'app_home/profile.html') 
 
 
 def registration(request):
