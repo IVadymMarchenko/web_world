@@ -27,4 +27,6 @@ COPY . .
 EXPOSE 8000
 
 # Command start server
-CMD ["sh", "-c", "python manage.py runserver 0.0.0.0:8000"]
+CMD ["sh", "-c", "python app_parking/manage.py runserver 0.0.0.0:8000"]
+
+
