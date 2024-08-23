@@ -60,7 +60,7 @@
                     {% csrf_token %}
 
                     <!-- Выводим ошибки формы -->
-                    {% if form.errors %}
+                    {% comment %} {% if form.errors %}
                         <div class="alert alert-danger">
                             <ul>
                                 {% for field in form %}
@@ -73,7 +73,7 @@
                                 {% endfor %}
                             </ul>
                         </div>
-                    {% endif %}
+                    {% endif %} {% endcomment %}
 
                     <div id="uploaded-car-photos" class="uploaded-photos-container">
                         {% if car_photos %}
@@ -90,6 +90,15 @@
                     <button type="submit" class="upload-button">Сохранить</button>
                 </form>
             </section>
+            <div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                    </div>
             <footer class="profile-footer">
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:edit_profile' %}'">Change information</button>
                 <button class="btn btn-secondary" onclick="location.href='{% url 'app_accounts:logout' %}'">Logout</button>

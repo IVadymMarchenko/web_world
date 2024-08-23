@@ -56,6 +56,7 @@ class ParkingRecord(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="parking_records"
     )
+    license_number = models.CharField(max_length=15)
     entry_time = models.DateTimeField(default=timezone.now)
     exit_time = models.DateTimeField(blank=True, null=True)
     parking_duration = models.DurationField(blank=True, null=True)
@@ -71,7 +72,7 @@ class ParkingRecord(models.Model):
         default=1,
     )
     is_paid = models.BooleanField(default=False)
-    is_parked = models.BooleanField(default=True)
+    is_parked = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.rate:

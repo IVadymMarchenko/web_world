@@ -1,32 +1,90 @@
+/* Error messages */
+.alert {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+    position: relative;
+    transition: opacity 0.3s ease-in-out;
+    text-align: center;
+    /* Center text horizontally */
+    opacity: 0.9;
+    /* Slightly transparent background */
+}
+
+.alert-info {
+    background-color: #17a2b8;
+}
+
+.alert-success {
+    background-color: #28a745;
+}
+
+.alert-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.alert-error {
+    background-color: #dc3545;
+    font-family: 'Arial', sans-serif;
+    /* Specific font for error messages */
+    font-weight: bold;
+    /* Make the error text bold */
+}
+
+.alert .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.alert .close-btn:hover {
+    color: #ddd;
+}
+
+.alert-dismissible {
+    padding-right: 40px;
+}
+
 /* Body styling with a gradient background and centered content */
 body {
-    font-family: 'Poppins', sans-serif; /* Applying Poppins font */
-    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient background */
+    font-family: 'Poppins', sans-serif;
+    /* Applying Poppins font */
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    /* Gradient background */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
-    margin: 0; 
+    height: 100vh;
+    margin: 0;
 }
 
 
 /* Main background container styling */
 .background {
     width: 100%;
-    max-width: 900px; /* Maximum width for the container */
+    max-width: 900px;
+    /* Maximum width for the container */
     padding: 20px;
-    background: rgba(255, 255, 255, 0.1); 
-    backdrop-filter: blur(10px); 
-    border-radius: 10px; 
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); 
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
 
 /* Profile container styling */
 .profile-container {
-    background: rgba(255, 255, 255, 0.9); 
+    background: rgba(255, 255, 255, 0.9);
     padding: 20px;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 
@@ -41,16 +99,16 @@ body {
 /* Section for the avatar image */
 .avatar-section {
     position: relative;
-    margin-right: 20px; 
+    margin-right: 20px;
 }
 
 
 .avatar-section img {
     width: 100px;
     height: 100px;
-    border-radius: 50%; 
-    object-fit: cover; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -59,10 +117,10 @@ body {
     margin-top: 10px;
     display: inline-block;
     padding: 8px 12px;
-    background-color: #2575fc; 
+    background-color: #2575fc;
     color: white;
-    border-radius: 5px; 
-    cursor: pointer; 
+    border-radius: 5px;
+    cursor: pointer;
     font-size: 14px;
     text-align: center;
 }
@@ -72,18 +130,19 @@ body {
 .user-details h1 {
     margin: 0;
     font-size: 24px;
-    color: #333; 
+    color: #333;
 }
 
 
 .user-details p {
     margin: 5px 0;
-    color: #666; 
+    color: #666;
 }
 
 
 /* Margins for sections like car details and photo uploads */
-.car-details, .photo-upload {
+.car-details,
+.photo-upload {
     margin-bottom: 20px;
 }
 
@@ -95,8 +154,8 @@ body {
 
 
 .info-item strong {
-    font-weight: bold; 
-    color: #333; 
+    font-weight: bold;
+    color: #333;
 }
 
 
@@ -104,61 +163,62 @@ body {
 .uploaded-car-photo {
     width: 120px;
     height: 80px;
-    margin-right: 10px; 
-    margin-bottom: 10px; 
-    object-fit: cover; 
-    border-radius: 5px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    margin-right: 10px;
+    margin-bottom: 10px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 
 /* Footer section with button alignment */
 .profile-footer {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 
 /* Primary button styling */
 .btn {
     padding: 10px 20px;
-    background-color: #2575fc; 
+    background-color: #2575fc;
     color: white;
     border: none;
-    border-radius: 5px; 
-    cursor: pointer; 
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 
 /* Button hover effect */
 .btn:hover {
-    background-color: #1c5fd8; 
+    background-color: #1c5fd8;
 }
 
 
 /* Secondary button styling */
 .btn-secondary {
-    background-color: #6a11cb; 
+    background-color: #6a11cb;
 }
 
 
 .btn-secondary:hover {
-    background-color: #5b0db8; 
+    background-color: #5b0db8;
 }
 
 
 /* Styling for parking history table */
 .parking-history table {
-    width: 100%; 
+    width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
 }
 
 
-.parking-history th, .parking-history td {
+.parking-history th,
+.parking-history td {
     padding: 10px;
-    border: 1px solid #ccc; 
-    text-align: left; 
+    border: 1px solid #ccc;
+    text-align: left;
 }
 
 
@@ -166,5 +226,5 @@ body {
 .payment-section .btn {
     margin-top: 20px;
     padding: 10px 20px;
-    font-size: 16px; 
+    font-size: 16px;
 }
