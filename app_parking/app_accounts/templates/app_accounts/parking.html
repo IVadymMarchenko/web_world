@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Now</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app_accounts/parking.css' %}">
+</head>
+
+<body>
+
+    <div class="parking-container">
+
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+        <section class="photo-upload">
+            <h2>Car photo</h2>
+            <form method="POST" enctype="multipart/form-data" action="{% url 'app_photo:upload' %}">
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <div id="uploaded-car-photos" class="uploaded-photos-container">
+                    {% if car_photos %}
+                        {% for photo in car_photos %}
+                            <img src="{{ photo.image }}" alt="Car photo" class="uploaded-car-photo">
+                        {% endfor %}
+                    {% else %}
+                        <p>There are no uploaded photos.</p>
+                    {% endif %}
+                </div>
+                <div class="custom-file-upload">
+                    <label for="car-photo-upload" class="custom-file-label">Upload a new photo</label>
+                    <input type="file" id="car-photo-upload" name="image" accept="image/*" class="custom-file-input">
+                </div>
+                <button type="submit" class="upload-button">Save</button>
+            </form>
+            
+            <div class="parking-status">
+                <h2>Parking Status: <span>Active</span></h2>
+                <p>Parking Time: 1 hour 30 minutes</p>
+            </div>
+        </section>
+        <section class="payment-section">
+            <h3>Make a Payment</h3>
+            <button class="btn btn-primary">Pay Now</button>
+        </section>
+
+
+
+    </div>
+
+</body>
+</html>

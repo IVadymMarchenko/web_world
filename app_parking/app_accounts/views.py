@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views import View
-
+from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import SignUpForm, LoginForm, UserChangeForm, UserProfileForm
 
@@ -64,6 +64,7 @@ def login_user(request):
 
 
 
+
 @login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
@@ -71,10 +72,14 @@ def profile(request, username):
         return redirect("app_accounts:profile", username=request.user.username)
 
     car_photos = user.car_images.all()
-    latest_record = ParkingRecord.objects.filter(user=user, is_parked=True).latest(
-        "entry_time"
-    )
+    
+    try:
+        latest_record = ParkingRecord.objects.filter(user=user, is_parked=True).latest("entry_time")
+    except ObjectDoesNotExist:
+        latest_record = None
+
     parking_records = ParkingRecord.objects.filter(user=user)
+
     return render(
         request,
         "app_accounts/profile.html",
@@ -85,7 +90,6 @@ def profile(request, username):
             "latest_record": latest_record,
         },
     )
-
 
 @login_required
 def logout_user(request):
@@ -125,3 +129,6 @@ class ParkingHistoryView(View):
             "app_accounts/parking_history.html",
             {"parking_records": parking_records},
         )
+
+def parking_view(request):
+    return render(request, 'app_accounts/parking.html')
