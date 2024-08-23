@@ -9,14 +9,14 @@ import cloudinary.uploader
 import os
 from django.http import HttpResponseRedirect
 from app_accounts.models import User,Profile
-
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from app_car_moderation.models import CarList, ParkingRecord
-
 from dotenv import load_dotenv
+
+cascade_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "model/haarcascade_russian_plate_number.xml"))
 
 User = get_user_model()
 
@@ -25,6 +25,7 @@ User = get_user_model()
 cascade_path = os.path.join(
     os.path.dirname(__file__), "model/haarcascade_russian_plate_number.xml"
 )
+
 
 # Initialize your recognizer with the correct path
 recognizer = CarPlateRecognizer(

@@ -72,16 +72,16 @@
             <ul class="navbar-nav  ">
               {% if user.is_authenticated %}
                 <li class="nav-item">
-                  <a class="nav-link" href="#about"> About</a>
+                  <a class="btn mains-button" href="#about"> About</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#pricing">Pricing</a>
+                  <a class="btn mains-button" href="#pricing">Pricing</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#why">Why Us</a>
+                  <a class="btn mains-button" href="#why">Why Us</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#testimonials">Testimonial</a>
+                  <a class="btn mains-button" href="#testimonials">Feedback</a>
                 </li>
                 <li class="nav-item profile">
                   <a href="{% url 'app_accounts:profile' user.username %}" class="btn profile-button">Profile</a>
@@ -90,27 +90,22 @@
               {% else %}
                 </li>
                 <li class="nav-item active">
-                  <a class="btn btn-primary" href="{% url 'app_accounts:register_form' %}">Registration</a> 
+                  <a class="btn btn-registr" href="{% url 'app_accounts:register_form' %}">Registration</a> 
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#about"> About</a>
+                  <a class="btn mains-button" href="#about"> About</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#pricing">Pricing</a>
+                  <a class="btn mains-button" href="#pricing">Pricing</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#why">Why Us</a>
+                  <a class="btn mains-button" href="#why">Why Us</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#testimonials">Testimonial</a>
+                  <a class="btn mains-button" href="#testimonials">Testimonial</a>
                 </li>
               {% endif %}
             </ul>
-            <form class="form-inline">
-              <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                <i class="fa fa-search" aria-hidden="true" href="#info"></i>
-              </button>
-            </form>
           </div>
         </nav>
       </div>
@@ -129,33 +124,33 @@
           </p>
         </div>
         <div class="find_form_container">
-          <form action="#" class="d-flex flex-column align-items-center">
+          {% if not user.is_authenticated %}
+          <form action="{% url 'app_accounts:login' %}" method="post" class="d-flex flex-column align-items-center">
+            {% csrf_token %}
             <div class="form-row mb-3">
-              <div class="col-md-5 px-0">
-                <div class="form-group">
-                  <label for="">Your Mail</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="mycar@gmail.com" />
-                  </div>
+                <div class="col-md-5 px-0">
+                    <div class="form-group">
+                        <label for="identifier">Your Login or Email</label>
+                        <div class="input-group">
+                            <input type="text" name="email" class="form-control" placeholder="mycar@gmail.com" required />
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-5 px-0">
-                <div class="form-group">
-                  <label for="">Your Password</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Enter Password" />
-                  </div>
+                <div class="col-md-5 px-0">
+                    <div class="form-group">
+                        <label for="password">Your Password</label>
+                        <div class="input-group">
+                            <input type="password" name="password" class="form-control" placeholder="Enter Password" required />
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            {% if not user.is_authenticated %}
-              <div class="btn-box">
-                <a href="{% url 'app_accounts:login' %}" class="btn btn-primary">Sign In</a>
-              </div>
-            {% endif %}
+            <div class="btn-box">
+              <button type="submit" class="btn sign_in">Sign In</button>
+            </div>
+          {% endif %}
           </form>
-        </div>
-        
+        </div>      
     </section>
     <!-- end slider section -->
   </div>

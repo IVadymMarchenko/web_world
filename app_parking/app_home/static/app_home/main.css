@@ -477,6 +477,7 @@ p {
 }
 
 .slider_section .find_form_container .btn-box button {
+  margin-left: 0px;
   display: inline-block;
   padding: 12px 50px;
   background-color: #ff6f3c;
@@ -484,11 +485,19 @@ p {
   border-radius: 45x;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  border: none;
+  border: 2px solid #ff6f3c; 
+  /* border: none; */
 }
 
+
+
+
+
+
 .slider_section .find_form_container .btn-box button:hover {
-  background-color: #ef3e00;
+
+  background-color: rgb(255, 255, 255);
+  color: #ff6f3c;
 }
 
 .slider_section #customCarousel1 {
@@ -997,7 +1006,7 @@ p {
 
 .scroll-to-top i {
   font-size: 32px;
-  /* Обновите размер стрелки, если используете символ */
+
 }
 .scroll-to-top.show {
   display: flex;
@@ -1007,9 +1016,77 @@ p {
   animation: fadeIn 0.5s forwards;
   /* Smooth appearance */
 }
-
-
-
 /*# sourceMappingURL=style.css.map */
 
 
+/* General styles for buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 12px; 
+  text-align: center;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 14px; 
+  transition: background-color 0.3s, color 0.3s;
+  margin-right: 3px
+}
+
+/* Styles for Profile */
+.profile-button {
+  margin-left: 10px;
+  background-color: #747373; 
+  color: white;
+  border: 2px solid #747373; 
+}
+
+.profile-button:hover {
+  background-color: rgb(255, 255, 255);
+  color: #ff6f3c;
+}
+
+/* Styles for button mains */
+.mains-button {
+  background-color: #1ab1c5; 
+  color: white;
+  border: 2px solid #1ab1c5; 
+}
+
+.mains-button:hover {
+  background-color: rgb(255, 255, 255);
+  color: #1ab1c5;
+}
+
+/* Styles for button Logout */
+.login-button {
+  background-color: #747373; 
+  color: white;
+  border: 2px solid #747373; 
+}
+
+.login-button:hover {
+  background-color: white;
+  color: #EF5350;
+}
+
+.btn-registr{
+  background-color: #ff6f3c; 
+  color: white;
+  border: 2px solid #ff6f3c; 
+}
+
+.btn-registr:hover {
+  background-color: rgb(255, 255, 255);
+  color: #ff6f3c;
+}
+
+
+.sign_in{
+  background-color: #ff6f3c; 
+  color: white;
+  border: 2px solid #ff6f3c; 
+}
+
+.sign_in:hover{
+  background-color: rgb(255, 255, 255);
+  color: #ff6f3c;
+}

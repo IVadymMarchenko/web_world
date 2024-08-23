@@ -12,6 +12,9 @@
 </head>
 
 <body>
+    <div class="bg-box">
+        <img src="{% static 'slider-bg.jpg' %}" alt="">
+      </div>
     <div class="wrapper">
         <div class="form-container">
             <h2>Sign Up</h2>
@@ -58,7 +61,6 @@
                     <label for="{{ form.address.id_for_label }}">Address</label>
                     <span class="icon"><ion-icon name="home-sharp"></ion-icon></span>
                     {{ form.address }}
-                </div>            
                 <button type="submit">Register Now</button>
             </form>
         </div>

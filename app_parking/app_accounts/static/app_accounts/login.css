@@ -1,6 +1,34 @@
 /* Importing Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+/* Background style */
+.bg-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.bg-box img {
+width: 100%;
+height: 100%;
+-o-object-fit: cover;
+object-fit: cover;
+}
+
+.bg-box::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: -webkit-gradient(linear, left top, right top, from(rgba(21, 82, 99, 0.65)), to(rgba(21, 82, 99, 0.55)));
+background: linear-gradient(to right, rgba(21, 82, 99, 0.65), rgba(21, 82, 99, 0.55));
+}
 
 /* Defining root variables for consistent theming */
 :root {

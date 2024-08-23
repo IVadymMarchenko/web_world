@@ -1,6 +1,7 @@
 __pycache__/
 .idea
 .env
+env
 Log
 postgres-data
 staticfiles
