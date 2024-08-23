@@ -1,0 +1,160 @@
+/* Общие стили */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f8fc;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.parking-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Стили сообщений */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #28a745;  
+    color: rgb(247, 247, 247);
+}
+
+.alert-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Стили загрузки фото */
+.photo-upload h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.custom-file-upload {
+    margin-bottom: 20px;
+}
+
+.custom-file-label {
+    display: inline-block;
+    padding: 10px;
+    background-color: #2575fc;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.custom-file-input {
+    display: none;
+}
+
+.upload-button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.upload-button:hover {
+    background-color: #218838;
+}
+
+/* Стили загруженных фото */
+.uploaded-photos-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.uploaded-car-photo {
+    width: 120px;
+    height: 80px;
+    border-radius: 5px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Статус парковки */
+.parking-status {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.parking-status span {
+    font-weight: bold;
+    color: #28a745;
+}
+
+/* Секция оплаты */
+.payment-section {
+    margin-top: 30px;
+}
+
+.payment-section h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    padding: 10px 20px;
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-primary:hover {
+    background-color: #1e5fd8;
+}
+
+/* История парковки */
+.parking-history {
+    margin-top: 40px;
+}
+
+.parking-history h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.parking-history table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.parking-history th, .parking-history td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.parking-history th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.parking-history tr:hover {
+    background-color: #f9f9f9;
+}

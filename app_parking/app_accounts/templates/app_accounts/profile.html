@@ -10,48 +10,38 @@
 </head>
 
 <body>
-
     <div class="bg-box">
         <img src="{% static 'slider-bg.jpg' %}" alt="">
     </div>
     <div class="background">
         <div class="profile-container">
-            <!-- Левый верхний блок с аватаром и именем -->
             <header class="profile-header">
                 <div class="avatar-section">
+                    {% if user.profile.avatar %}
+                        <img id="avatar" src="{{ user.profile.avatar.url }}" alt="User avatar">
+                    {% else %}
+                        <img id="avatar" src="{% static 'app_accounts/images/default_avatar.jpg' %}" alt="Default avatar">
+                    {% endif %}
+                    
 
-                    <img src="{% static 'app_accounts/images/default_avatar.jpg' %}" alt="User avatar" class="profile-avatar">
-
-                    <input type="file" id="avatar-upload" accept="image/*" onchange="loadAvatar(event)" style="display: none;">
-                    <label for="avatar-upload" class="upload-button">Change the avatar</label>
-
-    {% if user.profile.avatar %}
-        <img id="avatar" src="{{ user.profile.avatar }}" alt="User avatar">
-    {% else %}
-        <img id="avatar" src="{% static 'default-avatar.png' %}" alt="Default avatar">
-    {% endif %}
-    <form method="POST" enctype="multipart/form-data" action="{% url 'app_photo:upload_avatar' %}">
-        {% csrf_token %}
-        <input type="file" id="avatar-upload" name="avatar" accept="image/*" onchange="this.form.submit()" style="display: none;">
-        <label for="avatar-upload" class="upload-button">Change the avatar</label>
-    </form>
-</div>
-                <div class="user-details">
-
-                    <h1 id="username">{{ user.full_name }}</h1>
+                    <form method="POST" enctype="multipart/form-data" action="{% url 'app_photo:upload_avatar' %}">
+                        {% csrf_token %}
+                        <input type="file" id="avatar-upload" name="avatar" accept="image/*" onchange="this.form.submit()" style="display: none;">
+                        <label for="avatar-upload" class="upload-button">Change the avatar</label>
+                    </form>
                 </div>
-                <!-- <div class="avatar-section">
-                    <img id="avatar" src="{{ user.profile_image.url|default_if_none:'/static/app_accounts/images/default_avatar.jpg' }}" alt="User avatar" class="profile-avatar">
-                </div> -->
+
+                <div class="user-details">
+                    <h1 id="username">{{ user.get_full_name }}</h1>
+                </div>
             </header>
     
-            <!-- Основные действия профиля -->
             <section class="profile-actions">
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:parking_history' %}'">History of parking</button>
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_home:index' %}'">Back to main</button>
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:logout' %}'">Logout</button>
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:edit_profile' %}'">Change Information</button>
-                <button class="btn btn-primary" onclick="location.href='{% url 'app_photo:upload' %}'">Parking now</button>
+                <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:parking' %}'">Parking now</button>
             </section>
         </div>
     </div>   
