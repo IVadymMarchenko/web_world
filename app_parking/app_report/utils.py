@@ -18,7 +18,6 @@ def export_users_to_csv(queryset):
             "Full Name",
             "Phone Number",
             "Address",
-            "License Number",
             "Created At",
         ]
     )
@@ -30,7 +29,6 @@ def export_users_to_csv(queryset):
                 user.full_name,
                 user.phone_number,
                 user.address,
-                user.license_number,
                 user.created_at,
             ]
         )
@@ -46,6 +44,7 @@ def export_parking_records_to_csv(queryset):
     writer.writerow(
         [
             "User",
+            "license_number",
             "Entry Time",
             "Exit Time",
             "Parking Duration",

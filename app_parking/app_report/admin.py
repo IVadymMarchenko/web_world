@@ -15,7 +15,6 @@ class UsersAdmin(admin.ModelAdmin):
         "full_name",
         "phone_number",
         "address",
-        "license_number",
         "created_at",
     )
     list_filter = ("created_at",)
@@ -30,6 +29,7 @@ class UsersAdmin(admin.ModelAdmin):
 class ParkingRecordsAdmin(admin.ModelAdmin):
     list_display = (
         "user",
+        "license_number",
         "entry_time",
         "exit_time",
         "parking_duration",

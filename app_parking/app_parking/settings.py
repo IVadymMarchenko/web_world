@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+
 from pathlib import Path
 import os
 
@@ -18,7 +19,9 @@ import cloudinary_storage
 import cloudinary
 
 
-dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".env"))
+dotenv_path = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "..", "..", ".env")
+)
 load_dotenv(dotenv_path)
 
 
@@ -56,7 +59,7 @@ INSTALLED_APPS = [
     "app_car_moderation",
     "app_photo",
     "app_report",
-     "cloudinary",
+    "cloudinary",
     "cloudinary_storage",
 ]
 
@@ -167,7 +170,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'app_accounts.User'
+AUTH_USER_MODEL = "app_accounts.User"
 
 
 # Email or Username authentication
@@ -206,3 +209,4 @@ STATICFILES_DIRS = [
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+

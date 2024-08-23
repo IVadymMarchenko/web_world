@@ -49,7 +49,7 @@ class CarPlateExtractor:
 
     def extract(self,image):
         """Extracts license plates from an image"""
-        carplate_rects=self.classifier.detectMultiScale(image,scaleFactor=1.1,minNeighbors=5)
+        carplate_rects=self.classifier.detectMultiScale(image,scaleFactor=1.04,minNeighbors=6, minSize=(30, 30))
         carplate_imgs = [image[y + 10:y + h - 5, x + 10:x + w - 5] for x, y, w, h in carplate_rects]
         return carplate_imgs
 
@@ -89,6 +89,8 @@ class CarPlateRecognizer:
                 carplate_img=ImageHandler.enlarge_image(carplate_img,150)
                 carplate_imgs=cv2.cvtColor(carplate_img,cv2.COLOR_BGR2GRAY)
 
+                img_to_show = Image.fromarray(carplate_img)
+                img_to_show.show()
 
                 result=self.ocr_processor.process(carplate_imgs)
 
@@ -100,13 +102,13 @@ class CarPlateRecognizer:
                     print("OCR failed to recognize text.")
             return numbers
         except Exception as e:
-            print(f"Error: {str(e)}")
+         print(f"Error: {str(e)}")
 
 
-
-#recognizer = CarPlateRecognizer(classifier_path='model/haarcascade_russian_plate_number.xml',
-                                #font_path='font/simfang.ttf')
-#recognizer.recognize('https://static.apostrophe.ua/uploads/image/00110ccd282c9aabf82583eeffa18ebc.jpg')
+if __name__ == "__main__":
+    recognizer = CarPlateRecognizer(classifier_path='model/haarcascade_russian_plate_number.xml',
+                                font_path='font/simfang.ttf')
+    recognizer.recognize('cars/31-aa9922bb.jpg')
 
 
 

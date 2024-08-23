@@ -6,13 +6,25 @@ from .models import User
 
 
 class SignUpForm(UserCreationForm):
-    password1 = forms.CharField(label="Password", widget=forms.PasswordInput, required=True)
-    password2 = forms.CharField(label="Confirm Password", widget=forms.PasswordInput, required=True)
+    password1 = forms.CharField(
+        label="Password", widget=forms.PasswordInput, required=True
+    )
+    password2 = forms.CharField(
+        label="Confirm Password", widget=forms.PasswordInput, required=True
+    )
     email = forms.EmailField(label="Email", widget=forms.EmailInput, required=True)
 
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2', 'email', 'full_name', 'phone_number', 'address', 'license_number']
+        fields = [
+            "username",
+            "password1",
+            "password2",
+            "email",
+            "full_name",
+            "phone_number",
+            "address",
+        ]
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -27,7 +39,7 @@ class SignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
-    
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(label="Username", max_length=100)
@@ -37,8 +49,13 @@ class LoginForm(forms.Form):
 class UserProfileForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ['full_name', 'email', 'phone_number', 'address', 'license_number', 'location', 'birth_date']
+        fields = [
+            "full_name",
+            "email",
+            "phone_number",
+            "address",
+            "birth_date",
+        ]
         widgets = {
-            'birth_date': forms.DateInput(attrs={'type': 'date'}),
+            "birth_date": forms.DateInput(attrs={"type": "date"}),
         }
-        

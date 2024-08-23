@@ -6,8 +6,6 @@ from django.views import View
 
 
 from .forms import SignUpForm, LoginForm, UserChangeForm, UserProfileForm
-from .models import ParkingHistory
-
 
 from app_car_moderation.models import CarList, ParkingRecord, Payment
 
@@ -71,7 +69,22 @@ def profile(request, username):
     user = get_object_or_404(User, username=username)
     if user != request.user:
         return redirect("app_accounts:profile", username=request.user.username)
-    return render(request, "app_accounts/profile.html", {"user": user})
+
+    car_photos = user.car_images.all()
+    latest_record = ParkingRecord.objects.filter(user=user, is_parked=True).latest(
+        "entry_time"
+    )
+    parking_records = ParkingRecord.objects.filter(user=user)
+    return render(
+        request,
+        "app_accounts/profile.html",
+        {
+            "user": user,
+            "car_photos": car_photos,
+            "parking_records": parking_records,
+            "latest_record": latest_record,
+        },
+    )
 
 
 @login_required
@@ -106,16 +119,9 @@ def profile_view(request):
 
 class ParkingHistoryView(View):
     def get(self, request):
-        parking_records = ParkingHistory.objects.filter(user=request.user)
+        parking_records = ParkingRecord.objects.filter(user=request.user)
         return render(
             request,
             "app_accounts/parking_history.html",
             {"parking_records": parking_records},
         )
-
-
-def pay_parking(request, pk):
-    parking_record = get_object_or_404(ParkingHistory, pk=pk, user=request.user)
-    parking_record.is_paid = True
-    parking_record.save()
-    return redirect("parking_history")
