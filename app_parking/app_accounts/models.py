@@ -25,7 +25,6 @@ class User(AbstractUser):
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
-
     # Custom related_name settings to avoid conflicts
     groups = models.ManyToManyField(
         Group,
@@ -46,6 +45,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
+    avatar = models.FileField(upload_to='photo_for_users', max_length=500,null=True)
 
     
     def __str__(self):

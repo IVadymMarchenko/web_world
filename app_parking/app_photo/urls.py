@@ -5,4 +5,6 @@ from . import views
 app_name = 'app_photo'
 
 urlpatterns = [
-    path('profile/', views.upload, name='upload'),]
+    path('profile/', views.upload, name='upload'),
+    path('profile_avatar/', views.upload_avatar, name='upload_avatar')
+]

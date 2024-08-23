@@ -1,7 +1,6 @@
 [tool.poetry]
 name = "finallproject"
 version = "0.1.0"
-package-mode = false
 description = "app_parking"
 authors = ["IVadymMarchenko <topim31@gmail.com>"]
 readme = "README.md"
@@ -14,6 +13,14 @@ psycopg2 = "^2.9.9"
 python-dotenv = "^1.0.1"
 django-cloudinary-storage = "^0.3.0"
 cloudinary = "^1.41.0"
+matplotlib = "^3.9.2"
+pytesseract = "^0.3.13"
+opencv-python = "^4.10.0.84"
+imutils = "^0.5.4"
+paddleocr = "^2.8.1"
+paddlepaddle = "^2.6.1"
+setuptools = "^73.0.1"
+
 
 [build-system]
 requires = ["poetry-core"]
