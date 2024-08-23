@@ -3,6 +3,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import models
 
+def default_avatar():
+    return 'app_accounts/images/default_avatar.jpg'
 
 class User(AbstractUser):
     RATE_CHOICES = [
@@ -10,7 +12,7 @@ class User(AbstractUser):
         ("premium", "Premium"),
         ("standard", "Standard"),
     ]
-
+    profile_image = models.ImageField(upload_to='profile_images/', default=default_avatar)
     email = models.EmailField(unique=True)
     role = models.CharField(
         max_length=10, choices=[("admin", "Admin"), ("user", "User")], default="user"

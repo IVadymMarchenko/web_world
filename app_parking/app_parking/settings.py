@@ -170,6 +170,12 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTH_USER_MODEL = 'app_accounts.User'
 
 
+# Email or Username authentication
+AUTHENTICATION_BACKENDS = [
+    'app_accounts.backends.EmailOrUsernameModelBackend',  # New Backend Django
+    'django.contrib.auth.backends.ModelBackend',  # Standard Backend Django
+]
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -192,24 +198,11 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "app_home", "images"),  # Путь к вашей папке с изображениями
-    # os.path.join(BASE_DIR, "app_home", "images", "about_project", "images"),  # Путь к вашей папке с изображениями
+    os.path.join(BASE_DIR, "app_home", "images"),  # The path to your folder folder
+    # os.path.join(BASE_DIR, "app_home", "images", "about_project", "images"),
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-
-cloudinary.config(cloud_name='dozl7iemt',
-    api_key='828841675812886',
-    api_secret='LqE8T3BpI1spWSj_bDAipypzMm8')
-
-
-
-CLOUDINARY_STORAGE={'CLOUD_NAME': 'abc',
-                     "API_KEY":'828841675812886',
-                     "API_SECRET":'LqE8T3BpI1spWSj_bDAipypzMm8'}
-
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"

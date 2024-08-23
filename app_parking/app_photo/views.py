@@ -7,10 +7,12 @@ from .read_car_number import CarPlateRecognizer
 import cloudinary.uploader
 import os
 from django.http import HttpResponseRedirect
-
+import sys
 # Define the path to your Haar cascade file
-cascade_path = os.path.join(os.path.dirname(__file__), 'model/haarcascade_russian_plate_number.xml')
-
+# dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".env"))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+cascade_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "model/haarcascade_russian_plate_number.xml"))
+print(cascade_path)
 # Initialize your recognizer with the correct path
 recognizer = CarPlateRecognizer(classifier_path=cascade_path, font_path='font/simfang.ttf')
 

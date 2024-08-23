@@ -15,5 +15,4 @@ urlpatterns = [
     path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('parking-history/', views.ParkingHistoryView.as_view(), name='parking_history'),
     path('pay-parking/<int:pk>/', views.pay_parking, name='pay_parking'),
-
 ]
