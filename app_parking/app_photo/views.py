@@ -3,10 +3,12 @@ from symtable import Class
 from django.shortcuts import render, redirect
 from .forms import FormPicture
 from .models import Car_Image
+from .forms import AvatarForm
 from .read_car_number import CarPlateRecognizer
 import cloudinary.uploader
 import os
 from django.http import HttpResponseRedirect
+from app_accounts.models import User,Profile
 
 # Define the path to your Haar cascade file
 cascade_path = os.path.join(os.path.dirname(__file__), 'model/haarcascade_russian_plate_number.xml')
@@ -69,5 +71,27 @@ def upload(request):
     })
 
 
+def upload_avatar(request):
+    if request.method == 'POST':
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            file = request.FILES.get('avatar')
+            if file:
+                # Загрузка файла на Cloudinary
+                uploaded_file = cloudinary.uploader.upload(file, resource_type="image")  # image for images uploaded
+
+                # Получение объекта Profile для текущего пользователя
+                user_profile = Profile.objects.get(user=request.user)
+                user_profile.avatar = uploaded_file['secure_url']
+                user_profile.save()
+
+                # Сообщение об успешной загрузке
+                form.add_error(None, 'Аватар успешно загружен.')
+
+                return redirect('app_photo:upload')
+    else:
+        form = AvatarForm()
+
+    return render(request, 'app_accounts/profile.html', {'form': form})
 
 

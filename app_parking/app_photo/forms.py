@@ -2,6 +2,8 @@ from django.core.exceptions import ValidationError
 from django.forms import ModelForm, CharField, ImageField, TextInput, FileInput, FileField
 
 from .models import Car_Image
+from app_accounts.models import User
+
 
 
 def validate_file_size(value):
@@ -20,3 +22,14 @@ class FormPicture(ModelForm):
     class Meta:
         model = Car_Image
         fields = ['image']
+
+
+
+class AvatarForm(ModelForm):
+    avatar=FileField(widget=FileInput(attrs={'class':'form-control', 'id':'formFile'}),validators=[validate_file_size])
+
+    class Meta:
+        model = User
+        fields = ['avatar']
+
+
