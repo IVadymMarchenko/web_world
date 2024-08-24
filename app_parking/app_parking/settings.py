@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "app_report",
     "cloudinary",
     "cloudinary_storage",
+    "django_celery_results",
 ]
 
 
@@ -175,8 +176,8 @@ AUTH_USER_MODEL = "app_accounts.User"
 
 # Email or Username authentication
 AUTHENTICATION_BACKENDS = [
-    'app_accounts.backends.EmailOrUsernameModelBackend',  # New Backend Django
-    'django.contrib.auth.backends.ModelBackend',  # Standard Backend Django
+    "app_accounts.backends.EmailOrUsernameModelBackend",  # New Backend Django
+    "django.contrib.auth.backends.ModelBackend",  # Standard Backend Django
 ]
 
 # Internationalization
@@ -210,3 +211,19 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
+CELERY_BROKER_URL = os.getenv("REDIS_HOST0")
+# CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = os.getenv("REDIS_HOST0")
+# CELERY_RESULT_BACKEND = "django-db"
+
+# celery setting.
+CELERY_CACHE_BACKEND = "default"
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": os.getenv("REDIS_HOST1"),
+    }
+}

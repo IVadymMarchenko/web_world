@@ -16,6 +16,12 @@ from .forms import BalanceTopUpForm
 from app_car_moderation.models import CarList, ParkingRecord, Payment
 from django.contrib import messages
 from decimal import Decimal
+from django.utils import timezone
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+from django.utils.dateparse import parse_datetime
+from django.urls import reverse
 
 
 User = get_user_model()
@@ -161,15 +167,66 @@ def top_up_balance(request):
     return redirect("app_accounts:profile", username=request.user.username)
 
 
-class ParkingHistoryView(View):
-    def get(self, request):
-        parking_records = ParkingRecord.objects.filter(user=request.user)
-        return render(
-            request,
-            "app_accounts/parking_history.html",
-            {"parking_records": parking_records},
-        )
+@login_required
+def parking_history(request):
+    parking_records = ParkingRecord.objects.filter(user=request.user)
+    return render(
+        request,
+        "app_accounts/parking_history.html",
+        {"parking_records": parking_records, "user": request.user},
+    )
 
 
 def parking_view(request):
     return render(request, "app_accounts/parking.html")
+
+
+@login_required
+def pay_parking(request, record_id):
+    parking_record = get_object_or_404(ParkingRecord, id=record_id, is_parked=True)
+
+    # Установите время выхода
+    exit_time = timezone.now()
+    parking_record.process_parking_payment(exit_time)
+
+    # Обновите баланс пользователя
+    user = parking_record.user
+    parking_fee = parking_record.parking_fee
+
+    user.money_balance -= parking_fee
+    user.save()
+
+    return redirect(reverse("app_accounts:parking_history"))
+
+
+# @login_required
+# @csrf_exempt
+# def update_balance(request):
+#     if request.method == "POST":
+#         user = request.user
+#         data = json.loads(request.body)
+#         entry_time_str = data.get("entry_Time")
+#         rate_per_hour = Decimal(data.get("rate_per_hour"))
+
+#         # Преобразование строки в объект datetime
+#         entry_time = parse_datetime(entry_time_str)
+#         if not entry_time:
+#             return JsonResponse(
+#                 {"success": False, "error": "Invalid entry time format"}
+#             )
+
+#         # Вычисляем время с момента входа
+#         now = timezone.now()
+#         duration_in_hours = Decimal((now - entry_time).total_seconds()) / Decimal(3600)
+
+#         # Вычисляем сбор за парковку
+#         total_fee = duration_in_hours * rate_per_hour
+
+#         # Обновляем баланс
+#         updated_balance = max(user.money_balance - total_fee, Decimal("0.00"))
+#         user.money_balance = updated_balance
+#         user.save()
+
+#         return JsonResponse({"success": True, "updated_balance": str(updated_balance)})
+
+#     return JsonResponse({"success": False, "error": "Invalid request method"})

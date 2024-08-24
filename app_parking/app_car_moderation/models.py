@@ -4,6 +4,7 @@ from django.utils import timezone
 from datetime import timedelta
 from django.dispatch import receiver
 from django.db.models.signals import post_migrate
+from decimal import Decimal
 
 User = get_user_model()
 
@@ -59,7 +60,9 @@ class ParkingRecord(models.Model):
     license_number = models.CharField(max_length=15)
     entry_time = models.DateTimeField(default=timezone.now)
     exit_time = models.DateTimeField(blank=True, null=True)
-    parking_duration = models.DurationField(blank=True, null=True)
+    parking_duration = models.DecimalField(
+        max_digits=10, decimal_places=2, blank=True, null=True
+    )
     parking_fee = models.DecimalField(
         max_digits=10, decimal_places=2, blank=True, null=True
     )
@@ -83,20 +86,28 @@ class ParkingRecord(models.Model):
         super().save(*args, **kwargs)
 
     def calculate_duration_and_fee(self):
-
         if self.exit_time is None:
             self.exit_time = timezone.now()
 
-        # Розрахунок тривалості паркування
-        parking_duration = self.exit_time - self.entry_time
-        hours_parked = self.parking_duration.total_seconds() / 3600
+        # Расчет продолжительности парковки
+        parking_duration = round(
+            Decimal((self.exit_time - self.entry_time).total_seconds()), 2
+        )
+        if parking_duration is None:
+            raise ValueError("Parking duration is not set correctly.")
 
-        # Розрахунок вартості паркування
+        hours_parked = round(parking_duration / Decimal(3600), 2)
+
         if self.rate:
             parking_fee = round(hours_parked * self.rate.rate_per_hour, 2)
         else:
             parking_fee = None
-        # self.save()
+        print(parking_duration)
+        print(hours_parked)
+        print(self.exit_time)
+        print(self.entry_time)
+        print(parking_fee)
+
         return {
             "parking_duration": parking_duration,
             "parking_fee": parking_fee,
@@ -106,10 +117,10 @@ class ParkingRecord(models.Model):
     def process_parking_payment(self, exit_time):
         self.exit_time = exit_time
         data = self.calculate_duration_and_fee()
-        self.parking_duration = data["parking_daration"]
+        self.parking_duration = data["hours_parked"]
         self.parking_fee = data["parking_fee"]
-        # self.is_parked = False
         self.is_paid = True
+        self.is_parked = False
         self.save()
 
         # Создание записи оплаты
