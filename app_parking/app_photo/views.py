@@ -163,7 +163,7 @@ def upload(request):
     # Передаем форму, фото и распознанные номера в шаблон
     return render(
         request,
-        "app_accounts/profile.html",
+        "app_accounts/parking.html",
         {"form": form, "car_photos": car_photos, "car_numbers": car_numbers},
     )
 

@@ -89,8 +89,8 @@ class CarPlateRecognizer:
                 carplate_img=ImageHandler.enlarge_image(carplate_img,150)
                 carplate_imgs=cv2.cvtColor(carplate_img,cv2.COLOR_BGR2GRAY)
 
-                img_to_show = Image.fromarray(carplate_img)
-                img_to_show.show()
+                # img_to_show = Image.fromarray(carplate_img)
+                # img_to_show.show()
 
                 result=self.ocr_processor.process(carplate_imgs)
 

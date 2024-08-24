@@ -59,3 +59,7 @@ class UserProfileForm(UserChangeForm):
         widgets = {
             "birth_date": forms.DateInput(attrs={"type": "date"}),
         }
+
+
+class BalanceTopUpForm(forms.Form):
+    amount = forms.DecimalField(max_digits=10, decimal_places=2, min_value=0.01, label="Amount to top up")
