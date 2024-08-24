@@ -209,6 +209,10 @@ p {
   font-weight: bold;
 }
 
+.navbar-brand:hover .brand-text {
+  color: #e0dfdf; 
+}
+
 .custom_nav-container {
   padding: 0;
 }

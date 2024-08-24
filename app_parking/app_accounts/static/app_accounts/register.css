@@ -1,6 +1,24 @@
 /* Importing Google Fonts for consistent typography */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+.navbar-brand {
+    position: absolute;
+    margin-left: 350px;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+
+.brand-text {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar-brand:hover .brand-text {
+    color: #e0dfdf; 
+}
 
 /* Background style */
 .bg-box {
@@ -175,4 +193,34 @@ button:hover {
 
 .register-button:hover {
     background-color: #0056b3; 
+}
+
+.required {
+    color: red;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.close-btn {
+    position: absolute;
+    top: -35px;
+    right: -18px;
+    font-size: 34px;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.close-btn:hover {
+    color: #cc1818;
+}
+
+
+.close-btn ion-icon {
+    font-size: 32px;
+    color: #333;
+}
+
+.close-btn:hover ion-icon {
+    color: #e74c3c;
 }

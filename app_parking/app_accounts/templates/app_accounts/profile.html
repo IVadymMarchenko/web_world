@@ -8,7 +8,6 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'app_accounts/profile.css' %}">
     <style>
-        /* Дополнительные стили для скрытия формы пополнения по умолчанию */
         #balance-top-up-form {
             display: none;
             margin-top: 10px;
@@ -20,6 +19,11 @@
     </style>
 </head>
 <body>
+    <a class="navbar-brand" href="/">
+        <span class="brand-text">
+            WEB_WORLD: PARK-AUTO
+        </span>
+    </a>
     <div class="bg-box">
         <img src="{% static 'slider-bg.jpg' %}" alt="">
     </div>

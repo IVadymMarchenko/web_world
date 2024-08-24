@@ -1,3 +1,22 @@
+.navbar-brand {
+    position: absolute;
+    margin-left: 350px;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+
+.brand-text {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar-brand:hover .brand-text {
+    color: #e0dfdf; 
+}
+
 /* Container styling for central alignment and padding */
 .container {
     max-width: 900px;
