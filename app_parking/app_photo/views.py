@@ -124,8 +124,7 @@ def save_car_data(request, recognized_number, user, image_url):
 
 def upload(request):
     """Upload a file to the database."""
-    car_numbers = []  # Инициализация списка номеров
-
+    car_numbers = []  
     if request.method == "POST":
         form = FormPicture(request.POST, request.FILES)
         if form.is_valid():

@@ -6,47 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
-	{% load static %}
+    {% load static %}
     <link rel="stylesheet" href="{% static 'app_accounts/register.css' %}">
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 </head>
 
 <body>
+    <a class="navbar-brand" href="/">
+        <span class="brand-text">
+            WEB_WORLD: PARK-AUTO
+        </span>
+    </a>
     <div class="bg-box">
         <img src="{% static 'slider-bg.jpg' %}" alt="">
-      </div>
+    </div>
     <div class="wrapper">
         <div class="form-container">
-            <h2>Sign Up</h2>
+            <div style="position: relative;">
+                <h2>Sign Up</h2>
+                <a href="/" class="close-btn">&times;</a>
+            </div>
+            
             <form method="post">
                 {% csrf_token %}
                 
                 <div class="input-group">
-                    <label for="{{ form.username.id_for_label }}">Login</label>
+                    <label for="{{ form.username.id_for_label }}">Login <span class="required">*</span></label>
                     <span class="icon"><ion-icon name="person-sharp"></ion-icon></span>
                     {{ form.username }}
                 </div>
                 
                 <div class="input-group">
-                    <label for="{{ form.email.id_for_label }}">Email Address</label>
+                    <label for="{{ form.email.id_for_label }}">Email Address <span class="required">*</span></label>
                     <span class="icon"><ion-icon name="mail-sharp"></ion-icon></span>
                     {{ form.email }}
                 </div>
                 
                 <div class="input-group">
-                    <label for="{{ form.password1.id_for_label }}">Password</label>
+                    <label for="{{ form.password1.id_for_label }}">Password <span class="required">*</span></label>
                     <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
                     {{ form.password1 }}
                 </div>
                 
                 <div class="input-group">
-                    <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                    <label for="{{ form.password2.id_for_label }}">Confirm Password <span class="required">*</span></label>
                     <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
                     {{ form.password2 }}
                 </div>
                 
                 <div class="input-group">
-                    <label for="{{ form.full_name.id_for_label }}">Full Name</label>
+                    <label for="{{ form.full_name.id_for_label }}">Full Name <span class="required">*</span></label>
                     <span class="icon"><ion-icon name="person-sharp"></ion-icon></span>
                     {{ form.full_name }}
                 </div>
@@ -56,11 +65,6 @@
                     <span class="icon"><ion-icon name="call-sharp"></ion-icon></span>
                     {{ form.phone_number }}
                 </div>
-                
-                <div class="input-group">
-                    <label for="{{ form.address.id_for_label }}">Address</label>
-                    <span class="icon"><ion-icon name="home-sharp"></ion-icon></span>
-                    {{ form.address }}
                 <button type="submit">Register Now</button>
             </form>
         </div>

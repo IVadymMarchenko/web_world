@@ -1,6 +1,24 @@
 /* Importing Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+.navbar-brand {
+    position: absolute;
+    margin-left: 350px;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+
+.brand-text {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar-brand:hover .brand-text {
+    color: #e0dfdf; 
+}
 /* Background style */
 .bg-box {
     position: absolute;
@@ -136,32 +154,78 @@ input:focus {
 }
 
 
-/* Button styling for submission */
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    background: var(--primary);
-    color: var(--white);
+/* Основные стили для кнопок */
+.button {
+    display: inline-block;
+    padding: 12px 24px;
     font-size: 16px;
-    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
-    transition: background 0.3s ease; 
+    width: 100%; 
+    max-width: 350px; 
 }
 
-
-/* Hover state for the button */
-button:hover {
-    background: var(--btn-hvr);
-	background-color: #29a744; 
-    border-color: #29a744;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+.login-button {
+    background-color: #007bff; 
+    color: #fff; 
+    border: 2px solid transparent; 
 }
 
+.register-button {
+    background-color: #007bff; 
+    color: #fff; 
+    border: 2px solid transparent; 
+}
+
+.button:hover {
+    transform: scale(1.05); 
+}
+
+.login-button:hover {
+    background-color: #218838; 
+    border-color: #218838; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.register-button:hover {
+    background-color: #218838; 
+    border-color: #218838; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.button:active {
+    transform: scale(0.98); 
+}
+
+.login-button:active {
+    background-color: #1e7e34; 
+    border-color: #1e7e34; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.register-button:active {
+    background-color: #1c7430;
+    border-color: #1c7430; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+
+}
 
 /* Message styling for displaying validation or error messages */
 .messages {
     margin-bottom: 15px;
     color: red; 
     font-size: 14px;
+}
+
+/* Wrap for buttons and text "or" */
+.button-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    justify-content: center; 
+    margin-top: 20px;
 }

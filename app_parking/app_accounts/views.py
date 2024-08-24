@@ -13,7 +13,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import SignUpForm, LoginForm, UserChangeForm, UserProfileForm
 from .forms import BalanceTopUpForm
-from app_car_moderation.models import CarList, ParkingRecord, Payment
+from app_car_moderation.models import CarList, ParkingRecord, Payment, Rate
 from django.contrib import messages
 from decimal import Decimal
 from django.utils import timezone
@@ -22,6 +22,8 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.utils.dateparse import parse_datetime
 from django.urls import reverse
+
+
 
 
 User = get_user_model()
@@ -230,3 +232,8 @@ def pay_parking(request, record_id):
 #         return JsonResponse({"success": True, "updated_balance": str(updated_balance)})
 
 #     return JsonResponse({"success": False, "error": "Invalid request method"})
+
+
+def parking_view(request):
+    rates = Rate.objects.all()
+    return render(request, "app_accounts/parking.html", {"rates": rates})
