@@ -13,8 +13,9 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
-from app_car_moderation.models import CarList, ParkingRecord
+from app_car_moderation.models import CarList, ParkingRecord, Rate
 from dotenv import load_dotenv
+
 
 cascade_path = os.path.abspath(
     os.path.join(
@@ -78,7 +79,7 @@ def save_to_car_list(request, recognized_number, user):
         return car_list_entry
 
 
-def save_to_parking_record(request, user, recognized_number):
+def save_to_parking_record(request, user, recognized_number, rate_record):
     if ParkingRecord.objects.filter(
         user=user, license_number=recognized_number, is_parked=True
     ).exists():
@@ -91,7 +92,7 @@ def save_to_parking_record(request, user, recognized_number):
 
     # If no active parking record exists, create a new one
     parking_record = ParkingRecord(
-        user=user, license_number=recognized_number, is_parked=True
+        user=user, license_number=recognized_number, is_parked=True, rate=rate_record
     )
     parking_record.save()
     return parking_record
@@ -124,7 +125,7 @@ def save_car_data(request, recognized_number, user, image_url):
 
 def upload(request):
     """Upload a file to the database."""
-    car_numbers = []  
+    car_numbers = []
     if request.method == "POST":
         form = FormPicture(request.POST, request.FILES)
         if form.is_valid():
@@ -155,14 +156,18 @@ def upload(request):
                         # ).exists()
 
                         # if not existing_record:
-                        save_to_parking_record(request, user, recognized_numbers)
+                        id_value = int(request.POST.get("rate"))
+                        rate_record = Rate.objects.get(id=id_value)
+                        save_to_parking_record(
+                            request, user, recognized_numbers, rate_record
+                        )
                         save_car_data(request, recognized_numbers[0], user, secure_url)
 
                     elif user.money_balance < 0:
                         send_blacklist_notification(user, recognized_numbers)
                         messages.error(
                             request,
-                            f"Car with license number {recognized_numbers} is Blacklisted.",
+                            f"Your balance below zero. Please ",
                         )
 
                     car_numbers = recognized_numbers  # Сохраняем распознанные номера

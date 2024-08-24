@@ -14,7 +14,7 @@
 }
 
 .navbar-brand:hover .brand-text {
-    color: #e0dfdf; 
+    color: #e0dfdf;
 }
 
 /* General body styling */
@@ -31,6 +31,7 @@ body {
 .container {
     max-width: 1400px;
     margin: 20px auto;
+    margin-top: 50px;
     padding: 20px;
     background: #fff;
     border-radius: 8px;
