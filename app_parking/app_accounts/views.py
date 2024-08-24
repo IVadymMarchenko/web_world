@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import authenticate, login, logout, get_user_model, get_backends
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -6,7 +6,7 @@ from django.views import View
 from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import SignUpForm, LoginForm, UserChangeForm, UserProfileForm
-
+from .forms import BalanceTopUpForm
 from app_car_moderation.models import CarList, ParkingRecord, Payment
 
 
@@ -21,7 +21,9 @@ def sign_up_user(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            backend = get_backends()[0]  
+            user.backend = f'{backend.__module__}.{backend.__class__.__name__}'
+            login(request, user, backend=user.backend)
             return redirect(to="app_accounts:profile", username=user.username)
         else:
             return render(
@@ -111,14 +113,20 @@ def edit_profile(request):
 
 @login_required
 def profile_view(request):
-    user = request.user
-    parking_history = user.parking_history.all()
+    if request.method == "POST":
+        form = BalanceTopUpForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            request.user.profile.balance += amount
+            request.user.profile.save()
+            return redirect('app_accounts:profile')  # Перенаправление после пополнения
 
-    context = {
-        "user": user,
-        "parking_history": parking_history,
-    }
-    return render(request, "app_accounts/profile.html", context)
+    else:
+        form = BalanceTopUpForm()
+
+    return render(request, 'app_accounts/profile.html', {
+        'form': form
+    })
 
 
 class ParkingHistoryView(View):
@@ -132,3 +140,5 @@ class ParkingHistoryView(View):
 
 def parking_view(request):
     return render(request, 'app_accounts/parking.html')
+
+

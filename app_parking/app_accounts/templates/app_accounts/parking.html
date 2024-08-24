@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +7,8 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'app_accounts/parking.css' %}">
 </head>
-
 <body>
-
     <div class="parking-container">
-
-
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
@@ -21,8 +16,6 @@
                 </div>
             {% endfor %}
         {% endif %}
-
-
         <section class="photo-upload">
             <h2>Car photo</h2>
             <form method="POST" enctype="multipart/form-data" action="{% url 'app_photo:upload' %}">
@@ -41,7 +34,6 @@
                         </ul>
                     </div>
                 {% endif %}
-
                 <div id="uploaded-car-photos" class="uploaded-photos-container">
                     {% if car_photos %}
                         {% for photo in car_photos %}
@@ -56,8 +48,7 @@
                     <input type="file" id="car-photo-upload" name="image" accept="image/*" class="custom-file-input">
                 </div>
                 <button type="submit" class="upload-button">Save</button>
-            </form>
-            
+            </form>         
             <div class="parking-status">
                 <h2>Parking Status: <span>Active</span></h2>
                 <p>Parking Time: 1 hour 30 minutes</p>
@@ -67,10 +58,6 @@
             <h3>Make a Payment</h3>
             <button class="btn btn-primary">Pay Now</button>
         </section>
-
-
-
     </div>
-
 </body>
 </html>

@@ -45,6 +45,7 @@ class Profile(models.Model):
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     avatar = models.FileField(upload_to='photo_for_users', max_length=500,null=True)
+    balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     
     def __str__(self):
