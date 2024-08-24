@@ -102,20 +102,54 @@ def export_payments_to_csv(queryset):
     return response
 
 
+def export_cars_to_csv(queryset):
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = (
+        f'attachment; filename="cars{timezone.now().strftime("%Y%m%d_%H%M%S")}.csv"'
+    )
+    writer = csv.writer(response)
+    writer.writerow(["license_number", "User", "Is_balcklisted", "created_at"])
+    for car in queryset:
+        writer.writerow(
+            [
+                car.license_number,
+                car.owner_id,
+                car.is_blacklisted,
+                car.created_at,
+            ]
+        )
+    return response
+
+
 @app.task
 def send_balance_warning_emails():
     users = User.objects.filter(money_balance__lt=15)
     print(users)
 
     for user in users:
-        subject = "Warning: Low Balance"
-        html_message = render_to_string(
-            "app_report/balance_warning.html", {"user": user}
-        )
-        plain_message = strip_tags(html_message)
-        from_email = os.getenv("EMAIL_HOST_USER")
-        to_email = user.email
+        # subject = "Warning: Low Balance"
+        # html_message = render_to_string(
+        #     "app_report/balance_warning.html", {"user": user}
+        # )
+        # plain_message = strip_tags(html_message)
+        # from_email = os.getenv("EMAIL_HOST_USER")
+        # to_email = user.email
 
-        send_mail(
-            subject, plain_message, from_email, [to_email], html_message=html_message
-        )
+        # send_mail(
+        #     subject, plain_message, from_email, [to_email], html_message=html_message
+        # )
+        subject = f"Dear {user.full_name} - your Car is Blacklisted"
+        message = f"""
+        Dear {user.username},
+
+        We have detected that your profile balance below zero and equal {user.money_balance} $.
+        Please pay for continue parking.
+        Please contact our support team to resolve this issue.
+
+        Thank you,
+        WEB_WORLD: PARK-AUTO
+        """
+        from_email = os.getenv("EMAIL_HOST_USER")
+        recipient_list = [user.email]
+
+        send_mail(subject, message, from_email, recipient_list)

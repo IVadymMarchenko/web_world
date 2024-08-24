@@ -1,7 +1,9 @@
 # Use the official image of Python
 FROM python:3.11
 
-
+# RUN apt-get update && apt-get install -y \
+#     libgl1-mesa-glx \
+#     libglib2.0-0
 # Install the working directory          
 WORKDIR /app
 
@@ -27,6 +29,6 @@ COPY . .
 EXPOSE 8000
 
 # Command start server
-CMD ["sh", "-c", "python app_parking/manage.py runserver 0.0.0.0:8000"]
+CMD ["sh", "-c", "python app_parking/manage.py runserver 0.0.0.0:8000 & celery -A app_parking/manage.py beat -l info & celery -A app_parking/manage.py worker -l info -P eventlet"]
 
 

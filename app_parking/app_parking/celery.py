@@ -33,8 +33,8 @@ app.conf.beat_schedule = {
         "task": "app_report.utils.send_balance_warning_emails",
         # "schedule": crontab(minute="*", hour="1-23"),
         # "schedule": crontab(day_of_week=1, hour=0),
-        "schedule": crontab(minute="*"),
-        # "schedule": crontab(day_of_week="*", hour=0),
+        # "schedule": crontab(minute="*"),
+        "schedule": crontab(day_of_week="*", hour=0),
     }
 }
 app.conf.timezone = "UTC"
