@@ -13,9 +13,11 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import SignUpForm, LoginForm, UserChangeForm, UserProfileForm
 from .forms import BalanceTopUpForm
-from app_car_moderation.models import CarList, ParkingRecord, Payment
+from app_car_moderation.models import CarList, ParkingRecord, Payment, Rate
 from django.contrib import messages
 from decimal import Decimal
+
+
 
 
 User = get_user_model()
@@ -172,4 +174,5 @@ class ParkingHistoryView(View):
 
 
 def parking_view(request):
+    
     return render(request, "app_accounts/parking.html")

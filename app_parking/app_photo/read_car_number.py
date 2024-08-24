@@ -7,7 +7,7 @@ import requests
 
 
 
-orc=PaddleOCR() #Creating a PaddleOCR object for text recognition
+ocr = PaddleOCR(show_log=False) #Creating a PaddleOCR object for text recognition
 
 
 class ImageHandler:
