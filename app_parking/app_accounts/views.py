@@ -174,5 +174,5 @@ class ParkingHistoryView(View):
 
 
 def parking_view(request):
-    
-    return render(request, "app_accounts/parking.html")
+    rates = Rate.objects.all()
+    return render(request, "app_accounts/parking.html", {"rates": rates})

@@ -9,6 +9,11 @@
     <script src="{% static 'app_accounts/js/parking.js' %}" defer></script>
 </head>
 <body>
+    <a class="navbar-brand" href="/">
+        <span class="brand-text">
+            WEB_WORLD: PARK-AUTO
+        </span>
+    </a>
     <div class="parking-container">
         <div class="bg-box">
             <img src="{% static 'slider-bg.jpg' %}" alt="">
@@ -62,18 +67,12 @@
                 <!-- Секция тарифов -->
                 <div class="pricing-options">
                     <p>Select a parking rate:</p>
-                    <label>
-                        <input type="radio" name="rate" value="basic" />
-                        Basic $10
-                    </label>
-                    <label>
-                        <input type="radio" name="rate" value="standard" />
-                        Standard $20
-                    </label>
-                    <label>
-                        <input type="radio" name="rate" value="premium" />
-                        Premium $30
-                    </label>
+                    {% for rate in rates %}
+                        <label>
+                            <input type="radio" name="rate" value="{{ rate.id }}">
+                            {{ rate.rate_name }} $ {{ rate.rate_per_hour }}
+                        </label>
+                    {% endfor %}
                 </div>
                 
                 <!-- Кнопка для подтверждения выбора фото -->

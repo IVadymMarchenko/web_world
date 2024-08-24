@@ -1,6 +1,24 @@
 /* Importing Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+.navbar-brand {
+    position: absolute;
+    margin-left: 350px;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+
+.brand-text {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar-brand:hover .brand-text {
+    color: #e0dfdf; 
+}
 /* Background style */
 .bg-box {
     position: absolute;
