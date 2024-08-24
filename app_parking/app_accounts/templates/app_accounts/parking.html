@@ -6,9 +6,13 @@
     <title>Parking Now</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'app_accounts/parking.css' %}">
+    <script src="{% static 'app_accounts/js/parking.js' %}" defer></script>
 </head>
 <body>
     <div class="parking-container">
+        <div class="bg-box">
+            <img src="{% static 'slider-bg.jpg' %}" alt="">
+        </div>
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
@@ -34,6 +38,8 @@
                         </ul>
                     </div>
                 {% endif %}
+                
+                <!-- Отображение загруженных фото -->
                 <div id="uploaded-car-photos" class="uploaded-photos-container">
                     {% if car_photos %}
                         {% for photo in car_photos %}
@@ -43,20 +49,39 @@
                         <p>There are no uploaded photos.</p>
                     {% endif %}
                 </div>
+                
+                <!-- Загрузка нового фото -->
                 <div class="custom-file-upload">
                     <label for="car-photo-upload" class="custom-file-label">Upload a new photo</label>
                     <input type="file" id="car-photo-upload" name="image" accept="image/*" class="custom-file-input">
                 </div>
-                <button type="submit" class="upload-button">Save</button>
-            </form>         
-            <div class="parking-status">
-                <h2>Parking Status: <span>Active</span></h2>
-                <p>Parking Time: 1 hour 30 minutes</p>
-            </div>
-        </section>
-        <section class="payment-section">
-            <h3>Make a Payment</h3>
-            <button class="btn btn-primary">Pay Now</button>
+                
+                <!-- Кнопка загрузки фото -->
+                <button type="submit" class="upload-button" disabled>Save</button>
+                
+                <!-- Секция тарифов -->
+                <div class="pricing-options">
+                    <p>Select a parking rate:</p>
+                    <label>
+                        <input type="radio" name="rate" value="basic" />
+                        Basic $10
+                    </label>
+                    <label>
+                        <input type="radio" name="rate" value="standard" />
+                        Standard $20
+                    </label>
+                    <label>
+                        <input type="radio" name="rate" value="premium" />
+                        Premium $30
+                    </label>
+                </div>
+                
+                <!-- Кнопка для подтверждения выбора фото -->
+                <button type="button" id="ok-button" class="ok-button" style="display: none;">OK</button>
+                <a href="{% url 'app_accounts:profile' username=user.username %}" class="back-to-profile">Back to Profile</a>
+                
+                <!-- Кнопка для возвращения в профиль -->
+            </form>      
         </section>
     </div>
 </body>

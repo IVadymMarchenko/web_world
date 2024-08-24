@@ -19,26 +19,90 @@ body {
     max-width: 900px;
 }
 
-/* Стили сообщений */
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+
+/* Background style */
+.bg-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.bg-box img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.bg-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: -webkit-gradient(linear, left top, right top, from(rgba(21, 82, 99, 0.65)), to(rgba(21, 82, 99, 0.55)));
+    background: linear-gradient(to right, rgba(21, 82, 99, 0.65), rgba(21, 82, 99, 0.55));
+}
+
+
+/* Основные стили для кнопок */
+.upload-button,
+.ok-button,
+.back-to-profile {
+    display: inline-block;
+    padding: 10px 20px;
     font-size: 16px;
-    text-align: center;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-.alert-success {
-    background-color: #28a745;  
-    color: rgb(247, 247, 247);
+.upload-button {
+    background-color: #007bff;
 }
 
-.alert-danger {
-    background-color: #dc3545;
-    color: white;
+.upload-button:disabled {
+    background-color: #ddd;
+    color: #aaa;
+    cursor: not-allowed;
 }
 
-/* Стили загрузки фото */
+.ok-button {
+    display: none; /* Скрыть кнопку по умолчанию */
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.ok-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.back-to-profile {
+    background-color: #007bff;
+}
+
+.upload-button:hover,
+.ok-button:hover,
+.back-to-profile:hover {
+    transform: scale(1.05);
+}
+
+/* Стили для загрузки фото */
 .photo-upload h2 {
     font-size: 24px;
     margin-bottom: 20px;
@@ -49,7 +113,7 @@ body {
 }
 
 .custom-file-label {
-    display: inline-block;
+    display: block;
     padding: 10px;
     background-color: #2575fc;
     color: white;
@@ -60,24 +124,9 @@ body {
 }
 
 .custom-file-input {
-    display: none;
+    display: none; /* Скрыть стандартное поле загрузки */
 }
 
-.upload-button {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.upload-button:hover {
-    background-color: #218838;
-}
-
-/* Стили загруженных фото */
 .uploaded-photos-container {
     display: flex;
     flex-wrap: wrap;
@@ -93,68 +142,44 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Статус парковки */
-.parking-status {
+/* Стили для чекбоксов и секции тарифов */
+.pricing-options {
+    z-index: 10;
+    position: relative;
+    display: none; /* Изначально скрыто */
     margin-top: 20px;
-    font-size: 18px;
-}
-
-.parking-status span {
-    font-weight: bold;
-    color: #28a745;
-}
-
-/* Секция оплаты */
-.payment-section {
-    margin-top: 30px;
-}
-
-.payment-section h3 {
-    font-size: 22px;
-    margin-bottom: 15px;
-}
-
-.btn-primary {
-    padding: 10px 20px;
-    background-color: #2575fc;
-    color: white;
-    border: none;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.pricing-options label {
+    display: block;
+    margin-bottom: 10px;
     cursor: pointer;
+}
+
+.pricing-options input[type="radio"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Стили сообщений */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 16px;
     text-align: center;
 }
 
-.btn-primary:hover {
-    background-color: #1e5fd8;
+.alert-success {
+    background-color: #28a745;
+    color: rgb(247, 247, 247);
 }
 
-/* История парковки */
-.parking-history {
-    margin-top: 40px;
-}
-
-.parking-history h3 {
-    font-size: 22px;
-    margin-bottom: 20px;
-}
-
-.parking-history table {
-    width: 100%;
-    border-collapse: collapse;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.parking-history th, .parking-history td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.parking-history th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-.parking-history tr:hover {
-    background-color: #f9f9f9;
+.alert-danger {
+    background-color: #dc3545;
+    color: white;
 }
