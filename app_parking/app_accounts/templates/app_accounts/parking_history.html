@@ -10,6 +10,9 @@
 </head>
 
 <body>
+    <div class="bg-box">
+        <img src="{% static 'slider-bg.jpg' %}" alt="">
+    </div>
     <a class="navbar-brand" href="/">
         <span class="brand-text">
             WEB_WORLD: PARK-AUTO
@@ -24,31 +27,57 @@
         <table class="parking-table">
             <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Place</th>
-                    <th>Parking time</th>
-                    <th>Price</th>
-                    <th>Status</th>
+                    <th>Registration number</th>
+                    <th>Entry time</th>
+                    <th>Parking duration</th>
+                    <th>Parking fee</th>
+                    <th>Rate per hour</th>
+                    <th>Exit time</th>
+                    <th>Balance</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 {% for record in parking_records %}
                 <tr>
-                    <td>{{ record.date }}</td>
-                    <td>{{ record.location }}</td>
-                    <td>{{ record.parking_duration }} ч</td>
-                    <td>{{ record.amount }} у.е.</td>
+                    <td>{{ record.license_number }}</td>
+                    <td>{{ record.entry_time  }}</td>
                     <td>
-                        {% if record.is_paid %}
-                        <span class="status paid">Paid</span>
+                        {% if record.is_parked %}
+                        <span id="duration-{{ record.id }}" data-entry-time="{{ record.entry_time|date:'c' }}">
+                            Calculating...
+                        </span>
                         {% else %}
-                        <span class="status unpaid">Not paid</span>
+                        <span>{{record.parking_duration}} h</span>
                         {% endif %}
                     </td>
                     <td>
-                        {% if not record.is_paid %}
+                        {% if record.is_paid %}
+                        <span>{{record.parking_fee}} $</span>
+                        {% else %}
+                        <span id="fee-{{ record.id }}" data-rate="{{ record.rate.rate_per_hour }}" data-entry-time="{{ record.entry_time|date:'c' }}">
+                        </span> $
+                        {% endif %}
+                    </td>
+                    <td>{{ record.rate }} $</td>
+                    <td>
+                        {% if record.exit_time %}
+                        <span>{{record.exit_time}}</span>       
+                         {% else %}
+                            <span id="loading-dots" class="loading-dots"></span>
+                        {% endif %}
+                    </td>
 
+                    <td class="balance">{{ user.money_balance}} $</td>
+
+                    <td>
+                        {% if record.is_parked %}
+                        <form method="POST" action="{% url 'app_accounts:pay_parking' record.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Pay & Unpark</button>
+                        </form>
+                        {% else %}
+                        <span class="status unparked">Unparked</span>
                         {% endif %}
                     </td>
                 </tr>
@@ -60,6 +89,119 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+        function updateParkingDuration() {
+            document.querySelectorAll('[id^="duration-"]').forEach(function(element) {
+                const entryTime = new Date(element.getAttribute('data-entry-time'));
+                const now = new Date();
+                const diff = Math.floor((now - entryTime) / 1000); // Difference in seconds
+
+                const hours = Math.floor(diff / 3600);
+                const minutes = Math.floor((diff % 3600) / 60);
+                const seconds = diff % 60;
+
+                element.textContent = 
+                    `${hours}h ${minutes}m ${seconds}s`;
+            });
+        }
+
+        // Initial update
+        updateParkingDuration();
+
+        // Update every second
+        setInterval(updateParkingDuration, 1000);
+    </script>
+    
+  <script>
+    // Функция для обновления расчета парковки
+        function updateParkingFee() {
+    // Получаем текущую дату и время
+    const now = new Date();
+
+    // Находим все элементы с id, начинающимся на 'fee-'
+    document.querySelectorAll('span[id^="fee-"]').forEach(span => {
+        // Получаем данные из элемента
+        const ratePerHour = parseFloat(span.getAttribute('data-rate'));
+        const entryTime = new Date(span.getAttribute('data-entry-time'));
+
+        // Вычисляем разницу во времени между сейчас и временем входа
+        const durationInHours = (now - entryTime) / (1000 * 60 * 60);
+        const fee = Math.max(durationInHours * ratePerHour, 0).toFixed(2);
+
+        // Обновляем текст в элементе span
+        span.textContent = fee;
+    });
+    }
+    // Обновляем расчет каждую секунду
+    setInterval(updateParkingFee, 1000);
+    // Обновляем расчет сразу при загрузке страницы
+    updateParkingFee();
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    // Функция для создания анимации точек
+    function createLoadingDots(element) {
+        // Удаляем любые существующие точки
+        element.innerHTML = '';
+        // Создаем семь точек
+        for (let i = 0; i < 7; i++) {
+            const span = document.createElement('span');
+            span.className = 'dot';
+            element.appendChild(span);
+        }
+    }
+    // Находим все элементы с классом 'loading-dots'
+    document.querySelectorAll('.loading-dots').forEach(createLoadingDots);
+    });
+</script>
+
+{% comment %} <script>
+document.addEventListener('DOMContentLoaded', () => {
+    function updateParkingBalance() {
+        const balanceElements = document.querySelectorAll('.balance');
+        const feeElements = document.querySelectorAll('[id^="fee-"]');
+
+        if (balanceElements.length > 0 && feeElements.length > 0) {
+            const feeElement = feeElements[0];  // Берем первый элемент
+            const ratePerHour = parseFloat(feeElement.getAttribute('data-rate'));
+            const entryTime = feeElement.getAttribute('data-entry-time');  // Используем атрибут напрямую
+
+            fetch('/update_balance/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                body: JSON.stringify({
+                    rate_per_hour: ratePerHour,
+                    entry_Time: entryTime,
+                })
+            }).then(response => response.json())
+              .then(data => {
+                if (data.success) {
+                    balanceElements.forEach(balanceElement => {
+                        balanceElement.textContent = `${data.updated_balance} $`;
+                    });
+                } else {
+                    console.error('Error updating balance:', data.error);
+                }
+            }).catch(error => {
+                console.error('Fetch error:', error);
+            });
+        }
+    }
+
+    // Обновляем баланс каждый 10 секунд
+    setInterval(updateParkingBalance, 10000);
+
+    // Первичное обновление
+    updateParkingBalance();
+});
+</script> {% endcomment %}
+
 </body>
 
 </html>

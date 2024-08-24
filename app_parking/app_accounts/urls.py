@@ -13,9 +13,9 @@ urlpatterns = [
     path("profile/<str:username>/", views.profile, name="profile"),
     path("logout/", views.logout_user, name="logout"),
     path("edit_profile/", views.edit_profile, name="edit_profile"),
-    path(
-        "parking-history/", views.ParkingHistoryView.as_view(), name="parking_history"
-    ),
+    path("parking-history/", views.parking_history, name="parking_history"),
     path("parking/", views.parking_view, name="parking"),
     path("top_up_balance/", views.top_up_balance, name="top_up_balance"),
+    path("pay_parking/<int:record_id>/", views.pay_parking, name="pay_parking"),
+    # path("update_balance/", views.update_balance, name="update_balance"),
 ]

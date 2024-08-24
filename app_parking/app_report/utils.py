@@ -1,8 +1,21 @@
 import csv
 from django.http import HttpResponse
 from django.utils import timezone
-from app_accounts.models import User
+
+# from app_accounts.models import User
 from app_car_moderation.models import ParkingRecord, Payment
+
+from django.utils.html import strip_tags
+import os
+from django.template.loader import render_to_string
+
+from django.core.mail import send_mail
+from dotenv import load_dotenv
+
+from app_parking.celery import app
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 def export_users_to_csv(queryset):
@@ -87,3 +100,22 @@ def export_payments_to_csv(queryset):
             ]
         )
     return response
+
+
+@app.task
+def send_balance_warning_emails():
+    users = User.objects.filter(money_balance__lt=15)
+    print(users)
+
+    for user in users:
+        subject = "Warning: Low Balance"
+        html_message = render_to_string(
+            "app_report/balance_warning.html", {"user": user}
+        )
+        plain_message = strip_tags(html_message)
+        from_email = os.getenv("EMAIL_HOST_USER")
+        to_email = user.email
+
+        send_mail(
+            subject, plain_message, from_email, [to_email], html_message=html_message
+        )

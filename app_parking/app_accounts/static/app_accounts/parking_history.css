@@ -29,7 +29,7 @@ body {
 
 /* Container for main content */
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 20px auto;
     padding: 20px;
     background: #fff;
@@ -130,4 +130,104 @@ header h2 {
 .status.unpaid {
     background: #dc3545;
     color: #fff;
+}
+
+/* Background style */
+.bg-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.bg-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bg-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(21, 82, 99, 0.65), rgba(21, 82, 99, 0.55));
+}
+
+
+/* Status badge style for paid/unpaid parking */
+.status.unparked {
+    background: #f08d0b;
+    color: #fff;
+}
+
+.status.parked {
+    background: #28a745;
+    color: #fff;
+}
+
+
+/* Loading dots animation */
+#loading-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dot {
+    width: 12px;
+    /* Диаметр точки */
+    height: 12px;
+    margin: 0 4px;
+    /* Расстояние между точками */
+    background-color: rgb(116, 114, 223);
+    border-radius: 50%;
+    /* Делаем точки круглыми */
+    opacity: 0;
+    animation: blink 1.5s infinite;
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.dot:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.dot:nth-child(5) {
+    animation-delay: 0.8s;
+}
+
+.dot:nth-child(6) {
+    animation-delay: 1s;
+}
+
+.dot:nth-child(7) {
+    animation-delay: 1.2s;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }

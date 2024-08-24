@@ -8,7 +8,7 @@ from .read_car_number import CarPlateRecognizer
 import cloudinary.uploader
 import os
 from django.http import HttpResponseRedirect
-from app_accounts.models import User,Profile
+from app_accounts.models import User, Profile
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -16,7 +16,11 @@ from django.core.mail import send_mail
 from app_car_moderation.models import CarList, ParkingRecord
 from dotenv import load_dotenv
 
-cascade_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "model/haarcascade_russian_plate_number.xml"))
+cascade_path = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__), "model/haarcascade_russian_plate_number.xml"
+    )
+)
 
 User = get_user_model()
 
@@ -39,7 +43,9 @@ def send_blacklist_notification(user, license_number):
     message = f"""
     Dear {user.username},
 
-    We have detected that your car with license number {license_number} is in the blacklist due to unpaid parking fees.
+    We have detected that your tried to park car with registration number {license_number} but unsuccessful.
+    Due to reason that your profile balance below zero and equal {user.money_balance} $.
+    Please pay for continue parking.
     
     Please contact our support team to resolve this issue.
 
@@ -73,7 +79,9 @@ def save_to_car_list(request, recognized_number, user):
 
 
 def save_to_parking_record(request, user, recognized_number):
-    if ParkingRecord.objects.filter(user=user, is_parked=True).exists():
+    if ParkingRecord.objects.filter(
+        user=user, license_number=recognized_number, is_parked=True
+    ).exists():
         messages.warning(
             request,
             f"Car with license number {recognized_number} is already parked.",
@@ -104,10 +112,10 @@ def recognize_numer_car(image_url):
 def save_car_data(request, recognized_number, user, image_url):
     """Saves vehicle data to the database."""
     if Car_Image.objects.filter(number_car=recognized_number, user=user).exists():
-        messages.error(
-            request,
-            f"Such image with {recognized_number} recognized text is already present.",
-        )
+        # messages.error(
+        #     request,
+        #     f"Such image with {recognized_number} recognized text is already present.",
+        # )
         return None
 
     Car_Image.objects.create(number_car=recognized_number, user=user, image=image_url)
@@ -124,6 +132,10 @@ def upload(request):
             if file:
                 secure_url = handle_file_upload(file)
                 recognized_numbers = recognize_numer_car(secure_url)
+
+                cleaned_list = [rec.replace(" ", "") for rec in recognized_numbers]
+                recognized_numbers = cleaned_list
+
                 if recognized_numbers:
 
                     user = request.user
@@ -131,18 +143,27 @@ def upload(request):
                         request, recognized_numbers[0], user
                     )
 
-                    if car_list_entry and not car_list_entry.is_blacklisted:
+                    if (
+                        car_list_entry
+                        and not car_list_entry.is_blacklisted
+                        and user.money_balance >= 0
+                    ):
 
-                        license_number = car_list_entry.license_number
-                        existing_record = ParkingRecord.objects.filter(
-                            user=user, license_number=license_number, is_parked=True
-                        ).exists()
+                        # license_number = car_list_entry.license_number
+                        # existing_record = ParkingRecord.objects.filter(
+                        #     user=user, license_number=license_number, is_parked=True
+                        # ).exists()
 
-                        if not existing_record:
-                            save_to_parking_record(request, user, recognized_numbers)
-                            save_car_data(
-                                request, recognized_numbers[0], user, secure_url
-                            )
+                        # if not existing_record:
+                        save_to_parking_record(request, user, recognized_numbers)
+                        save_car_data(request, recognized_numbers[0], user, secure_url)
+
+                    elif user.money_balance < 0:
+                        send_blacklist_notification(user, recognized_numbers)
+                        messages.error(
+                            request,
+                            f"Car with license number {recognized_numbers} is Blacklisted.",
+                        )
 
                     car_numbers = recognized_numbers  # Сохраняем распознанные номера
 
@@ -168,25 +189,26 @@ def upload(request):
 
 
 def upload_avatar(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
-            file = request.FILES.get('avatar')
+            file = request.FILES.get("avatar")
             if file:
                 # Загрузка файла на Cloudinary
-                uploaded_file = cloudinary.uploader.upload(file, resource_type="image")  # image for images uploaded
+                uploaded_file = cloudinary.uploader.upload(
+                    file, resource_type="image"
+                )  # image for images uploaded
 
                 # Получение объекта Profile для текущего пользователя
                 user_profile = Profile.objects.get(user=request.user)
-                user_profile.avatar = uploaded_file['secure_url']
+                user_profile.avatar = uploaded_file["secure_url"]
                 user_profile.save()
 
                 # Сообщение об успешной загрузке
-                form.add_error(None, 'Аватар успешно загружен.')
+                form.add_error(None, "Аватар успешно загружен.")
 
-                return redirect('app_photo:upload')
+                return redirect("app_photo:upload")
     else:
         form = AvatarForm()
 
-    return render(request, 'app_accounts/profile.html', {'form': form})
-
+    return render(request, "app_accounts/profile.html", {"form": form})

@@ -1,5 +1,5 @@
 __pycache__/
-.idea
+.idea/
 .env
 env
 Log
@@ -14,3 +14,6 @@ postgres-data
 staticfiles
 db.sqlite3
 poetry.lock
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir

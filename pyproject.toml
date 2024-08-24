@@ -22,6 +22,12 @@ opencv-python = "^4.10.0.84"
 paddleocr = "^2.8.1"
 paddlepaddle = "^2.6.1"
 setuptools = "^73.0.1"
+celery = "^5.4.0"
+redis = "^5.0.8"
+django-redis = "^5.4.0"
+django-celery-results = "^2.5.1"
+eventlet = "^0.36.1"
+flower = "^2.0.1"
 
 
 [build-system]
