@@ -1,3 +1,5 @@
+* **[Change to ukrainian](README_ua.md)**
+
 # Web_World: Park-Auto <a><img src="https://github.com/IVadymMarchenko/web_world/blob/main/app_parking/app_home/images/about_project/images/web_logo.jpg" width="40px" style="border: 10px solid orange;"></a>
 The final project of the course Python 19 Data Science, on the Web framework - Django.
 
@@ -20,27 +22,27 @@ Every time you choose a parking place, think about how your decision will affect
 
 ## Features:
 **Web_World: Park-Auto** - performs the following features:
-* **Authorization and Authentication:** - users can register, log in, and log out.
-* **Image Uploading:** - users can upload images for car number recognition via personal profile.
-* **User profile management:** - car auto history, recognized numbers, payment history.
-* **Admin profile management** - adjusted django admin profile, giving full project management possibility.
-* **Celery task scheduler** - task scheduler that performs auto email notifications, for blacklisted users.
-* **Model algorithm: [paddleocr](https://huggingface.co/spaces/itsyoboieltr/anpr/blob/main/ANPR.ipynb)** - recognition algorithm already trained and implemented.
-* **Docker container:** - the project can start-up via containerized Docker.
+* 👨‍💻 **Authorization and Authentication:** - users can register, log in, and log out.
+* 🚗 **Image Uploading:** - users can upload images for car number recognition via personal profile.
+* 🤓 **User profile management:** - car auto history, recognized numbers, payment history.
+* 😎 **Admin profile management** - adjusted django admin profile, giving full project management possibility.
+* 📆 **Celery task scheduler** - task scheduler that performs auto email notifications, for blacklisted users.
+* 🌌 **Model algorithm: [paddleocr](https://huggingface.co/spaces/itsyoboieltr/anpr/blob/main/ANPR.ipynb)** - recognition algorithm already trained and implemented.
+* 🐳 **Docker container:** - the project can start-up via containerized Docker.
 
 ## Technologies:
 Project is mainly based on:
 * 🐍 **Python** - backend programming language.
-* **HTML/CSS/JavaScript:** - frontend programming languages.
-* **Django** -  python web framework.
-* **Paddleocr / OpenCV** - vision image recognition models.
-* **PostgreSQL** - object-relational database management system.
-* **Celery** - automation task scheduler.
-* **Docker** - a software platform for rapid application development, testing and deployment.
-* **GitHub** - storing, tracking, and collaborating on project development/deployment.
-* **Googleapis** - a service by Google that provides a diverse collection of web fonts.
-* **Koyeb** - service for project deplotment.
-* **Trello** - a visual tool that allows your team to manage projects, workflows and any type of job.
+* 🌠 **HTML/CSS/JavaScript:** - frontend programming languages.
+* 🤠 **Django** -  python web framework.
+* 🌌 **Paddleocr / OpenCV** - vision image recognition models.
+* 🐘 **PostgreSQL** - object-relational database management system.
+* 📆 **Celery** - automation task scheduler.
+* 🐳 **Docker** - a software platform for rapid application development, testing and deployment.
+* 👀 **GitHub** - storing, tracking, and collaborating on project development/deployment.
+* 🎰 **Googleapis** - a service by Google that provides a diverse collection of web fonts.
+* 🌎 **Koyeb** - service for project deplotment.
+* 👨‍👦‍👦 **Trello** - a visual tool that allows your team to manage projects, workflows and any type of job.
 
 ## Setup-Locally:
 1. The first thing to do is to clone the repository:
@@ -83,7 +85,7 @@ REDIS_HOST0=*your redis host for celery*/0
 REDIS_HOST1=*your redis host for celery*/1
 ```
 
-4. Then run docker container nad make migrations for db:
+4. Then run docker container and make migrations for db:
     * Run postgre docker container.
     * Run redis docker container.
         - From any terminal window:
@@ -132,7 +134,7 @@ Third terminal window - for web server start-up:
 
 * And navigate to `http://127.0.0.1:8000/.
 
-## Docker-setup
+## Docker-setup:
 From the root folder:
 1. Build containers via `docker-compose`:
 
@@ -146,4 +148,5 @@ From the root folder:
     docker-compose up
     ```
 
-3. Open `http://localhost:8000` in a browser. You should see the main page.
+3. Open `http://localhost:8000` in a browser.
+
