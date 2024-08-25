@@ -24,8 +24,6 @@ from django.utils.dateparse import parse_datetime
 from django.urls import reverse
 
 
-
-
 User = get_user_model()
 
 
@@ -157,14 +155,20 @@ def top_up_balance(request):
                     request.user.money_balance += amount
                     request.user.save()
                     messages.success(
-                        request, f"Your balance has been topped up by ${amount:.2f}."
+                        request,
+                        f"Your balance has been topped up by ${amount:.2f}.",
+                        extra_tags="top_balance",
                     )
                 else:
-                    messages.error(request, "The amount must be greater than zero.")
+                    messages.error(
+                        request,
+                        "The amount must be greater than zero.",
+                        extra_tags="top_balance",
+                    )
             except Decimal.InvalidOperation:
-                messages.error(request, "Invalid amount.")
+                messages.error(request, "Invalid amount.", extra_tags="top_balance")
         else:
-            messages.error(request, "Please enter an amount.")
+            messages.error(request, "Please enter an amount.", extra_tags="top_balance")
 
     return redirect("app_accounts:profile", username=request.user.username)
 

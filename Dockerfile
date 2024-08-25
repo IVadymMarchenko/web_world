@@ -26,6 +26,18 @@ FROM python:3.11
 # RUN pip install opencv-contrib-python
 # RUN apt update && apt install -y libsm6 libxext6 ffmpeg libfontconfig1 libxrender1 libgl1-mesa-glx
 
+# Update package lists and install necessary libraries
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    ffmpeg \
+    libfontconfig1 \
+    libxrender1
+# Install OpenCV with extra modules via pip
+RUN pip install opencv-contrib-python
+
 # Install the working directory          
 WORKDIR /app
 

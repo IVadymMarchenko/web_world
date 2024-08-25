@@ -70,6 +70,7 @@ def save_to_car_list(request, recognized_number, user):
             messages.error(
                 request,
                 f"Car with license number {recognized_number} is Blacklisted.",
+                extra_tags="if_parking",
             )
 
         return car_list_entry
@@ -86,6 +87,7 @@ def save_to_parking_record(request, user, recognized_number, rate_record):
         messages.warning(
             request,
             f"Car with license number {recognized_number} is already parked.",
+            extra_tags="if_parking",
         )
 
         return None
@@ -168,6 +170,7 @@ def upload(request):
                         messages.error(
                             request,
                             f"Your balance below zero. Please ",
+                            extra_tags="if_parking",
                         )
 
                     car_numbers = recognized_numbers  # Сохраняем распознанные номера
