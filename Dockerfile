@@ -1,5 +1,5 @@
 # Use the official image of Python
-FROM python:3.11
+FROM python:3.8
 
 # RUN apt-get update && apt-get install -y \
 #     libgl1-mesa-glx \
@@ -26,6 +26,30 @@ FROM python:3.11
 # RUN pip install opencv-contrib-python
 # RUN apt update && apt install -y libsm6 libxext6 ffmpeg libfontconfig1 libxrender1 libgl1-mesa-glx
 
+# # Update package lists and install necessary libraries
+# RUN apt-get update && apt-get install -y \
+#     libgl1-mesa-glx \
+#     libglib2.0-0 \
+#     libsm6 \
+#     libxext6 \
+#     ffmpeg \
+#     libfontconfig1 \
+#     libxrender1
+# # Install OpenCV with extra modules via pip
+# RUN pip install opencv-contrib-python
+
+# # Update package lists and install necessary libraries
+# RUN apt-get update && apt-get install -y \
+#     libgl1-mesa-glx \
+#     libglib2.0-0 \
+#     libsm6 \
+#     libxext6 \
+#     ffmpeg \
+#     libfontconfig1 \
+#     libxrender1
+# # Install OpenCV with extra modules via pip
+# RUN pip install opencv-python paddlepaddle paddleocr
+
 # Update package lists and install necessary libraries
 RUN apt-get update && apt-get install -y \
     libgl1-mesa-glx \
@@ -35,8 +59,11 @@ RUN apt-get update && apt-get install -y \
     ffmpeg \
     libfontconfig1 \
     libxrender1
-# Install OpenCV with extra modules via pip
-RUN pip install opencv-contrib-python
+# Install a specific version of PaddlePaddle
+RUN pip install paddlepaddle==2.5.1 paddleocr opencv-python
+# Disable CPU optimizations that may not be supported
+ENV FLAGS_use_mkldnn=False
+ENV FLAGS_use_mkldnn_quantizer=False
 
 # Install the working directory          
 WORKDIR /app

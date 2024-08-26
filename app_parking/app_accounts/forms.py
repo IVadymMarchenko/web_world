@@ -1,4 +1,8 @@
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    UserChangeForm,
+    PasswordChangeForm,
+)
 from django import forms
 
 
@@ -50,6 +54,7 @@ class UserProfileForm(UserChangeForm):
     class Meta:
         model = User
         fields = [
+            "username",
             "full_name",
             "email",
             "phone_number",
@@ -62,4 +67,31 @@ class UserProfileForm(UserChangeForm):
 
 
 class BalanceTopUpForm(forms.Form):
-    amount = forms.DecimalField(max_digits=10, decimal_places=2, min_value=0.01, label="Amount to top up")
+    amount = forms.DecimalField(
+        max_digits=10, decimal_places=2, min_value=0.01, label="Amount to top up"
+    )
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        label="Old Password",
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control", "placeholder": "Old Password"}
+        ),
+    )
+    new_password1 = forms.CharField(
+        label="New Password",
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control", "placeholder": "New Password"}
+        ),
+    )
+    new_password2 = forms.CharField(
+        label="Confirm New Password",
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control", "placeholder": "Confirm New Password"}
+        ),
+    )
+
+    class Meta:
+        model = User
+        fields = ["old_password", "new_password1", "new_password2"]
