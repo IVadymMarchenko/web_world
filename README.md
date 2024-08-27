@@ -30,20 +30,6 @@ Every time you choose a parking place, think about how your decision will affect
 * 🌌 **Model algorithm: [paddleocr](https://huggingface.co/spaces/itsyoboieltr/anpr/blob/main/ANPR.ipynb)** - recognition algorithm already trained and implemented.
 * 🐳 **Docker container:** - the project can start-up via containerized Docker.
 
-## Technologies:
-Project is mainly based on:
-* 🐍 **Python** - backend programming language.
-* 🌠 **HTML/CSS/JavaScript:** - frontend programming languages.
-* 🤠 **Django** -  python web framework.
-* 🌌 **Paddleocr / OpenCV** - vision image recognition models.
-* 🐘 **PostgreSQL** - object-relational database management system.
-* 📆 **Celery** - automation task scheduler.
-* 🐳 **Docker** - a software platform for rapid application development, testing and deployment.
-* 👀 **GitHub** - storing, tracking, and collaborating on project development/deployment.
-* 🎰 **Googleapis** - a service by Google that provides a diverse collection of web fonts.
-* 🌎 **Koyeb** - service for project deplotment.
-* 👨‍👦‍👦 **Trello** - a visual tool that allows your team to manage projects, workflows and any type of job.
-
 ## Setup-Locally:
 1. The first thing to do is to clone the repository:
 
@@ -150,3 +136,17 @@ From the root folder:
 
 3. Open `http://localhost:8000` in a browser.
 
+## Technologies:
+Project is mainly based on:
+* 🐍 **Python** - backend programming language.
+* 🌠 **HTML/CSS/JavaScript:** - frontend programming languages.
+* 🤠 **Django** -  python web framework.
+* 🌌 **Paddleocr / OpenCV** - vision image recognition models.
+* 🐘 **PostgreSQL** - object-relational database management system.
+* ⚙️ **Redis** - data base that is responsible for the storage and cache of the main database.
+* 📆 **Celery** - automation task scheduler.
+* 🐳 **Docker** - a software platform for rapid application development, testing and deployment.
+* 👀 **GitHub** - storing, tracking, and collaborating on project development/deployment.
+* 🎰 **Googleapis** - a service by Google that provides a diverse collection of web fonts.
+* 🌎 **Koyeb** - service for project deplotment.
+* 👨‍👦‍👦 **Trello** - a visual tool that allows your team to manage projects, workflows and any type of job.

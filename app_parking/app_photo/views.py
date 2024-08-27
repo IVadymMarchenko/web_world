@@ -136,11 +136,9 @@ def upload(request):
                 secure_url = handle_file_upload(file)
                 recognized_numbers = recognize_numer_car(secure_url)
 
-                cleaned_list = [rec.replace(" ", "") for rec in recognized_numbers]
-                recognized_numbers = cleaned_list
-
                 if recognized_numbers:
-
+                    cleaned_list = [rec.replace(" ", "") for rec in recognized_numbers]
+                    recognized_numbers = cleaned_list
                     user = request.user
                     car_list_entry = save_to_car_list(
                         request, recognized_numbers[0], user
@@ -174,6 +172,12 @@ def upload(request):
                         )
 
                     car_numbers = recognized_numbers  # Сохраняем распознанные номера
+                else:
+                    messages.warning(
+                        request,
+                        f"Nothing to recognize. Please try again.",
+                        extra_tags="if_parking",
+                    )
 
                 # Сохраняем распознанные номера в сессию
                 request.session["car_numbers"] = car_numbers
@@ -199,24 +203,27 @@ def upload(request):
 def upload_avatar(request):
     if request.method == "POST":
         form = AvatarForm(request.POST, request.FILES)
+        
         if form.is_valid():
-            file = request.FILES.get("avatar")
+            file = request.FILES.get("profile_image")
+            
             if file:
                 # Загрузка файла на Cloudinary
                 uploaded_file = cloudinary.uploader.upload(
                     file, resource_type="image"
                 )  # image for images uploaded
-
                 # Получение объекта Profile для текущего пользователя
                 user_profile = Profile.objects.get(user=request.user)
                 user_profile.avatar = uploaded_file["secure_url"]
                 user_profile.save()
 
                 # Сообщение об успешной загрузке
-                form.add_error(None, "Аватар успешно загружен.")
+                # form.add_error(None, "Аватар успешно загружен.")
 
-                return redirect("app_photo:upload")
+                return redirect(
+                    "app_accounts:edit_profile", username=request.user.username
+                )
     else:
         form = AvatarForm()
 
-    return render(request, "app_accounts/profile.html", {"form": form})
+    return redirect("app_accounts:edit_profile", username=request.user.username)
