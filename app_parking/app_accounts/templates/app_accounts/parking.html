@@ -78,7 +78,7 @@
                 </div>
                 
                 <!-- Кнопка для подтверждения выбора фото -->
-                <button type="button" id="ok-button" class="ok-button" style="display: none;">OK</button>
+                {% comment %} <button type="button" id="ok-button" class="ok-button" style="display: none;">OK</button> {% endcomment %}
                 <a href="{% url 'app_accounts:profile' username=user.username %}" class="back-to-profile">Back to Profile</a>
                 
                 <!-- Кнопка для возвращения в профиль -->

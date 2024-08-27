@@ -41,31 +41,32 @@
                 <div class="user-details">
                     <h1 id="username">{{ user.full_name }}</h1>
                     <p>Balance: ${{ user.money_balance }}</p> <!-- Отображение баланса -->
+                
+                <!-- Кнопка для показа формы пополнения баланса -->
+                <section class="balance-top-up">
+                    <button class="btn-top-up" onclick="toggleTopUpForm()">Top Up Balance</button>
+
+                    <!-- Форма пополнения баланса -->
+                    <div id="balance-top-up-form" class="top-up-form">
+                        <h3 class="top-up-title">Enter Amount</h3>
+                        <form method="POST" action="{% url 'app_accounts:top_up_balance' %}">
+                            {% csrf_token %}
+                            <input type="number" name="amount" placeholder="Enter amount" min="1" required class="top-up-input">
+                            <button type="submit" class="btn-submit">Submit</button>
+                        </form>
+                    </div>
+                </section>
                 </div>
             </header>
     
             <section class="profile-actions">
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:parking_history' %}'">History of parking</button>
+                <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:parking' %}'">Parking now</button>
+                <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:edit_profile' user.username %}'">Change Information</button>
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_home:index' %}'">Back to main</button>
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:logout' %}'">Logout</button>
-                <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:edit_profile' user.username %}'">Change Information</button>
-                <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:parking' %}'">Parking now</button>
             </section>
-
-            <!-- Кнопка для показа формы пополнения баланса -->
-            <section class="balance-top-up">
-                <button class="btn btn-success" onclick="toggleTopUpForm()">Top Up Balance</button>
-                
-                <!-- Форма пополнения баланса -->
-                <div id="balance-top-up-form">
-                    <h3>Enter Amount</h3>
-                    <form method="POST" action="{% url 'app_accounts:top_up_balance' %}">
-                        {% csrf_token %}
-                        <input type="number" name="amount" placeholder="Enter amount" min="1" required>
-                        <button type="submit" class="btn btn-success">Submit</button>
-                    </form>
-                </div>
-            </section>
+               
         </div>
     </div>   
 
