@@ -17,3 +17,5 @@ poetry.lock
 celerybeat-schedule.bak
 celerybeat-schedule.dat
 celerybeat-schedule.dir
+app_parking/app_car_moderation/migrations/0002_alter_parkingrecord_parking_duration.py
+app_parking/app_accounts/migrations/0002_alter_user_phone_number.py

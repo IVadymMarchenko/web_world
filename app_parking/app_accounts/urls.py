@@ -17,5 +17,4 @@ urlpatterns = [
     path("parking/", views.parking_view, name="parking"),
     path("top_up_balance/", views.top_up_balance, name="top_up_balance"),
     path("pay_parking/<int:record_id>/", views.pay_parking, name="pay_parking"),
-    # path("update_balance/", views.update_balance, name="update_balance"),
 ]

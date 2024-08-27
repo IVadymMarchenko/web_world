@@ -50,6 +50,7 @@ FROM python:3.8
 # # Install OpenCV with extra modules via pip
 # RUN pip install opencv-python paddlepaddle paddleocr
 
+
 # Update package lists and install necessary libraries
 RUN apt-get update && apt-get install -y \
     libgl1-mesa-glx \
@@ -67,29 +68,17 @@ ENV FLAGS_use_mkldnn_quantizer=False
 
 # Install the working directory          
 WORKDIR /app
-
-
 # Copy the files required to install dependencies
 COPY poetry.lock pyproject.toml ./
-# COPY poetry.lock $APP_HOME/poetry.lock
-# COPY pyproject.toml $APP_HOME/pyproject.toml
-
-# Set Poetry and dependences
+# Set up Poetry and install project dependencies
 RUN pip install poetry && \
     poetry config virtualenvs.create false && \
     poetry install --no-root
-# RUN pip install poetry
-# RUN poetry config virtualenvs.create false && poetry install --no-root
-
-
-# Copy the rest of the project files
+# Copy the rest of the project files into the container
 COPY . .
-
-
-# Open port 8000
+# Expose port 8000 for the Django server
 EXPOSE 8000
-
-# Command start server
-CMD ["sh", "-c", "python app_parking/manage.py runserver 0.0.0.0:8000"]
+# Command to start the Django server
+CMD ["sh", "-c", "python3 app_parking/manage.py makemigrations && python3 app_parking/manage.py migrate && python3 app_parking/manage.py runserver 0.0.0.0:8000"]
 
 # & celery -A app_parking/manage.py beat -l info & celery -A app_parking/manage.py worker -l info -P eventlet
