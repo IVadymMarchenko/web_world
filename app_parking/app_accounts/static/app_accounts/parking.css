@@ -14,7 +14,7 @@
 }
 
 .navbar-brand:hover .brand-text {
-    color: #e0dfdf; 
+    color: #e0dfdf;
 }
 
 /* Общие стили */
@@ -94,7 +94,8 @@ body {
 }
 
 .ok-button {
-    display: none; /* Скрыть кнопку по умолчанию */
+    display: none;
+    /* Скрыть кнопку по умолчанию */
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
@@ -143,7 +144,8 @@ body {
 }
 
 .custom-file-input {
-    display: none; /* Скрыть стандартное поле загрузки */
+    display: none;
+    /* Скрыть стандартное поле загрузки */
 }
 
 .uploaded-photos-container {
@@ -165,8 +167,10 @@ body {
 .pricing-options {
     z-index: 10;
     position: relative;
-    display: none; /* Изначально скрыто */
+    display: none;
+    /* Изначально скрыто */
     margin-top: 20px;
+    margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -201,4 +205,55 @@ body {
 .alert-danger {
     background-color: #dc3545;
     color: white;
+}
+
+/* Error messages */
+.alert {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #631111;
+    position: relative;
+    transition: opacity 0.3s ease-in-out;
+    text-align: center;
+    opacity: 0.9;
+}
+
+.alert-info {
+    background-color: #17a2b8;
+}
+
+.alert-success {
+    background-color: #28a745;
+}
+
+.alert-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.alert-error {
+    background-color: #dc3545;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+.alert .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.alert .close-btn:hover {
+    color: #7a1b1b;
+}
+
+.alert-dismissible {
+    padding-right: 40px;
 }

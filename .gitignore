@@ -10,6 +10,8 @@ staticfiles
 0003_initial.py
 0004_initial.py
 0005_initial.py
+0002_alter_carlist_owner.py
+0002_alter_car_image_number_car.py
 postgres-data
 staticfiles
 db.sqlite3

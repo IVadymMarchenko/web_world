@@ -21,6 +21,7 @@ from .forms import (
 )
 from .forms import BalanceTopUpForm
 from app_car_moderation.models import CarList, ParkingRecord, Payment, Rate
+from app_photo.models import Car_Image
 from django.contrib import messages
 from decimal import Decimal
 from django.utils import timezone
@@ -36,8 +37,6 @@ from .models import Profile
 User = get_user_model()
 
 
-
-
 def sign_up_user(request):
     if request.user.is_authenticated:
         return redirect(to="app_home:index")
@@ -49,19 +48,35 @@ def sign_up_user(request):
             backend = get_backends()[0]
             user.backend = f"{backend.__module__}.{backend.__class__.__name__}"
             login(request, user, backend=user.backend)
-            
+
             username = user.username
-            messages.success(request, f'Welcome, {username}!<br>Registration successful! Redirecting to your profile...')
+            messages.success(
+                request,
+                f"Welcome, {username}!<br>Registration successful! Redirecting to your profile...",
+            )
             # Возвращаем тот же шаблон, чтобы показать сообщение об успешной регистрации
-            return render(request, "app_accounts/register_form.html", context={"form": form, "redirect": True, "redirect_url": reverse('app_accounts:profile', kwargs={'username': username})})
+            return render(
+                request,
+                "app_accounts/register_form.html",
+                context={
+                    "form": form,
+                    "redirect": True,
+                    "redirect_url": reverse(
+                        "app_accounts:profile", kwargs={"username": username}
+                    ),
+                },
+            )
 
         else:
-            messages.error(request, 'There was an error with your registration. Please try again.')
-            return render(request, "app_accounts/register_form.html", context={"form": form})
+            messages.error(
+                request, "There was an error with your registration. Please try again."
+            )
+            return render(
+                request, "app_accounts/register_form.html", context={"form": form}
+            )
     else:
         form = SignUpForm()
     return render(request, "app_accounts/register_form.html", context={"form": form})
-
 
 
 def login_user(request):
@@ -102,7 +117,7 @@ def profile(request, username):
     if user != request.user:
         return redirect("app_accounts:profile", username=request.user.username)
 
-    car_photos = user.car_images.all()
+    car_photos = Car_Image.objects.filter(user=user).latest("image")
 
     try:
         latest_record = ParkingRecord.objects.filter(user=user, is_parked=True).latest(
@@ -304,7 +319,6 @@ def pay_parking(request, record_id):
 #         return JsonResponse({"success": True, "updated_balance": str(updated_balance)})
 
 #     return JsonResponse({"success": False, "error": "Invalid request method"})
-
 
 
 def parking_view(request):

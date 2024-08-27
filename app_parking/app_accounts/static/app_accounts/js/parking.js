@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const fileInput = document.getElementById('car-photo-upload');
-    const okButton = document.getElementById('ok-button');
-    const pricingOptions = document.querySelector('.pricing-options');
     const saveButton = document.querySelector('.upload-button');
+    const pricingOptions = document.querySelector('.pricing-options');
+    const rateInputs = document.querySelectorAll('input[name="rate"]');
 
     fileInput.addEventListener('change', function () {
         const file = fileInput.files[0];
@@ -18,8 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 uploadedPhotosContainer.appendChild(img);
                 // Показать чекбоксы
                 pricingOptions.style.display = 'block';
-                // Показать кнопку "OK"
-                okButton.style.display = 'block';
                 // Отключить кнопку "Save" до выбора тарифа
                 saveButton.disabled = true;
             };
@@ -27,18 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    okButton.addEventListener('click', function () {
-        // Проверить, выбран ли тариф
-        const selectedRate = document.querySelector('input[name="rate"]:checked');
-        if (selectedRate) {
-            // Включить кнопку "Save"
+    rateInputs.forEach(function (rateInput) {
+        rateInput.addEventListener('change', function () {
+            // Включить кнопку "Save" после выбора тарифа
             saveButton.disabled = false;
-            // Скрыть кнопку "OK"
-            okButton.style.display = 'none';
-        } else {
-            alert('Please select a parking rate.');
-        }
+        });
     });
 });
-
-

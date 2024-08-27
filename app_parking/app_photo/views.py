@@ -61,10 +61,16 @@ def send_blacklist_notification(user, license_number):
 
 def save_to_car_list(request, recognized_number, user):
     try:
+        car_list_entry = CarList.objects.get(license_number=recognized_number)
 
-        car_list_entry = CarList.objects.get(
-            license_number=recognized_number, owner=user
-        )
+        if car_list_entry.owner != user:
+            messages.error(
+                request,
+                f"Car with license number {recognized_number} is already associated with another user.",
+                extra_tags="if_parking",
+            )
+            return None
+
         if car_list_entry.is_blacklisted:
             send_blacklist_notification(user, recognized_number)
             messages.error(
@@ -74,7 +80,8 @@ def save_to_car_list(request, recognized_number, user):
             )
 
         return car_list_entry
-    except ObjectDoesNotExist:
+
+    except CarList.DoesNotExist:
         car_list_entry = CarList(license_number=recognized_number, owner=user)
         car_list_entry.save()
         return car_list_entry
@@ -127,6 +134,7 @@ def save_car_data(request, recognized_number, user, image_url):
 
 def upload(request):
     """Upload a file to the database."""
+    rates = Rate.objects.all()
     car_numbers = []
     if request.method == "POST":
         form = FormPicture(request.POST, request.FILES)
@@ -159,7 +167,7 @@ def upload(request):
                         id_value = int(request.POST.get("rate"))
                         rate_record = Rate.objects.get(id=id_value)
                         save_to_parking_record(
-                            request, user, recognized_numbers, rate_record
+                            request, user, recognized_numbers[0], rate_record
                         )
                         save_car_data(request, recognized_numbers[0], user, secure_url)
 
@@ -196,17 +204,23 @@ def upload(request):
     return render(
         request,
         "app_accounts/parking.html",
-        {"form": form, "car_photos": car_photos, "car_numbers": car_numbers},
+        {
+            "form": form,
+            "car_photos": car_photos,
+            "car_numbers": car_numbers,
+            "rates": rates,
+        },
     )
+    
 
 
 def upload_avatar(request):
+
     if request.method == "POST":
         form = AvatarForm(request.POST, request.FILES)
-        
         if form.is_valid():
             file = request.FILES.get("profile_image")
-            
+
             if file:
                 # Загрузка файла на Cloudinary
                 uploaded_file = cloudinary.uploader.upload(
