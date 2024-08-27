@@ -31,8 +31,8 @@
         <div class="profile-container">
             <header class="profile-header">
                 <div class="avatar-section">
-                    {% if user.profile.avatar %}
-                        <img id="avatar" src="{{ user.profile.avatar.url }}" alt="User avatar">
+                    {% if user_profile_avatar.avatar %}
+                        <img id="avatar" src="{{ user_profile_avatar.avatar }}" alt="User avatar">
                     {% else %}
                         <img id="avatar" src="{% static 'app_accounts/images/default_avatar.jpg' %}" alt="Default avatar">
                     {% endif %}
@@ -48,7 +48,7 @@
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:parking_history' %}'">History of parking</button>
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_home:index' %}'">Back to main</button>
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:logout' %}'">Logout</button>
-                <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:edit_profile' %}'">Change Information</button>
+                <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:edit_profile' user.username %}'">Change Information</button>
                 <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:parking' %}'">Parking now</button>
             </section>
 

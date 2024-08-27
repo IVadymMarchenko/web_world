@@ -1,10 +1,11 @@
 from django.contrib import admin
 from app_accounts.models import User
-from app_car_moderation.models import ParkingRecord, Payment
+from app_car_moderation.models import ParkingRecord, Payment, CarList
 from .utils import (
     export_users_to_csv,
     export_parking_records_to_csv,
     export_payments_to_csv,
+    export_cars_to_csv,
 )
 
 
@@ -58,6 +59,20 @@ class PaymentsAdmin(admin.ModelAdmin):
     export_to_csv.short_description = "Export selected payments to CSV"
 
 
+class CarListAdmin(admin.ModelAdmin):
+    list_display = ("license_number", "owner", "is_blacklisted", "created_at")
+    search_fields = ("license_number",)
+    list_filter = ("is_blacklisted", "created_at")
+    ordering = ("license_number",)
+    actions = ["export_to_csv"]
+
+    def export_to_csv(self, request, queryset):
+        return export_cars_to_csv(queryset)
+
+    export_to_csv.short_description = "Export selected payments to CSV"
+
+
 admin.site.register(User, UsersAdmin)
 admin.site.register(ParkingRecord, ParkingRecordsAdmin)
 admin.site.register(Payment, PaymentsAdmin)
+admin.site.register(CarList, CarListAdmin)

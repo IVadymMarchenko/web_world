@@ -7,11 +7,18 @@ from django.contrib.auth import (
 )
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from django.views import View
 from django.core.exceptions import ObjectDoesNotExist
 
-from .forms import SignUpForm, LoginForm, UserChangeForm, UserProfileForm
+from .forms import (
+    SignUpForm,
+    LoginForm,
+    UserChangeForm,
+    UserProfileForm,
+    PasswordChangeForm,
+)
 from .forms import BalanceTopUpForm
 from app_car_moderation.models import CarList, ParkingRecord, Payment, Rate
 from django.contrib import messages
@@ -23,7 +30,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.dateparse import parse_datetime
 from django.urls import reverse
 
-
+from .models import Profile
 
 
 User = get_user_model()
@@ -91,6 +98,7 @@ def login_user(request):
 @login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
+    user_profile_avatar = get_object_or_404(Profile, user=user)
     if user != request.user:
         return redirect("app_accounts:profile", username=request.user.username)
 
@@ -110,6 +118,7 @@ def profile(request, username):
         "app_accounts/profile.html",
         {
             "user": user,
+            "user_profile_avatar": user_profile_avatar,
             "car_photos": car_photos,
             "parking_records": parking_records,
             "latest_record": latest_record,
@@ -124,15 +133,65 @@ def logout_user(request):
 
 
 @login_required
-def edit_profile(request):
+def edit_profile(request, username):
+    user = get_object_or_404(User, username=username)
+    user_profile_avatar = get_object_or_404(Profile, user=user)
+
+    active_tab = request.GET.get("tab", "account-general")
+
     if request.method == "POST":
-        form = UserProfileForm(request.POST, request.FILES, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect("app_accounts:profile", username=request.user.username)
+        if "save_profile" in request.POST:
+            form = UserProfileForm(request.POST, request.FILES, instance=request.user)
+            if form.is_valid():
+                form.save()
+                messages.success(
+                    request, "Profile updated successfully.", extra_tags="edit_profile"
+                )
+                return redirect("app_accounts:profile", username=request.user.username)
+            else:
+                messages.error(
+                    request,
+                    "Please correct the errors below.",
+                    extra_tags="edit_profile",
+                )
+            active_tab = "account-general"
+
+        elif "change_password" in request.POST:
+            password_form = PasswordChangeForm(user=request.user, data=request.POST)
+            if password_form.is_valid():
+                user = password_form.save()
+                update_session_auth_hash(request, user)
+                messages.success(
+                    request,
+                    "Your password was successfully changed.",
+                    extra_tags="edit_profile",
+                )
+                return redirect(
+                    "app_accounts:edit_profile", username=request.user.username
+                )
+            else:
+                messages.error(
+                    request,
+                    "Please correct the errors below.",
+                    extra_tags="edit_profile",
+                )
+            active_tab = "account-change-password"
+
+            form = UserProfileForm(instance=request.user)
     else:
         form = UserProfileForm(instance=request.user)
-    return render(request, "app_accounts/edit_profile.html", {"form": form})
+        password_form = PasswordChangeForm(user=request.user)
+
+    return render(
+        request,
+        "app_accounts/edit_profile.html",
+        {
+            "form": form,
+            "password_form": password_form,
+            "user_profile_avatar": user_profile_avatar,
+            "active_tab": active_tab,
+        },
+    )
 
 
 @login_required
@@ -164,14 +223,20 @@ def top_up_balance(request):
                     request.user.money_balance += amount
                     request.user.save()
                     messages.success(
-                        request, f"Your balance has been topped up by ${amount:.2f}."
+                        request,
+                        f"Your balance has been topped up by ${amount:.2f}.",
+                        extra_tags="top_balance",
                     )
                 else:
-                    messages.error(request, "The amount must be greater than zero.")
+                    messages.error(
+                        request,
+                        "The amount must be greater than zero.",
+                        extra_tags="top_balance",
+                    )
             except Decimal.InvalidOperation:
-                messages.error(request, "Invalid amount.")
+                messages.error(request, "Invalid amount.", extra_tags="top_balance")
         else:
-            messages.error(request, "Please enter an amount.")
+            messages.error(request, "Please enter an amount.", extra_tags="top_balance")
 
     return redirect("app_accounts:profile", username=request.user.username)
 
@@ -186,8 +251,8 @@ def parking_history(request):
     )
 
 
-def parking_view(request):
-    return render(request, "app_accounts/parking.html")
+# def parking_view(request):
+#     return render(request, "app_accounts/parking.html")
 
 
 @login_required

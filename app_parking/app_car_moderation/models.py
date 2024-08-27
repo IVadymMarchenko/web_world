@@ -37,7 +37,7 @@ def create_default_rates(sender, **kwargs):
 
 class CarList(models.Model):
     license_number = models.CharField(max_length=15, unique=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vehicles")
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="cars")
     is_blacklisted = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
 

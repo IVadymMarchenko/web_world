@@ -14,17 +14,19 @@
 }
 
 .navbar-brand:hover .brand-text {
-    color: #e0dfdf; 
+    color: #e0dfdf;
 }
 
 /* Container styling for central alignment and padding */
 .container {
-    max-width: 900px;
-    margin: 0 auto; 
+    max-width: 600px;
+    max-height: 600px;
+    margin: 0 auto;
+    margin-top: 80px;
     padding: 20px;
     background-color: #f8f9fa;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -33,16 +35,20 @@ h4 {
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 20px;
-    text-align: center; 
+    text-align: center;
 }
 
 
 /* Card component styling */
 .card {
-    border: none;
-    background-color: #ffffff;
+    max-width: 600px;
+    max-height: 850px;
+    margin: 0 auto;
+    margin-top: 80px;
+    padding: 20px;
+    background-color: #f8f9fa;
     border-radius: 10px;
-    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -55,7 +61,7 @@ h4 {
 /* Sidebar links styling */
 .account-settings-links {
     background-color: #e9ecef;
-    border-radius: 10px 0 0 10px; 
+    border-radius: 10px 0 0 10px;
 }
 
 
@@ -71,7 +77,7 @@ h4 {
 .account-settings-links a:hover,
 .account-settings-links a.active {
     background-color: #007bff;
-    color: #ffffff; 
+    color: #ffffff;
 }
 
 
@@ -91,7 +97,7 @@ h4 {
 .form-group label {
     font-weight: 500;
     margin-bottom: 5px;
-    display: block; 
+    display: block;
 }
 
 
@@ -107,7 +113,7 @@ h4 {
 /* Focus state for form inputs */
 .form-control:focus {
     border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); 
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 
@@ -151,8 +157,8 @@ h4 {
 .ui-w-80 {
     width: 80px;
     height: 80px;
-    border-radius: 50%; 
-    object-fit: cover; 
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 
@@ -223,4 +229,64 @@ input[type="file"] {
 /* Hover state for links in warning alert */
 .alert-warning a:hover {
     text-decoration: none;
+}
+
+/* Background style */
+.bg-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.bg-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bg-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(21, 82, 99, 0.65), rgba(21, 82, 99, 0.55));
+}
+
+.avatar-section {
+    position: relative;
+    margin-right: 20px;
+}
+
+.avatar-section img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.file-name-style {
+    font-size: 0,7em;
+    /* Увеличиваем размер шрифта */
+    color: #007bff;
+    /* Устанавливаем цвет текста */
+    margin-top: 10px;
+    /* Добавляем отступ сверху */
+    font-weight: bold;
+    /* Делаем текст жирным */
+}
+
+.allowed-file-types {
+    font-size: 0,7em;
+    /* Увеличиваем размер шрифта */
+    color: #28a745;
+    /* Устанавливаем зеленый цвет текста */
+    margin-top: 10px;
+    /* Добавляем отступ сверху */
 }

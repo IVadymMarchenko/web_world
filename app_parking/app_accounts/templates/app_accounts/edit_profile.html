@@ -11,41 +11,59 @@
 </head>
 
 <body>
+    <div class="bg-box">
+        <img src="{% static 'slider-bg.jpg' %}" alt="">
+    </div>
     <a class="navbar-brand" href="/">
         <span class="brand-text">
             WEB_WORLD: PARK-AUTO
         </span>
     </a>
-    <div class="container light-style flex-grow-1 container-p-y">
-        <h4 class="font-weight-bold py-3 mb-4">Account settings</h4>
         <div class="card overflow-hidden">
             <div class="row no-gutters row-bordered row-border-light">
                 <div class="col-md-3 pt-0">
                     <div class="list-group list-group-flush account-settings-links">
-                        <a class="list-group-item list-group-item-action active" data-toggle="list"
+                        <a class="list-group-item list-group-item-action {% if active_tab == 'account-general' %}active{% endif %}" data-toggle="list"
                             href="#account-general">General</a>
-                        <a class="list-group-item list-group-item-action" data-toggle="list"
+                        <a class="list-group-item list-group-item-action {% if active_tab == 'account-change-password' %}active{% endif %}" data-toggle="list"
                             href="#account-change-password">Change password</a>
                     </div>
                 </div>
                 <div class="col-md-9">
                     <div class="tab-content">
-                        <div class="tab-pane fade active show" id="account-general">
-                            <form method="POST" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <div class="card-body media align-items-center">
-                                    <img src="{{ user.profile_image.url }}" alt class="d-block ui-w-80">
+                        <div class="tab-pane fade {% if active_tab == 'account-general' %}active show{% endif %}" id="account-general">
+                            <form method="POST" enctype="multipart/form-data" action="{% url 'app_photo:upload_avatar' %}">
+                            {% csrf_token %}
+                                <div class="avatar-section">
+
+                                    {% if user_profile_avatar.avatar %}
+                                        <img id="avatar" src="{{ user_profile_avatar.avatar }}" alt="User avatar">
+                                    {% else %}
+                                        <img id="avatar" src="{% static 'app_accounts/images/default_avatar.jpg' %}" alt="Default avatar">
+                                    {% endif %}
+
                                     <div class="media-body ml-4">
-                                        <label class="btn btn-outline-primary">
+                                        <label class="btn btn-outline-primary" style="margin-top: 10px;">
                                             Upload new photo
-                                            <input type="file" class="account-settings-fileinput" name="profile_image">
+                                            <input type="file" class="account-settings-fileinput" name="profile_image" id="profileImageInput">
                                         </label> &nbsp;
-                                        <button type="button" class="btn btn-default md-btn-flat">Reset</button>
-                                        <div class="text-light small mt-1">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                                        {% comment %} <button type="button" class="btn btn-default md-btn-flat">Reset</button> {% endcomment %}
+                                        <button type="submit" class="btn btn-default md-btn-flat">Save</button>
+                                        <p id="fileName" class="file-name-style"></p>
+                                        <div class="allowed-file-types">Allowed JPG, GIF or PNG.</div>
                                     </div>
                                 </div>
+                            </form>
+                                <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
                                 <hr class="border-light m-0">
                                 <div class="card-body">
+
+                                    <div class="form-group">
+                                        <label class="form-label">Login name</label>
+                                        {{ form.username }}
+                                    </div>
+
                                     <div class="form-group">
                                         <label class="form-label">Full Name</label>
                                         {{ form.full_name }}
@@ -59,42 +77,58 @@
                                         {{ form.phone_number }}
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">Address</label>
-                                        {{ form.address }}
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">License Number</label>
-                                        {{ form.license_number }}
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Bio</label>
-                                        {{ form.bio }}
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Location</label>
-                                        {{ form.location }}
-                                    </div>
-                                    <div class="form-group">
                                         <label class="form-label">Birth Date</label>
                                         {{ form.birth_date }}
                                     </div>
                                 </div>
                                 <div class="text-right mt-3">
-                                    <button type="submit" class="btn btn-primary">Save changes</button>&nbsp;
+                                    <button type="submit" class="btn btn-primary" name="save_profile">Save changes</button>&nbsp;
                                     <a href="{% url 'app_accounts:profile' user.username %}" class="btn btn-default"><i class="fas fa-arrow-left me-1"></i> Back to Profile</a>
                                 </div>
                             </form>
                         </div>
-                        <div class="tab-pane fade" id="account-change-password">
+                         <div class="tab-pane fade {% if active_tab == 'account-change-password' %}active show{% endif %}" id="account-change-password">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ password_form.non_field_errors }}
+                                <div class="form-group">
+                                    <label class="form-label">Old Password</label>
+                                    {{ password_form.old_password }}
+                                    {% if password_form.old_password.errors %}
+                                        <div class="text-danger">{{ password_form.old_password.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">New Password</label>
+                                    {{ password_form.new_password1 }}
+                                    {% if password_form.new_password1.errors %}
+                                        <div class="text-danger">{{ password_form.new_password1.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Confirm New Password</label>
+                                    {{ password_form.new_password2 }}
+                                    {% if password_form.new_password2.errors %}
+                                        <div class="text-danger">{{ password_form.new_password2.errors }}</div>
+                                    {% endif %}
+                                </div>
+                                <button type="submit" name="change_password" class="btn btn-primary">Change Password</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
+<script>
+    document.getElementById('profileImageInput').addEventListener('change', function(){
+        var fileName = this.files[0].name;
+        document.getElementById('fileName').textContent = "" + fileName;
+    });
+</script>
+
+</body>
 </html>
