@@ -29,6 +29,8 @@ from django.urls import reverse
 User = get_user_model()
 
 
+
+
 def sign_up_user(request):
     if request.user.is_authenticated:
         return redirect(to="app_home:index")
@@ -40,14 +42,19 @@ def sign_up_user(request):
             backend = get_backends()[0]
             user.backend = f"{backend.__module__}.{backend.__class__.__name__}"
             login(request, user, backend=user.backend)
-            return redirect(to="app_accounts:profile", username=user.username)
-        else:
-            return render(
-                request, "app_accounts/register_form.html", context={"form": form}
-            )
+            
+            username = user.username
+            messages.success(request, f'Welcome, {username}!<br>Registration successful! Redirecting to your profile...')
+            # Возвращаем тот же шаблон, чтобы показать сообщение об успешной регистрации
+            return render(request, "app_accounts/register_form.html", context={"form": form, "redirect": True, "redirect_url": reverse('app_accounts:profile', kwargs={'username': username})})
 
-    form = SignUpForm()
+        else:
+            messages.error(request, 'There was an error with your registration. Please try again.')
+            return render(request, "app_accounts/register_form.html", context={"form": form})
+    else:
+        form = SignUpForm()
     return render(request, "app_accounts/register_form.html", context={"form": form})
+
 
 
 def login_user(request):
@@ -232,6 +239,7 @@ def pay_parking(request, record_id):
 #         return JsonResponse({"success": True, "updated_balance": str(updated_balance)})
 
 #     return JsonResponse({"success": False, "error": "Invalid request method"})
+
 
 
 def parking_view(request):

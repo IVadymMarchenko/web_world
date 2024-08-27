@@ -20,33 +20,34 @@
     color: #e0dfdf; 
 }
 
-/* Background style */
+/* Background container */
 .bg-box {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+/* Background image */
+.bg-box img {
+    width: 100%;
+    height: 100vh; 
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+/* Overlay */
+.bg-box::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    z-index: -1;
-}
-
-.bg-box img {
-width: 100%;
-height: 100%;
--o-object-fit: cover;
-object-fit: cover;
-}
-
-.bg-box::before {
-content: "";
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: -webkit-gradient(linear, left top, right top, from(rgba(21, 82, 99, 0.65)), to(rgba(21, 82, 99, 0.55)));
-background: linear-gradient(to right, rgba(21, 82, 99, 0.65), rgba(21, 82, 99, 0.55));
+    background: linear-gradient(to right, rgba(21, 82, 99, 0.65), rgba(21, 82, 99, 0.55));
 }
 
 /* Defining root CSS variables for easy theme management */
@@ -69,37 +70,37 @@ background: linear-gradient(to right, rgba(21, 82, 99, 0.65), rgba(21, 82, 99, 0
 }
 
 
-/* Body styling for a full-screen gradient background with centered content */
 body {
-    background: linear-gradient(to bottom right, #6a11cb, #2575fc);
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start; /* Выравниваем контент по верху страницы */
+    min-height: 100vh; /* Устанавливаем минимальную высоту для body */
     color: var(--text-clr); 
+    margin: 0; 
+    padding: 0;
+    overflow-x: hidden; /* Скрываем горизонтальную прокрутку, если она появляется */
 }
-
 
 /* Styling the main wrapper for the form */
 .wrapper {
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     padding: 20px;
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.1); 
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); 
     backdrop-filter: blur(10px); 
+    position: relative; /* Для контроля расположения */
+    margin-top: 20px; /* Отступ сверху */
+    margin-bottom: 20px; /* Отступ снизу, чтобы добавить пространство для прокрутки */      
 }
-
 
 /* Form container styles for layout and background */
 .form-container {
     background: var(--input-bg); 
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
 }
-
 
 /* Styling for the form header */
 .form-container h2 {
@@ -109,13 +110,42 @@ body {
     color: var(--primary); 
 }
 
+/* Убираем стандартные отступы и добавляем пространство */
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 /* Input group layout with relative positioning for icons */
 .input-group {
     position: relative;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
+
+.input-group {
+    position: relative;
+}
+
+.input-group .validation-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5em;
+    display: none;
+}
+
+.input-group.valid .validation-icon.valid-icon {
+    color: green;
+    display: block;
+}
+
+.input-group.invalid .validation-icon.invalid-icon {
+    color: red;
+    display: block;
+}
 
 /* Label styling above input fields */
 .input-group label {
@@ -129,11 +159,11 @@ body {
 /* Icon styling within input fields */
 .input-group .icon {
     position: absolute;
-    top: 50%;
     left: 10px;
-    transform: translateY(10%); 
-    color: var(--primary); 
+    top: 42px;
+    color: var(--primary);
     font-size: 18px;
+    line-height: 0;
 }
 
 
@@ -155,46 +185,51 @@ input:focus {
 }
 
 
+:root {
+    --primary: #007bff; /* Primary color */
+    --btn-hvr: #0056b3; /* Hover color */
+    --white: #fff; /* White color */
+}
+
 /* Button styling with hover effects and transitions */
 button {
     width: 100%;
     padding: 12px;
     border: none;
-    background: var(--primary); 
-    color: var(--white); 
+    border-radius: 30px; /* More rounded corners */
+    background: linear-gradient(45deg, var(--primary), var(--btn-hvr)); /* Gradient background */
+    color: var(--white);
     font-size: 16px;
-    border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease; 
+    transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
-
 
 /* Button hover state */
 button:hover {
-    background: var(--btn-hvr); 
-    color: var(--white);
-    background-color: #29a744; 
-    border-color: #29a744;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    background: linear-gradient(45deg, var(--btn-hvr), var(--primary)); /* Reverse gradient on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Bigger shadow on hover */
 }
 
-/* Add styles for the registration button*/
+/* Add styles for the registration button */
 .register-button {
     display: inline-block;
     padding: 10px 20px;
     margin-top: 10px;
-    background-color: #007bff; 
-    color: #fff; 
+    background: linear-gradient(45deg, var(--primary), var(--btn-hvr)); /* Gradient background */
+    color: var(--white);
     text-align: center;
-    text-decoration: none; 
-    border-radius: 5px; 
+    text-decoration: none;
+    border-radius: 30px; /* More rounded corners */
     font-weight: 600;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .register-button:hover {
-    background-color: #0056b3; 
+    background: linear-gradient(45deg, var(--btn-hvr), var(--primary)); /* Reverse gradient on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Bigger shadow on hover */
 }
-
 .required {
     color: red;
     font-weight: bold;
@@ -223,4 +258,183 @@ button:hover {
 
 .close-btn:hover ion-icon {
     color: #e74c3c;
+}
+
+
+.login-redirect {
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.login-redirect p {
+    font-size: 14px;
+    color: #555;
+}
+
+.login-redirect a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-redirect a:hover {
+    color: #0056b3;
+}
+
+button:disabled,
+button.disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button:not(:disabled) {
+    background-color: #007bff;
+    cursor: pointer;
+}
+
+/* Стили для текста соглашения */
+.agreement-text {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.agreement-text a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.agreement-text a:hover {
+    color: #0056b3;
+}
+.input-group {
+    position: relative;
+    top: 10px;
+}
+
+.input-group .validation-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5em;
+    display: none;
+}
+
+.input-group.valid .validation-icon.valid-icon {
+    margin-top: 13px;
+    color: green;
+    display: block;
+}
+
+.input-group.invalid .validation-icon.invalid-icon {
+    margin-top: 13px;
+    color: red;
+    display: block;
+}
+.input-group input {
+    transition: border 0.3s ease;
+    border: 1px solid #ccc; 
+}
+
+.input-group input:hover {
+    border-color: #007bff; 
+}
+
+.input-group input:valid {
+    border-color: #28a745; 
+}
+
+.input-group input:invalid {
+    border-color: #dc3545; 
+}
+
+.input-group input:focus {
+    border-color: #007bff; 
+}
+
+.input-group input:hover {
+    border-color: #007bff; 
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.alert-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.alert-warning {
+    background-color: #ffc107;
+    color: black;
+}
+
+.alert-debug {
+    background-color: #6c757d;
+    color: white;
+}
+
+.error {
+    color: #dc3545; 
+    font-size: 0.875em;
+    margin-top: 5px;
+}
+
+.alert.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.alert-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+/* Зеленый цвет границы для надежного пароля */
+input[type="password"].strong-password {
+    border-color: #28a745;
+}
+
+/* Желтый цвет границы для среднего пароля */
+input[type="password"].medium-password {
+    border-color: #ffc107;
+}
+
+/* Красный цвет границы для слабого пароля */
+input[type="password"].weak-password {
+    border-color: #dc3545;
+}
+
+/* Красный цвет границы, если пароли не совпадают */
+input[type="password"].no-match {
+    border-color: #dc3545;
+}
+
+/* Зеленый цвет границы, если пароли совпадают */
+input[type="password"].match {
+    border-color: #28a745;
 }
