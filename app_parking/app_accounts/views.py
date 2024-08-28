@@ -109,11 +109,12 @@ def login_user(request):
 
     return render(request, "app_accounts/login.html", {"form": form})
 
+
 @login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     user_profile_avatar = get_object_or_404(Profile, user=user)
-    
+
     if user != request.user:
         return redirect("app_accounts:profile", username=request.user.username)
 
@@ -123,7 +124,9 @@ def profile(request, username):
         car_photos = None
 
     try:
-        latest_record = ParkingRecord.objects.filter(user=user, is_parked=True).latest("entry_time")
+        latest_record = ParkingRecord.objects.filter(user=user, is_parked=True).latest(
+            "entry_time"
+        )
     except ObjectDoesNotExist:
         latest_record = None
 
@@ -140,7 +143,6 @@ def profile(request, username):
             "latest_record": latest_record,
         },
     )
-
 
 
 @login_required
@@ -211,8 +213,6 @@ def edit_profile(request, username):
     )
 
 
-
-
 @login_required
 def profile_view(request):
     if request.method == "POST":
@@ -221,7 +221,7 @@ def profile_view(request):
             amount = form.cleaned_data["amount"]
             request.user.profile.balance += amount
             request.user.profile.save()
-            return redirect("app_accounts:profile") 
+            return redirect("app_accounts:profile")
 
     else:
         form = BalanceTopUpForm()
@@ -262,13 +262,15 @@ def top_up_balance(request):
 
 @login_required
 def parking_history(request):
-    parking_records = ParkingRecord.objects.filter(user=request.user)
+    parking_records = ParkingRecord.objects.filter(user=request.user).order_by(
+        "-entry_time"
+    )
+
     return render(
         request,
         "app_accounts/parking_history.html",
         {"parking_records": parking_records, "user": request.user},
     )
-
 
 
 @login_required
@@ -290,4 +292,8 @@ def pay_parking(request, record_id):
 @login_required
 def parking_view(request):
     rates = Rate.objects.all()
-    return render(request, "app_accounts/parking.html", {"rates": rates})
+    car_photos = Car_Image.objects.filter(user=request.user)
+
+    return render(
+        request, "app_accounts/parking.html", {"rates": rates, "car_photos": car_photos}
+    )

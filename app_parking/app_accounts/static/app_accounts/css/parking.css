@@ -1,8 +1,5 @@
 .navbar-brand {
-    position: absolute;
     margin-left: 350px;
-    top: 10px;
-    left: 10px;
     font-size: 24px;
     font-weight: 600;
     color: white;
@@ -14,30 +11,8 @@
 }
 
 .navbar-brand:hover .brand-text {
-    color: #e0dfdf;
+    color: #b18c48;
 }
-
-/* Общие стили */
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f7f8fc;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.parking-container {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 900px;
-}
-
 
 /* Background style */
 .bg-box {
@@ -64,10 +39,55 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: -webkit-gradient(linear, left top, right top, from(rgba(21, 82, 99, 0.65)), to(rgba(21, 82, 99, 0.55)));
     background: linear-gradient(to right, rgba(21, 82, 99, 0.65), rgba(21, 82, 99, 0.55));
 }
 
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 10px;
+    margin-right: 220px;
+}
+
+
+.parking-container {
+    max-width: 900px;
+    margin: 100px auto 50px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
 
 /* Основные стили для кнопок */
 .upload-button,
@@ -91,6 +111,11 @@ body {
     background-color: #ddd;
     color: #aaa;
     cursor: not-allowed;
+}
+
+.upload-button:hover {
+    background-color: #24a6af;
+    transform: scale(1.05);
 }
 
 .ok-button {
@@ -141,12 +166,21 @@ body {
     cursor: pointer;
     text-align: center;
     margin-right: 10px;
+    transition: all 0.3s ease-in-out;
+    /* Добавим плавную анимацию перехода */
+}
+
+.custom-file-label:hover {
+    background-color: #4070bd;
+    /* Изменим цвет фона при наведении */
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    /* Добавим тень */
 }
 
 .custom-file-input {
     display: none;
-    /* Скрыть стандартное поле загрузки */
 }
+
 
 .uploaded-photos-container {
     display: flex;
@@ -191,25 +225,6 @@ body {
 /* Стили сообщений */
 .alert {
     padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    text-align: center;
-}
-
-.alert-success {
-    background-color: #28a745;
-    color: rgb(247, 247, 247);
-}
-
-.alert-danger {
-    background-color: #dc3545;
-    color: white;
-}
-
-/* Error messages */
-.alert {
-    padding: 15px;
     margin: 10px 0;
     border-radius: 5px;
     font-size: 16px;
@@ -220,38 +235,30 @@ body {
     opacity: 0.9;
 }
 
-.alert-info {
-    background-color: #17a2b8;
-}
-
-.alert-success {
+.success {
     background-color: #28a745;
+    color: rgb(0, 0, 0);
 }
 
-.alert-warning {
-    background-color: #ffc107;
-    color: #212529;
+.danger {
+    background-color: #b93542;
+    color: rgb(0, 0, 0);
 }
 
-.alert-error {
-    background-color: #dc3545;
-    font-family: 'Arial', sans-serif;
-    font-weight: bold;
+.info {
+    background-color: #17a2b8;
+    color: rgb(0, 0, 0);
 }
 
-.alert .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 18px;
-    color: #fff;
-    cursor: pointer;
+
+.warning {
+    background-color: #d8971e;
+    color: rgb(0, 0, 0);
 }
 
-.alert .close-btn:hover {
-    color: #7a1b1b;
+.error {
+    background-color: #b93542;
+    color: rgb(0, 0, 0);
 }
 
 .alert-dismissible {

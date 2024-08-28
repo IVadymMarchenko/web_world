@@ -9,15 +9,17 @@
     <script src="{% static 'app_accounts/js/parking.js' %}" defer></script>
 </head>
 <body>
-    <a class="navbar-brand" href="/">
-        <span class="brand-text">
+    <div class="bg-box">
+        <img src="{% static 'slider-bg.jpg' %}" alt="">
+    </div>
+    <div class="navbar">
+        <a class="navbar-brand" href="/">
             WEB_WORLD: PARK-AUTO
-        </span>
-    </a>
+        </a>
+    </div>
+
     <div class="parking-container">
-        <div class="bg-box">
-            <img src="{% static 'slider-bg.jpg' %}" alt="">
-        </div>
+        
         {% if messages %}
             {% for message in messages %}
                 {% if 'if_parking' in message.tags %}
