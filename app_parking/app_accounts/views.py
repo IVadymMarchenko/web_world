@@ -109,20 +109,21 @@ def login_user(request):
 
     return render(request, "app_accounts/login.html", {"form": form})
 
-
 @login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     user_profile_avatar = get_object_or_404(Profile, user=user)
+    
     if user != request.user:
         return redirect("app_accounts:profile", username=request.user.username)
 
-    car_photos = Car_Image.objects.filter(user=user).latest("image")
+    try:
+        car_photos = Car_Image.objects.filter(user=user).latest("image")
+    except Car_Image.DoesNotExist:
+        car_photos = None
 
     try:
-        latest_record = ParkingRecord.objects.filter(user=user, is_parked=True).latest(
-            "entry_time"
-        )
+        latest_record = ParkingRecord.objects.filter(user=user, is_parked=True).latest("entry_time")
     except ObjectDoesNotExist:
         latest_record = None
 
@@ -141,6 +142,7 @@ def profile(request, username):
     )
 
 
+
 @login_required
 def logout_user(request):
     logout(request)
@@ -154,16 +156,21 @@ def edit_profile(request, username):
 
     active_tab = request.GET.get("tab", "account-general")
 
+    form = UserProfileForm(instance=request.user)
+    password_form = PasswordChangeForm(user=request.user)
+
     if request.method == "POST":
         if "save_profile" in request.POST:
             form = UserProfileForm(request.POST, request.FILES, instance=request.user)
             if form.is_valid():
+                print("Form is valid. Saving data...")
                 form.save()
                 messages.success(
                     request, "Profile updated successfully.", extra_tags="edit_profile"
                 )
                 return redirect("app_accounts:profile", username=request.user.username)
             else:
+                print("Form is not valid:", form.errors)
                 messages.error(
                     request,
                     "Please correct the errors below.",
@@ -192,11 +199,6 @@ def edit_profile(request, username):
                 )
             active_tab = "account-change-password"
 
-            form = UserProfileForm(instance=request.user)
-    else:
-        form = UserProfileForm(instance=request.user)
-        password_form = PasswordChangeForm(user=request.user)
-
     return render(
         request,
         "app_accounts/edit_profile.html",
@@ -209,6 +211,8 @@ def edit_profile(request, username):
     )
 
 
+
+
 @login_required
 def profile_view(request):
     if request.method == "POST":
@@ -217,7 +221,7 @@ def profile_view(request):
             amount = form.cleaned_data["amount"]
             request.user.profile.balance += amount
             request.user.profile.save()
-            return redirect("app_accounts:profile")  # Перенаправление после пополнения
+            return redirect("app_accounts:profile") 
 
     else:
         form = BalanceTopUpForm()
@@ -266,19 +270,14 @@ def parking_history(request):
     )
 
 
-# def parking_view(request):
-#     return render(request, "app_accounts/parking.html")
-
 
 @login_required
 def pay_parking(request, record_id):
     parking_record = get_object_or_404(ParkingRecord, id=record_id, is_parked=True)
 
-    # Установите время выхода
     exit_time = timezone.now()
     parking_record.process_parking_payment(exit_time)
 
-    # Обновите баланс пользователя
     user = parking_record.user
     parking_fee = parking_record.parking_fee
 
@@ -288,39 +287,7 @@ def pay_parking(request, record_id):
     return redirect(reverse("app_accounts:parking_history"))
 
 
-# @login_required
-# @csrf_exempt
-# def update_balance(request):
-#     if request.method == "POST":
-#         user = request.user
-#         data = json.loads(request.body)
-#         entry_time_str = data.get("entry_Time")
-#         rate_per_hour = Decimal(data.get("rate_per_hour"))
-
-#         # Преобразование строки в объект datetime
-#         entry_time = parse_datetime(entry_time_str)
-#         if not entry_time:
-#             return JsonResponse(
-#                 {"success": False, "error": "Invalid entry time format"}
-#             )
-
-#         # Вычисляем время с момента входа
-#         now = timezone.now()
-#         duration_in_hours = Decimal((now - entry_time).total_seconds()) / Decimal(3600)
-
-#         # Вычисляем сбор за парковку
-#         total_fee = duration_in_hours * rate_per_hour
-
-#         # Обновляем баланс
-#         updated_balance = max(user.money_balance - total_fee, Decimal("0.00"))
-#         user.money_balance = updated_balance
-#         user.save()
-
-#         return JsonResponse({"success": True, "updated_balance": str(updated_balance)})
-
-#     return JsonResponse({"success": False, "error": "Invalid request method"})
-
-
+@login_required
 def parking_view(request):
     rates = Rate.objects.all()
     return render(request, "app_accounts/parking.html", {"rates": rates})
