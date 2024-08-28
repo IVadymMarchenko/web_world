@@ -210,7 +210,7 @@ p {
 }
 
 .navbar-brand:hover .brand-text {
-  color: #e0dfdf; 
+  color: #e0dfdf;
 }
 
 .custom_nav-container {
@@ -489,7 +489,7 @@ p {
   border-radius: 45x;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  border: 2px solid #ff6f3c; 
+  border: 2px solid #ff6f3c;
   /* border: none; */
 }
 
@@ -1012,6 +1012,7 @@ p {
   font-size: 32px;
 
 }
+
 .scroll-to-top.show {
   display: flex;
   justify-content: center;
@@ -1020,39 +1021,55 @@ p {
   animation: fadeIn 0.5s forwards;
   /* Smooth appearance */
 }
+
 /*# sourceMappingURL=style.css.map */
 
 
 /* General styles for buttons */
 .btn {
   display: inline-block;
-  padding: 8px 12px; 
+  padding: 8px 12px;
   text-align: center;
   text-decoration: none;
   border-radius: 20px;
-  font-size: 14px; 
+  font-size: 14px;
   transition: background-color 0.3s, color 0.3s;
   margin-right: 3px
 }
 
 /* Styles for Profile */
 .profile-button {
-  margin-left: 10px;
-  background-color: #747373; 
-  color: white;
-  border: 2px solid #747373; 
+  display: inline-block;
+  background: linear-gradient(45deg, #081f47, #2575fc);
+  color: #fff;
+  width: 140px;
+  height: 40px;
+  padding: 0;
+  line-height: 40px;
+  border: none;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .profile-button:hover {
-  background-color: rgb(255, 255, 255);
-  color: #ff6f3c;
+  background: linear-gradient(45deg, #081f47, #1ab1c5);
+  color: rgb(201, 176, 162);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Styles for button mains */
 .mains-button {
-  background-color: #1ab1c5; 
+  background-color: #1ab1c5;
   color: white;
-  border: 2px solid #1ab1c5; 
+  border: 2px solid #1ab1c5;
+  width: 100px;
+  height: 40px;
 }
 
 .mains-button:hover {
@@ -1062,20 +1079,34 @@ p {
 
 /* Styles for button Logout */
 .login-button {
-  background-color: #747373; 
-  color: white;
-  border: 2px solid #747373; 
+  display: inline-block;
+  background: linear-gradient(45deg, #081f47, #2575fc);
+  color: #fff;
+  width: 140px;
+  height: 40px;
+  padding: 0;
+  line-height: 40px;
+  border: none;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .login-button:hover {
-  background-color: white;
-  color: #EF5350;
+  background: linear-gradient(45deg, #081f47, #1ab1c5);
+  transform: translateY(-3px);
+  color: rgb(201, 176, 162);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-.btn-registr{
-  background-color: #ff6f3c; 
+.btn-registr {
+  background-color: #ff6f3c;
   color: white;
-  border: 2px solid #ff6f3c; 
+  border: 2px solid #ff6f3c;
 }
 
 .btn-registr:hover {
@@ -1084,13 +1115,13 @@ p {
 }
 
 
-.sign_in{
-  background-color: #ff6f3c; 
+.sign_in {
+  background-color: #ff6f3c;
   color: white;
-  border: 2px solid #ff6f3c; 
+  border: 2px solid #ff6f3c;
 }
 
-.sign_in:hover{
+.sign_in:hover {
   background-color: rgb(255, 255, 255);
   color: #ff6f3c;
 }

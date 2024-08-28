@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    
     <div class="bg-box">
         <img src="{% static 'slider-bg.jpg' %}" alt="">
     </div>
@@ -91,30 +92,30 @@
         </table>
     </div>
 
-    <script>
-        function updateParkingDuration() {
-            document.querySelectorAll('[id^="duration-"]').forEach(function(element) {
-                const entryTime = new Date(element.getAttribute('data-entry-time'));
-                const now = new Date();
-                const diff = Math.floor((now - entryTime) / 1000); // Difference in seconds
+<script>
+    function updateParkingDuration() {
+        document.querySelectorAll('[id^="duration-"]').forEach(function(element) {
+            const entryTime = new Date(element.getAttribute('data-entry-time'));
+            const now = new Date();
+            const diff = Math.floor((now - entryTime) / 1000); // Difference in seconds
 
-                const hours = Math.floor(diff / 3600);
-                const minutes = Math.floor((diff % 3600) / 60);
-                const seconds = diff % 60;
+            const hours = Math.floor(diff / 3600);
+            const minutes = Math.floor((diff % 3600) / 60);
+            const seconds = diff % 60;
 
-                element.textContent = 
-                    `${hours}h ${minutes}m ${seconds}s`;
-            });
-        }
+            element.textContent = 
+                `${hours}h ${minutes}m ${seconds}s`;
+        });
+    }
 
-        // Initial update
-        updateParkingDuration();
+    // Initial update
+    updateParkingDuration();
 
-        // Update every second
-        setInterval(updateParkingDuration, 1000);
-    </script>
+    // Update every second
+    setInterval(updateParkingDuration, 1000);
+</script>
     
-  <script>
+<script>
     // Функция для обновления расчета парковки
         function updateParkingFee() {
     // Получаем текущую дату и время

@@ -1,8 +1,5 @@
 .navbar-brand {
-    position: absolute;
     margin-left: 350px;
-    top: 10px;
-    left: 10px;
     font-size: 24px;
     font-weight: 600;
     color: white;
@@ -15,6 +12,37 @@
 
 .navbar-brand:hover .brand-text {
     color: #e0dfdf;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    padding: 10px 20px;
+    /* position: fixed; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
 }
 
 /* Container styling for central alignment and padding */
@@ -41,15 +69,16 @@ h4 {
 
 /* Card component styling */
 .card {
-    max-width: 600px;
-    max-height: 850px;
-    margin: 0 auto;
-    margin-top: 80px;
+    max-width: 640px;
+    max-height: 900px;
+    margin: 100px auto 50px;
     padding: 20px;
-    background-color: #f8f9fa;
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
+
+
 
 /* Inner content padding for cards */
 .card-body {
@@ -59,24 +88,42 @@ h4 {
 
 /* Sidebar links styling */
 .account-settings-links {
+    border: 1px solid black;
     background-color: #e9ecef;
     border-radius: 10px 0 0 10px;
+    /* padding: 2px 2px; */
+    transition: background-color 0.3s ease-in-out;
+    /* Add smooth transition */
 }
-
 
 /* Sidebar links style */
 .account-settings-links a {
     color: #495057;
-    padding: 15px 20px;
-    font-weight: 500;
+    font-weight: 700;
+    font-size: 11px;
+    display: block;
+    text-decoration: none;
+    /* padding: 15px 20px; */
 }
-
 
 /* Hover and active states for sidebar links */
 .account-settings-links a:hover,
 .account-settings-links a.active {
-    background-color: #007bff;
+    background: linear-gradient(45deg, #5c7db8, #3c9dc4);
     color: #ffffff;
+    text-decoration: underline;
+    transform: scale(1.05);
+    /* Add a slight zoom effect */
+}
+
+.tab-content {
+    margin-left: 10px;
+    border: medium double rgb(9, 9, 136);
+}
+
+.second-border {
+    /* margin-left: 10px; */
+    border: medium double rgb(9, 9, 136);
 }
 
 
@@ -115,42 +162,112 @@ h4 {
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
+.btn-outline-primary {
+    display: inline-block;
+    background: linear-gradient(45deg, #5c7db8, #1b627e);
+    color: #fff;
+    width: 140px;
+    height: 40px;
+    padding: 0;
+    line-height: 40px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(45deg, #084739, #1ac5ae);
+    transform: translateY(-3px);
+    color: white;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
 
 /* Primary button styling */
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    font-weight: 500;
+    display: inline-block;
+    background: linear-gradient(45deg, #5c7db8, #1b627e);
+    color: #fff;
+    width: 140px;
+    height: 40px;
+    padding: 0;
+    line-height: 40px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 
 /* Hover state for primary button */
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+    background: linear-gradient(45deg, #084739, #1ac5ae);
+    transform: translateY(-3px);
+    color: white;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 
 /* Default button styling */
 .btn-default {
-    background-color: #f8f9fa;
-    border-color: #ced4da;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    font-weight: 500;
+    display: inline-block;
+    background: linear-gradient(45deg, #081f47, #2575fc);
+    color: #fff;
+    width: 140px;
+    height: 40px;
+    padding: 0;
+    line-height: 40px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 
 /* Hover state for default button */
 .btn-default:hover {
-    background-color: #e2e6ea;
-    border-color: #dae0e5;
+    background: linear-gradient(45deg, #081f47, #1ab1c5);
+    transform: translateY(-3px);
+    color: white;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
+.btn-default-save {
+    display: inline-block;
+    background: linear-gradient(45deg, #5c7db8, #1b627e);
+    color: #fff;
+    width: 140px;
+    height: 40px;
+    padding: 0;
+    line-height: 40px;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.btn-default-save:hover {
+    background: linear-gradient(45deg, #084739, #1ac5ae);
+    transform: translateY(-3px);
+    color: white;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
 
 /* Profile image styling */
 .ui-w-80 {
@@ -232,7 +349,8 @@ input[type="file"] {
 
 /* Background style */
 .bg-box {
-    position: absolute;
+    position: fixed;
+    /* Фиксируем фон для расширения на всю страницу */
     top: 0;
     left: 0;
     width: 100%;
@@ -244,7 +362,6 @@ input[type="file"] {
 .bg-box img {
     width: 100%;
     height: 100%;
-    -o-object-fit: cover;
     object-fit: cover;
 }
 
