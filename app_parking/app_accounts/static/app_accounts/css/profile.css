@@ -1,0 +1,341 @@
+.navbar-brand {
+    margin-left: 350px;
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+.brand-text {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar-brand:hover .brand-text {
+    color: #e0dfdf;
+}
+
+/* Background style */
+.bg-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.bg-box img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.bg-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(21, 82, 99, 0.65), rgba(21, 82, 99, 0.55));
+} 
+
+#balance-top-up-form {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    max-width: 300px;
+}
+
+/* Error messages */
+.alert {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fff;
+    position: relative;
+    transition: opacity 0.3s ease-in-out;
+    text-align: center;
+    opacity: 0.9;
+}
+
+.alert-info {
+    background-color: #17a2b8;
+}
+
+.alert-success {
+    background-color: #28a745;
+}
+
+.alert-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.alert-error {
+    background-color: #dc3545;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+}
+
+.alert .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.alert .close-btn:hover {
+    color: #ddd;
+}
+
+.alert-dismissible {
+    padding-right: 40px;
+}
+
+/* Body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: transparent;
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 10px;  
+    margin-right: 220px; 
+}
+
+.profile-actions .btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #081f47, #2575fc); 
+    color: #fff;
+    width: 140px;  
+    height: 40px;
+    padding: 0;
+    line-height: 40px; 
+    border: none;
+    border-radius: 30px;  
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease, transform 0.3s ease;  
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
+    cursor: pointer; 
+}
+
+.profile-actions .btn:hover {
+    background: linear-gradient(45deg, #081f47, #1ab1c5);  
+    transform: translateY(-3px);  
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); 
+}
+
+.profile-actions .btn:active {
+    transform: translateY(1px);  
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);  
+}
+
+/* Profile container styling */
+.profile-container {
+    max-width: 900px;
+    margin: 100px auto 50px;  
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    padding-top: 10px;  
+}
+
+.avatar-section {
+    position: relative;
+    margin-right: 20px;
+    text-align: center;
+    margin-top: -100px; 
+}
+
+.avatar-section img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;  
+}
+
+
+.status-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;  
+}
+
+.status-text {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 5px;  
+}
+
+.status-icon {
+    display: inline-block;
+    width: 12px; 
+    height: 12px;
+    background-color: #28a745;
+    border-radius: 50%;
+    margin-right: 5px;  
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.8);  
+    animation: pulse 1.5s infinite;  
+}
+
+.status-label {
+    font-size: 16px;
+    color: #28a745;  
+}
+
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 4px rgba(40, 167, 69, 0.8);
+    }
+    50% {
+        box-shadow: 0 0 12px rgba(40, 167, 69, 1);
+    }
+    100% {
+        box-shadow: 0 0 4px rgba(40, 167, 69, 0.8);
+    }
+}
+.user-details {
+    margin: 5px 0;
+    margin-top: -40px;
+    flex-grow: 1;
+}
+
+#username {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+/* Top up button styling */
+.btn-top-up {
+    margin-top: 15px;
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-top-up:hover {
+    background-color: #218838;
+}
+
+/* Top up form styling */
+.top-up-form {
+    margin-top: 15px;
+    display: none;
+    background-color: #f1f1f1;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.top-up-input {
+    padding: 10px;
+    width: calc(100% - 22px);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-submit {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.btn-cancel {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+}
+
+/* Additional info styling */
+.additional-info {
+    margin-top: 20px;
+}
+
+.additional-info h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.additional-info p, .additional-info ul {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.additional-info ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}

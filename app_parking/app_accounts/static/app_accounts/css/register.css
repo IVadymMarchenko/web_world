@@ -73,12 +73,12 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Выравниваем контент по верху страницы */
-    min-height: 100vh; /* Устанавливаем минимальную высоту для body */
+    align-items: flex-start; 
+    min-height: 100vh; 
     color: var(--text-clr); 
     margin: 0; 
     padding: 0;
-    overflow-x: hidden; /* Скрываем горизонтальную прокрутку, если она появляется */
+    overflow-x: hidden; 
 }
 
 /* Styling the main wrapper for the form */
@@ -90,9 +90,9 @@ body {
     background: rgba(255, 255, 255, 0.1); 
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); 
     backdrop-filter: blur(10px); 
-    position: relative; /* Для контроля расположения */
-    margin-top: 20px; /* Отступ сверху */
-    margin-bottom: 20px; /* Отступ снизу, чтобы добавить пространство для прокрутки */      
+    position: relative; 
+    margin-top: 20px; 
+    margin-bottom: 20px;   
 }
 
 /* Form container styles for layout and background */
@@ -110,7 +110,7 @@ body {
     color: var(--primary); 
 }
 
-/* Убираем стандартные отступы и добавляем пространство */
+
 html, body {
     margin: 0;
     padding: 0;
@@ -196,19 +196,19 @@ button {
     width: 100%;
     padding: 12px;
     border: none;
-    border-radius: 30px; /* More rounded corners */
-    background: linear-gradient(45deg, var(--primary), var(--btn-hvr)); /* Gradient background */
+    border-radius: 30px; 
+    background: linear-gradient(45deg, var(--primary), var(--btn-hvr)); 
     color: var(--white);
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 /* Button hover state */
 button:hover {
-    background: linear-gradient(45deg, var(--btn-hvr), var(--primary)); /* Reverse gradient on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Bigger shadow on hover */
+    background: linear-gradient(45deg, var(--btn-hvr), var(--primary)); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
 }
 
 /* Add styles for the registration button */
@@ -216,19 +216,19 @@ button:hover {
     display: inline-block;
     padding: 10px 20px;
     margin-top: 10px;
-    background: linear-gradient(45deg, var(--primary), var(--btn-hvr)); /* Gradient background */
+    background: linear-gradient(45deg, var(--primary), var(--btn-hvr)); 
     color: var(--white);
     text-align: center;
     text-decoration: none;
-    border-radius: 30px; /* More rounded corners */
+    border-radius: 30px;
     font-weight: 600;
     transition: background 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .register-button:hover {
-    background: linear-gradient(45deg, var(--btn-hvr), var(--primary)); /* Reverse gradient on hover */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Bigger shadow on hover */
+    background: linear-gradient(45deg, var(--btn-hvr), var(--primary)); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
 }
 .required {
     color: red;
@@ -293,7 +293,7 @@ button:not(:disabled) {
     cursor: pointer;
 }
 
-/* Стили для текста соглашения */
+
 .agreement-text {
     font-size: 14px;
     color: #555;
@@ -414,27 +414,27 @@ button:not(:disabled) {
     border-color: #f5c6cb;
 }
 
-/* Зеленый цвет границы для надежного пароля */
+
 input[type="password"].strong-password {
     border-color: #28a745;
 }
 
-/* Желтый цвет границы для среднего пароля */
+
 input[type="password"].medium-password {
     border-color: #ffc107;
 }
 
-/* Красный цвет границы для слабого пароля */
+
 input[type="password"].weak-password {
     border-color: #dc3545;
 }
 
-/* Красный цвет границы, если пароли не совпадают */
+
 input[type="password"].no-match {
     border-color: #dc3545;
 }
 
-/* Зеленый цвет границы, если пароли совпадают */
+
 input[type="password"].match {
     border-color: #28a745;
 }

@@ -37,7 +37,7 @@ class SignUpForm(UserCreationForm):
         widget=forms.EmailInput(attrs={
             'placeholder': 'Enter your email',
             'required': True,
-            'pattern': '[a-z0-9.]+@[a-z0-9.]+\.[a-z]{2,}$'
+            'pattern': r'[a-z0-9.]+@[a-z0-9.]+\.[a-z]{2,}$'
         })
     )
     full_name = forms.CharField(
@@ -108,6 +108,64 @@ class LoginForm(forms.Form):
 
 
 class UserProfileForm(UserChangeForm):
+    username = forms.CharField(
+        label="Username",
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Enter your username',
+            'autofocus': True
+        }),
+        required=True,
+        min_length=5,
+        max_length=20
+    )
+    full_name = forms.CharField(
+        label="Full Name",
+        validators=[
+            RegexValidator(
+                regex=r'^[^\W\d_]+(?: [^\W\d_]+)*$',
+                message="Full Name can only contain letters and spaces."
+            )
+        ],
+        widget=forms.TextInput(attrs={'placeholder': 'Enter your full name'}),
+        required=True,
+        min_length=2,
+        max_length=50
+    )
+    email = forms.EmailField(
+        label="Email",
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'Enter your email',
+            'required': True,
+            'pattern': r'[a-z0-9.]+@[a-z0-9.]+\.[a-z]{2,}$'
+        })
+    )
+    phone_number = forms.CharField(
+        label="Phone Number",
+        validators=[
+            RegexValidator(
+                regex=r'^(\+?380|0)[4-9][0-9]\d{7}$',
+                message="Please enter a valid phone number. Format: +380981231212 or 0981231223"
+            )
+        ],
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Enter your phone number',
+            'pattern': r'^(\+?380|0)[4-9][0-9]\d{7}$'
+        }),
+        required=True
+    )
+    address = forms.CharField(
+        label="Address",
+        widget=forms.TextInput(attrs={'placeholder': 'Enter your address'}),
+        required=True,
+        min_length=5,
+        max_length=100
+    )
+    birth_date = forms.DateField(
+        label="Birth Date",
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=True
+    )
+
     class Meta:
         model = User
         fields = [
@@ -121,7 +179,6 @@ class UserProfileForm(UserChangeForm):
         widgets = {
             "birth_date": forms.DateInput(attrs={"type": "date"}),
         }
-
 
 class BalanceTopUpForm(forms.Form):
     amount = forms.DecimalField(

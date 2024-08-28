@@ -1,84 +1,80 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User profile</title>
+    <title>User Profile</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'app_accounts/profile.css' %}">
-    <style>
-        #balance-top-up-form {
-            display: none;
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #f1f1f1;
-            border-radius: 5px;
-            max-width: 300px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'app_accounts/css/profile.css' %}">
+    <script src="{% static 'app_accounts/js/profile.js' %}" defer></script>
 </head>
 <body>
-    <a class="navbar-brand" href="/">
-        <span class="brand-text">
-            WEB_WORLD: PARK-AUTO
-        </span>
-    </a>
     <div class="bg-box">
         <img src="{% static 'slider-bg.jpg' %}" alt="">
     </div>
-    <div class="background">
-        <div class="profile-container">
-            <header class="profile-header">
-                <div class="avatar-section">
+    <div class="navbar">
+        <a class="navbar-brand" href="/">
+            WEB_WORLD: PARK-AUTO
+        </a>
+        <div class="profile-actions">
+            <a class="btn" href="{% url 'app_accounts:parking_history' %}">History of Parking</a>
+            <a class="btn" href="{% url 'app_accounts:parking' %}">Parking Now</a>
+            <a class="btn" href="{% url 'app_accounts:edit_profile' user.username %}">Edit Profile</a>
+            <a class="btn" href="{% url 'app_home:index' %}">Back to Main</a>
+            <a class="btn" href="{% url 'app_accounts:logout' %}">Logout</a>
+        </div>
+    </div>
+
+    <div class="profile-container">
+        <header class="profile-header">
+            <div class="avatar-section">
+                <div class="avatar-wrapper">
                     {% if user_profile_avatar.avatar %}
                         <img id="avatar" src="{{ user_profile_avatar.avatar }}" alt="User avatar">
                     {% else %}
                         <img id="avatar" src="{% static 'app_accounts/images/default_avatar.jpg' %}" alt="Default avatar">
                     {% endif %}
                 </div>
+            </div>
 
-                <div class="user-details">
-                    <h1 id="username">{{ user.full_name }}</h1>
-                    <p>Balance: ${{ user.money_balance }}</p> <!-- Отображение баланса -->
-                
-                <!-- Кнопка для показа формы пополнения баланса -->
-                <section class="balance-top-up">
-                    <button class="btn-top-up" onclick="toggleTopUpForm()">Top Up Balance</button>
-
-                    <!-- Форма пополнения баланса -->
-                    <div id="balance-top-up-form" class="top-up-form">
-                        <h3 class="top-up-title">Enter Amount</h3>
-                        <form method="POST" action="{% url 'app_accounts:top_up_balance' %}">
-                            {% csrf_token %}
-                            <input type="number" name="amount" placeholder="Enter amount" min="1" required class="top-up-input">
-                            <button type="submit" class="btn-submit">Submit</button>
-                        </form>
-                    </div>
-                </section>
+            <div class="user-details">
+                <h1 id="username">{{ user.full_name }}</h1>
+                <div class="status-container">
+                    <span class="status-text">Status:</span>
+                    <span class="status-icon online-status"></span>
+                    <span class="status-label">Online</span>
                 </div>
-            </header>
-    
-            <section class="profile-actions">
-                <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:parking_history' %}'">History of parking</button>
-                <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:parking' %}'">Parking now</button>
-                <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:edit_profile' user.username %}'">Change Information</button>
-                <button class="btn btn-primary" onclick="location.href='{% url 'app_home:index' %}'">Back to main</button>
-                <button class="btn btn-primary" onclick="location.href='{% url 'app_accounts:logout' %}'">Logout</button>
-            </section>
-               
-        </div>
-    </div>   
+                <p>Email: {{ user.email }}</p>
+                <p>Phone: {{ user.phone_number }}</p>
+                <p>Address: {{ user.address }}</p>
+                <p>Balance: ${{ user.money_balance }}</p> 
+                <button class="btn-top-up" onclick="toggleTopUpForm()">Top Up Balance</button>
 
-    <script>
-        function toggleTopUpForm() {
-            var form = document.getElementById("balance-top-up-form");
-            if (form.style.display === "none" || form.style.display === "") {
-                form.style.display = "block";
-            } else {
-                form.style.display = "none";
-            }
-        }
-    </script>
+
+                <div id="balance-top-up-form" class="top-up-form">
+                    <form method="POST" action="{% url 'app_accounts:top_up_balance' %}">
+                        {% csrf_token %}
+                        <input type="number" name="amount" placeholder="Enter amount" min="1" required class="top-up-input">
+                        <div class="form-buttons">
+                            <button type="submit" class="btn-submit">Submit</button>
+                            <button type="button" class="btn-cancel" onclick="toggleTopUpForm()">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </header>
+    
+        <section class="additional-info">
+            <h2>About Me</h2>
+            <p>{{ user_profile.about_me|default:"No information provided." }}</p>
+
+            <h2>Recent Activity</h2>
+            <ul>
+                <li>Last parking session: {{ latest_parking_session|default:"No recent activity." }}</li>
+                <li>Membership since: {{ user.date_joined|date:"F Y" }}</li>
+                <li>Total parkings: {{ total_parking_count }}</li>
+            </ul>
+        </section>
+    </div>
 </body>
 </html>

@@ -24,6 +24,7 @@ class User(AbstractUser):
     money_balance = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     created_at = models.DateTimeField(auto_now_add=True)
     birth_date = models.DateField(null=True, blank=True)
+    bio = models.CharField(max_length=500)
 
     # Custom related_name settings to avoid conflicts
     groups = models.ManyToManyField(

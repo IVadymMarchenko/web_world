@@ -51,23 +51,6 @@ h4 {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* .wrapper { */
-/* width: 100%; */
-/* max-width: 420px; */
-/* padding: 20px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    position: relative; */
-/* Для контроля расположения */
-/* margin-top: 20px; */
-/* Отступ сверху */
-/* margin-bottom: 20px; */
-/* margin: 0 auto; */
-/* Отступ снизу, чтобы добавить пространство для прокрутки */
-/* } */
-
 /* Inner content padding for cards */
 .card-body {
     padding: 20px;
@@ -289,20 +272,13 @@ input[type="file"] {
 
 .file-name-style {
     font-size: 0, 7em;
-    /* Увеличиваем размер шрифта */
     color: #007bff;
-    /* Устанавливаем цвет текста */
     margin-top: 10px;
-    /* Добавляем отступ сверху */
     font-weight: bold;
-    /* Делаем текст жирным */
 }
 
 .allowed-file-types {
     font-size: 0, 7em;
-    /* Увеличиваем размер шрифта */
     color: #28a745;
-    /* Устанавливаем зеленый цвет текста */
     margin-top: 10px;
-    /* Добавляем отступ сверху */
 }
