@@ -58,7 +58,7 @@ body {
     align-items: center;
     background-color: transparent;
     padding: 10px 20px;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 0;
     width: 100%;
@@ -94,29 +94,47 @@ body {
 .ok-button,
 .back-to-profile {
     display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
+    background: linear-gradient(45deg, #081f47, #2575fc);
     color: #fff;
+    width: 140px;
+    height: 40px;
+    padding: 0;
+    line-height: 40px;
     border: none;
-    border-radius: 8px;
+    border-radius: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
 }
 
-.upload-button {
-    background-color: #007bff;
+.upload-button,
+.ok-button,
+.back-to-profile:hover {
+    background: linear-gradient(45deg, #081f47, #1ab1c5);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
+
+.upload-button,
+.ok-button,
+.back-to-profile:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* .upload-button {
+    background-color: #007bff;
+} */
 
 .upload-button:disabled {
-    background-color: #ddd;
-    color: #aaa;
-    cursor: not-allowed;
+    background: linear-gradient(45deg, #8198d3, #f5f5f7);
+    color: #ffffff;
+    cursor: pointer;
 }
 
-.upload-button:hover {
-    background-color: #24a6af;
-    transform: scale(1.05);
-}
 
 .ok-button {
     display: none;
@@ -137,15 +155,6 @@ body {
     transform: scale(1.05);
 }
 
-.back-to-profile {
-    background-color: #007bff;
-}
-
-.upload-button:hover,
-.ok-button:hover,
-.back-to-profile:hover {
-    transform: scale(1.05);
-}
 
 /* Стили для загрузки фото */
 .photo-upload h2 {
@@ -160,21 +169,27 @@ body {
 .custom-file-label {
     display: block;
     padding: 10px;
-    background-color: #2575fc;
+    background: linear-gradient(45deg, #081f47, #2575fc);
     color: white;
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
     margin-right: 10px;
     transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
     /* Добавим плавную анимацию перехода */
 }
 
 .custom-file-label:hover {
-    background-color: #4070bd;
-    /* Изменим цвет фона при наведении */
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-    /* Добавим тень */
+    background: linear-gradient(45deg, #081f47, #1ab1c5);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.custom-file-label:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .custom-file-input {

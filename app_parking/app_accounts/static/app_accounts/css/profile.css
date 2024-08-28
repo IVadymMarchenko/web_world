@@ -5,6 +5,7 @@
     color: white;
     text-decoration: none;
 }
+
 .brand-text {
     font-family: 'Poppins', sans-serif;
 }
@@ -15,7 +16,8 @@
 
 /* Background style */
 .bg-box {
-    position: fixed; /* Фиксируем фон для расширения на всю страницу */
+    position: fixed;
+    /* Фиксируем фон для расширения на всю страницу */
     top: 0;
     left: 0;
     width: 100%;
@@ -38,19 +40,21 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(to right, rgba(21, 82, 99, 0.65), rgba(21, 82, 99, 0.55));
-} 
+}
 
 #balance-top-up-form {
     display: none;
-    position: absolute; /* Форма будет накладываться, а не сдвигать контент */
-    top: 0; 
-    right: 0; 
+    position: absolute;
+    /* Форма будет накладываться, а не сдвигать контент */
+    top: 0;
+    right: 0;
     padding: 10px;
     background-color: #f1f1f1;
     border-radius: 5px;
     max-width: 300px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    z-index: 10; /* Поднимает форму над другими элементами */
+    z-index: 10;
+    /* Поднимает форму над другими элементами */
 }
 
 /* Error messages */
@@ -120,7 +124,7 @@ body {
     align-items: center;
     background-color: transparent;
     padding: 10px 20px;
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     left: 0;
     width: 100%;
@@ -137,43 +141,43 @@ body {
 
 .profile-actions {
     display: flex;
-    gap: 10px;  
-    margin-right: 220px; 
+    gap: 10px;
+    margin-right: 220px;
 }
 
 .profile-actions .btn {
     display: inline-block;
-    background: linear-gradient(45deg, #081f47, #2575fc); 
+    background: linear-gradient(45deg, #081f47, #2575fc);
     color: #fff;
-    width: 140px;  
+    width: 140px;
     height: 40px;
     padding: 0;
-    line-height: 40px; 
+    line-height: 40px;
     border: none;
-    border-radius: 30px;  
+    border-radius: 30px;
     text-align: center;
     text-decoration: none;
     font-size: 14px;
-    transition: all 0.3s ease, transform 0.3s ease;  
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  
-    cursor: pointer; 
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 .profile-actions .btn:hover {
-    background: linear-gradient(45deg, #081f47, #1ab1c5);  
-    transform: translateY(-3px);  
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); 
+    background: linear-gradient(45deg, #081f47, #1ab1c5);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 .profile-actions .btn:active {
-    transform: translateY(1px);  
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);  
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Profile container styling */
 .profile-container {
     max-width: 900px;
-    margin: 100px auto 50px;  
+    margin: 100px auto 50px;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
@@ -186,14 +190,14 @@ body {
     border-bottom: 1px solid #ddd;
     padding-bottom: 20px;
     margin-bottom: 20px;
-    padding-top: 10px;  
+    padding-top: 10px;
 }
 
 .avatar-section {
     position: relative;
     margin-right: 20px;
     text-align: center;
-    margin-top: -100px; 
+    margin-top: -100px;
 }
 
 .avatar-section img {
@@ -201,36 +205,36 @@ body {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 10px;  
+    margin-bottom: 10px;
 }
 
 
 .status-container {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;  
+    margin-bottom: 10px;
 }
 
 .status-text {
     font-size: 16px;
     font-weight: bold;
-    margin-right: 5px;  
+    margin-right: 5px;
 }
 
 .status-icon {
     display: inline-block;
-    width: 12px; 
+    width: 12px;
     height: 12px;
     background-color: #28a745;
     border-radius: 50%;
-    margin-right: 5px;  
-    box-shadow: 0 0 8px rgba(40, 167, 69, 0.8);  
-    animation: pulse 1.5s infinite;  
+    margin-right: 5px;
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.8);
+    animation: pulse 1.5s infinite;
 }
 
 .status-label {
     font-size: 16px;
-    color: #28a745;  
+    color: #28a745;
 }
 
 
@@ -238,13 +242,16 @@ body {
     0% {
         box-shadow: 0 0 4px rgba(40, 167, 69, 0.8);
     }
+
     50% {
         box-shadow: 0 0 12px rgba(40, 167, 69, 1);
     }
+
     100% {
         box-shadow: 0 0 4px rgba(40, 167, 69, 0.8);
     }
 }
+
 .user-details {
     margin: 5px 0;
     margin-top: -40px;
@@ -255,10 +262,13 @@ body {
     font-size: 32px;
     margin-bottom: 10px;
 }
+
 .balance-top-up-container {
-    position: relative; /* Родительский контейнер для формы и кнопки */
+    position: relative;
+    /* Родительский контейнер для формы и кнопки */
 
 }
+
 /* Top up button styling */
 .btn-top-up {
     margin-top: 15px;
@@ -333,17 +343,18 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
-    
+
 }
 
 .additional-info h2 {
-    
+
     font-size: 22px;
     margin-bottom: 10px;
 }
 
-.additional-info p, .additional-info ul {
-    
+.additional-info p,
+.additional-info ul {
+
     font-size: 16px;
     line-height: 1.5;
 }
@@ -416,7 +427,8 @@ body {
     border-radius: 50%;
     background-color: #28a745;
     margin-right: 5px;
-    box-shadow: 0 0 8px rgba(40, 167, 69, 0.8);  /* Эффект свечения */
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.8);
+    /* Эффект свечения */
 }
 
 .parked-car-photo {
@@ -427,7 +439,9 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.recent-activity, .current-parking, .user-details {
+.recent-activity,
+.current-parking,
+.user-details {
     margin-top: 20px;
     padding: 15px;
     background-color: #f8f9fa;
@@ -435,21 +449,25 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.recent-activity h2, .current-parking h2, .user-details h2 {
+.recent-activity h2,
+.current-parking h2,
+.user-details h2 {
     margin-bottom: 10px;
     font-size: 18px;
     font-weight: bold;
     color: #333;
 }
 
-.recent-activity ul, .current-parking ul {
+.recent-activity ul,
+.current-parking ul {
     list-style-type: none;
     padding: 0;
 }
 
-.recent-activity li, .current-parking li, .user-details p {
+.recent-activity li,
+.current-parking li,
+.user-details p {
     margin-bottom: 5px;
     font-size: 16px;
     color: #555;
 }
-

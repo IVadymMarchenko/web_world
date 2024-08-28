@@ -12,6 +12,7 @@ staticfiles
 0005_initial.py
 0002_alter_carlist_owner.py
 0002_alter_car_image_number_car.py
+0002_remove_user_bio.py
 postgres-data
 staticfiles
 db.sqlite3
