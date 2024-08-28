@@ -155,64 +155,60 @@ input:focus {
 
 
 /* Основные стили для кнопок */
-.button {
-    display: inline-block;
-    padding: 12px 24px;
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 30px; 
+    background: linear-gradient(45deg, var(--primary), var(--btn-hvr)); 
+    color: var(--white);
     font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+/* Button hover state */
+button:hover {
+    background: linear-gradient(45deg, var(--btn-hvr), var(--primary)); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+}
+
+.login-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background: linear-gradient(45deg, var(--primary), var(--btn-hvr));
+    color: var(--white);
     text-align: center;
     text-decoration: none;
     border-radius: 30px;
     font-weight: 600;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    width: 100%; 
-    max-width: 350px; 
 }
 
-.login-button {
-    background-color: #007bff; 
-    color: #fff; 
-    border: 2px solid transparent; 
+
+.disabled-button {
+    background-color: grey;
+    cursor: not-allowed;
+    box-shadow: none;
+    color: #ddd;
 }
 
-.register-button {
-    background-color: #007bff; 
-    color: #fff; 
-    border: 2px solid transparent; 
-}
 
-.button:hover {
-    transform: scale(1.05); 
-}
-
-.login-button:hover {
-    background-color: #218838; 
-    border-color: #218838; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.register-button:hover {
-    background-color: #218838; 
-    border-color: #218838; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-}
-
-.button:active {
-    transform: scale(0.98); 
-}
-
-.login-button:active {
-    background-color: #1e7e34; 
-    border-color: #1e7e34; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
-}
-
-.register-button:active {
-    background-color: #1c7430;
-    border-color: #1c7430; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+.login-button:not(.disabled-button):hover {
+    background: linear-gradient(45deg, var(--btn-hvr), var(--primary));
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 
 }
+
+
+.login-button:not(.disabled-button):active {
+    background: linear-gradient(45deg, var(--btn-hvr), var(--primary)); 
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
 
 /* Message styling for displaying validation or error messages */
 .messages {
@@ -229,3 +225,97 @@ input:focus {
     justify-content: center; 
     margin-top: 20px;
 }
+
+.required:after {
+    content: "*";
+    color: red;
+    margin-left: 5px;
+}
+
+.disabled-button {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    font-size: 34px;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.close-btn:hover {
+    color: #cc1818;
+}
+
+
+.close-btn ion-icon {
+    font-size: 32px;
+    color: #333;
+}
+
+.close-btn:hover ion-icon {
+    color: #e74c3c;
+}
+
+
+.agreement-text {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.agreement-text a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.agreement-text a:hover {
+    color: #0056b3;
+}
+
+.signup-redirect {
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.signup-redirect p {
+    font-size: 14px;
+    color: #555;
+}
+
+.signup-redirect a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-redirect a:hover {
+    color: #0056b3;
+}
+
+.forgot-password-link{
+    margin-top: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+
+.forgot-password-link a {
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+.forgot-password-link a:hover {
+    color: #0056b3;
+}
+

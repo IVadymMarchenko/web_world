@@ -81,7 +81,7 @@
                     <label for="password1">Password <span class="required">*</span></label>
                     <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
                     {{ form.password1 }}
-                    <!-- Добавляем идентификатор для поля пароля -->
+
                     <span class="validation-icon valid-icon">&#10004;</span>
                     <span class="validation-icon invalid-icon">&#10008;</span>
                     {% if form.password1.errors %}
@@ -95,7 +95,7 @@
                     <label for="password2">Confirm Password <span class="required">*</span></label>
                     <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
                     {{ form.password2 }}
-                    <!-- Добавляем идентификатор для поля подтверждения пароля -->
+
                     <span class="validation-icon valid-icon">&#10004;</span>
                     <span class="validation-icon invalid-icon">&#10008;</span>
                     {% if form.password2.errors %}
@@ -130,7 +130,7 @@
                     </div>
                     {% endif %}
                 </div>
-                <button type="submit" id="register-now">Register Now</button>
+                <button type="submit" id="register-now" class="button register-button disabled-button" disabled>Continue</button>
             </form>
 
             <div class="login-redirect" id="login-redirect">

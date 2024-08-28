@@ -70,10 +70,29 @@
 
             <h2>Recent Activity</h2>
             <ul>
-                <li>Last parking session: {{ latest_parking_session|default:"No recent activity." }}</li>
-                <li>Membership since: {{ user.date_joined|date:"F Y" }}</li>
-                <li>Total parkings: {{ total_parking_count }}</li>
+                <li>Last parking session: {{ last_parking_text }}</li>
+                <li>Membership since: {{ membership_since }}</li>
+                <li>Total parkings: {{ total_parkings }}</li>
             </ul>
+        </section>
+        <section class="current-parking">
+            <h2>Current Parking</h2>
+            {% if latest_record %}
+                <ul>
+                    <li>Status: <span class="status-dot"></span> {{ latest_record.status }}</li>
+                    <li>License Number: {{ latest_record.license_number }}</li>
+                    <li>Rate: {{ latest_record.rate_name }}</li>
+                    <li>Parked Since: {{ latest_record.entry_time }}</li>
+                    <li>Duration: {{ latest_record.hours_parked }} hours</li>
+                </ul>
+                {% if parked_car_photo_url %}
+                    <img src="{{ parked_car_photo_url }}" alt="Parked Car Image" class="parked-car-photo">
+                {% else %}
+                    <p>No photo available for the parked car.</p>
+                {% endif %}
+            {% else %}
+                <p>No cars currently parked.</p>
+            {% endif %}
         </section>
     </div>
 </body>
