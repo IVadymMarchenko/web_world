@@ -170,6 +170,11 @@ def upload(request):
                             request, user, recognized_numbers[0], rate_record
                         )
                         save_car_data(request, recognized_numbers[0], user, secure_url)
+                        messages.success(
+                            request,
+                            f"Recognized car number is  {recognized_numbers[0]}.",
+                            extra_tags="if_parking",
+                        )
 
                     elif user.money_balance < 0:
                         send_blacklist_notification(user, recognized_numbers)
@@ -211,7 +216,6 @@ def upload(request):
             "rates": rates,
         },
     )
-    
 
 
 def upload_avatar(request):
