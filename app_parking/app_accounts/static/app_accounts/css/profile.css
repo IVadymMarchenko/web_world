@@ -15,7 +15,7 @@
 
 /* Background style */
 .bg-box {
-    position: absolute;
+    position: fixed; /* Фиксируем фон для расширения на всю страницу */
     top: 0;
     left: 0;
     width: 100%;
@@ -27,7 +27,6 @@
 .bg-box img {
     width: 100%;
     height: 100%;
-    -o-object-fit: cover;
     object-fit: cover;
 }
 
@@ -43,11 +42,15 @@
 
 #balance-top-up-form {
     display: none;
-    margin-top: 10px;
+    position: absolute; /* Форма будет накладываться, а не сдвигать контент */
+    top: 0; 
+    right: 0; 
     padding: 10px;
     background-color: #f1f1f1;
     border-radius: 5px;
     max-width: 300px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* Поднимает форму над другими элементами */
 }
 
 /* Error messages */
@@ -252,7 +255,10 @@ body {
     font-size: 32px;
     margin-bottom: 10px;
 }
+.balance-top-up-container {
+    position: relative; /* Родительский контейнер для формы и кнопки */
 
+}
 /* Top up button styling */
 .btn-top-up {
     margin-top: 15px;
@@ -271,9 +277,10 @@ body {
 
 /* Top up form styling */
 .top-up-form {
-    margin-top: 15px;
+    margin-top: 350px;
+    margin-right: 800px;
     display: none;
-    background-color: #f1f1f1;
+    background-color: #6b6161;
     padding: 15px;
     border-radius: 5px;
 }
@@ -322,20 +329,127 @@ body {
 
 /* Additional info styling */
 .additional-info {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+    
 }
 
 .additional-info h2 {
+    
     font-size: 22px;
     margin-bottom: 10px;
 }
 
 .additional-info p, .additional-info ul {
+    
     font-size: 16px;
     line-height: 1.5;
 }
 
 .additional-info ul {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     list-style-type: disc;
     padding-left: 20px;
 }
+
+
+.recent-activity {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.recent-activity h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.recent-activity ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recent-activity li {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #555;
+}
+
+.current-parking {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #eef6f7;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.current-parking h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.current-parking ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.current-parking li {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #555;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #28a745;
+    margin-right: 5px;
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.8);  /* Эффект свечения */
+}
+
+.parked-car-photo {
+    margin-top: 10px;
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recent-activity, .current-parking, .user-details {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.recent-activity h2, .current-parking h2, .user-details h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.recent-activity ul, .current-parking ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.recent-activity li, .current-parking li, .user-details p {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #555;
+}
+

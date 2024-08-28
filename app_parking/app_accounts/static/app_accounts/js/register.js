@@ -1,24 +1,33 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('registration-form');
-    
-    if (!form) return; // Проверяем, существует ли форма
+    const registerButton = document.getElementById('register-now');
+    const inputs = document.querySelectorAll('input');
 
-    const registerButton = form.querySelector('button[type="submit"]');
+    // Функция для проверки, заполнены ли все обязательные поля
+    function checkInputs() {
+        let allFilled = true;
+        inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                allFilled = false;
+            }
+        });
 
-    form.addEventListener('input', function () {
-        // Проверяем, заполнены ли все обязательные поля
-        const allFilled = [...form.querySelectorAll('input[required]')].every(input => input.value.trim() !== '');
-        registerButton.disabled = !allFilled;
-
-        // Меняем цвет кнопки в зависимости от состояния
         if (allFilled) {
-            registerButton.classList.remove('disabled');
+            registerButton.classList.remove('disabled-button');
+            registerButton.disabled = false;
         } else {
-            registerButton.classList.add('disabled');
+            registerButton.classList.add('disabled-button');
+            registerButton.disabled = true;
         }
-    });
-});
+    }
 
+    // Событие ввода на всех полях формы
+    inputs.forEach(input => {
+        input.addEventListener('input', checkInputs);
+    });
+
+    // Начальная проверка на случай, если поля уже заполнены
+    checkInputs();
+});
 
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('registration-form');

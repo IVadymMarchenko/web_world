@@ -32,8 +32,8 @@ from django.utils.dateparse import parse_datetime
 from django.urls import reverse
 
 from .models import Profile
-
-
+from app_car_moderation.models import ParkingRecord
+from urllib.parse import unquote
 User = get_user_model()
 
 
@@ -54,7 +54,7 @@ def sign_up_user(request):
                 request,
                 f"Welcome, {username}!<br>Registration successful! Redirecting to your profile...",
             )
-            # Возвращаем тот же шаблон, чтобы показать сообщение об успешной регистрации
+
             return render(
                 request,
                 "app_accounts/register_form.html",
@@ -110,40 +110,86 @@ def login_user(request):
     return render(request, "app_accounts/login.html", {"form": form})
 
 
+def format_duration(duration):
+    total_seconds = int(duration.total_seconds())
+    hours = total_seconds // 3600
+    minutes = (total_seconds % 3600) // 60
+    seconds = total_seconds % 60
+    return f"{hours}h {minutes}m {seconds}s"
+
+from urllib.parse import unquote
+
 @login_required
 def profile(request, username):
+
     user = get_object_or_404(User, username=username)
     user_profile_avatar = get_object_or_404(Profile, user=user)
+
 
     if user != request.user:
         return redirect("app_accounts:profile", username=request.user.username)
 
-    try:
-        car_photos = Car_Image.objects.filter(user=user).latest("image")
-    except Car_Image.DoesNotExist:
-        car_photos = None
 
-    try:
-        latest_record = ParkingRecord.objects.filter(user=user, is_parked=True).latest(
-            "entry_time"
-        )
-    except ObjectDoesNotExist:
-        latest_record = None
-
-    parking_records = ParkingRecord.objects.filter(user=user)
-
-    return render(
-        request,
-        "app_accounts/profile.html",
-        {
-            "user": user,
-            "user_profile_avatar": user_profile_avatar,
-            "car_photos": car_photos,
-            "parking_records": parking_records,
-            "latest_record": latest_record,
-        },
+    last_parking_session = (
+        ParkingRecord.objects.filter(user=user, exit_time__isnull=False)
+        .order_by('-exit_time')
+        .first()
     )
+    last_parking_text = last_parking_session.exit_time.strftime('%Y-%m-%d %H:%M:%S') if last_parking_session else "No recent activity."
 
+
+    membership_since = user.date_joined.strftime('%B %Y')
+    total_parkings = ParkingRecord.objects.filter(user=user).count()
+
+
+    current_parking = ParkingRecord.objects.filter(user=user, is_parked=True).first()
+    current_parking_info = None
+    parked_car_photo_url = None
+
+    if current_parking:
+
+        duration = timezone.now() - current_parking.entry_time
+        formatted_duration = format_duration(duration)
+
+        current_parking_info = {
+            'license_number': current_parking.license_number,
+            'rate_name': current_parking.rate.rate_name if current_parking.rate else "Unknown",
+            'entry_time': current_parking.entry_time.strftime('%Y-%m-%d %H:%M:%S'),
+            'hours_parked': formatted_duration,
+            'status': "On Parking",
+        }
+
+        parked_car_photo = Car_Image.objects.filter(
+            number_car=current_parking.license_number, user=user
+        ).order_by('-detected_at').first()
+
+
+        if parked_car_photo and parked_car_photo.image:
+            image_url = parked_car_photo.image.url
+            
+
+            fixed_url = unquote(image_url)
+
+
+            if fixed_url.startswith('/https:'):
+                fixed_url = fixed_url[1:] 
+            
+            parked_car_photo_url = fixed_url
+            print(f"Окончательно исправленный URL: {parked_car_photo_url}")
+
+
+    context = {
+        "user": user,
+        "user_profile_avatar": user_profile_avatar,
+        "parking_records": ParkingRecord.objects.filter(user=user),
+        "latest_record": current_parking_info,
+        'last_parking_text': last_parking_text,
+        'membership_since': membership_since,
+        'total_parkings': total_parkings,
+        'parked_car_photo_url': parked_car_photo_url,  
+    }
+
+    return render(request, "app_accounts/profile.html", context)
 
 @login_required
 def logout_user(request):

@@ -212,23 +212,42 @@ button:hover {
 }
 
 /* Add styles for the registration button */
+/* Основные стили для кнопки регистрации */
 .register-button {
     display: inline-block;
     padding: 10px 20px;
     margin-top: 10px;
-    background: linear-gradient(45deg, var(--primary), var(--btn-hvr)); 
+    background: linear-gradient(45deg, var(--primary), var(--btn-hvr));
     color: var(--white);
     text-align: center;
     text-decoration: none;
     border-radius: 30px;
     font-weight: 600;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
-.register-button:hover {
-    background: linear-gradient(45deg, var(--btn-hvr), var(--primary)); 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+/* Стили для неактивного состояния кнопки */
+.disabled-button {
+    background-color: grey;
+    cursor: not-allowed;
+    box-shadow: none;
+    color: #ddd;
+}
+
+/* Стили для активного состояния при наведении */
+.register-button:not(.disabled-button):hover {
+    background: linear-gradient(45deg, var(--btn-hvr), var(--primary));
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+/* Стили для активного состояния при нажатии */
+.register-button:not(.disabled-button):active {
+    background: linear-gradient(45deg, var(--btn-hvr), var(--primary));
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(0.98);
 }
 .required {
     color: red;
@@ -438,3 +457,4 @@ input[type="password"].no-match {
 input[type="password"].match {
     border-color: #28a745;
 }
+
