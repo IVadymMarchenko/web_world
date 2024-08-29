@@ -8,12 +8,13 @@
 Кожен раз, коли ви обираєте місце для паркування, думайте про те, як ваше рішення вплине на інших. Залиште достатньо місця для пішоходів, велосипедистів та інших водіїв. Належне паркування – це повага до інших та внесок у створення безпечнішого та зручнішого міста.
 
 
-## Зміст:
-   * [Основна інформація](#основна-інформація)
-   * [Особливості проекта](#особливості-проекта)
-   * [Технології](#технології)
-   * [Розгорнути локально](#розгорнути-локально)
-   * [Розгорнути в контейнері](#розгорнути-в-контейнері)
+## Table of contents:
+   * [General info](#general-info)
+   * [Features](#features)
+   * [Image recognizing](#image-recognizing)  
+   * [Setup-Local](#setup-locally)
+   * [Setup-Docker](#docker-setup)
+   * [Technologies](#technologies)
 
 ## Основна інформація:
 **Web_World: Park-Auto** - працює на основі наступних алгоритмів:
@@ -30,6 +31,11 @@
 * 🌌 **Алгоритм моделі: [paddleocr](https://huggingface.co/spaces/itsyoboieltr/anpr/blob/main/ANPR.ipynb)** - алгоритм розпізнавання вже навчений і впроваджений.
 * 🐳 **Докер-контейнер:** - проект можна запустити через докер контейнер.
 
+## Image recognizing:
+<a><img src="https://github.com/IVadymMarchenko/web_world/blob/main/app_parking/app_home/images/about_project/exmp/exmpl1.jpg" width="540px" style="border: 10px solid orange;"></a>
+<a><img src="https://github.com/IVadymMarchenko/web_world/blob/main/app_parking/app_home/images/about_project/exmp/exmpl2.jpg" width="540px" style="border: 10px solid orange;"></a>
+<a><img src="https://github.com/IVadymMarchenko/web_world/blob/main/app_parking/app_home/images/about_project/exmp/exmpl3.jpg" width="540px" style="border: 10px solid orange;"></a>
+<a><img src="https://github.com/IVadymMarchenko/web_world/blob/main/app_parking/app_home/images/about_project/exmp/exmpl4.jpg" width="540px" style="border: 10px solid orange;"></a>
 
 ## Розгорнути локально:
 1. Перший крок до виконання - клонування репозиторія:
