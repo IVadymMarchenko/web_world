@@ -11,9 +11,10 @@ Every time you choose a parking place, think about how your decision will affect
 ## Table of contents:
    * [General info](#general-info)
    * [Features](#features)
-   * [Technologies](#technologies)
+   * [Image recognizing](#image-recognizing)  
    * [Setup-Local](#setup-locally)
    * [Setup-Docker](#docker-setup)
+   * [Technologies](#technologies)
 
 ## General info:
 **Web_World: Park-Auto** - it performs the following algorithm model:
@@ -29,6 +30,12 @@ Every time you choose a parking place, think about how your decision will affect
 * 📆 **Celery task scheduler** - task scheduler that performs auto email notifications, for blacklisted users.
 * 🌌 **Model algorithm: [paddleocr](https://huggingface.co/spaces/itsyoboieltr/anpr/blob/main/ANPR.ipynb)** - recognition algorithm already trained and implemented.
 * 🐳 **Docker container:** - the project can start-up via containerized Docker.
+
+## Image recognizing:
+<a><img src="https://github.com/IVadymMarchenko/web_world/blob/main/app_parking/app_home/images/about_project/exmp/exmpl1.jpg" width="540px" style="border: 10px solid orange;"></a>
+<a><img src="https://github.com/IVadymMarchenko/web_world/blob/main/app_parking/app_home/images/about_project/exmp/exmpl2.jpg" width="540px" style="border: 10px solid orange;"></a>
+<a><img src="https://github.com/IVadymMarchenko/web_world/blob/main/app_parking/app_home/images/about_project/exmp/exmpl3.jpg" width="540px" style="border: 10px solid orange;"></a>
+<a><img src="https://github.com/IVadymMarchenko/web_world/blob/main/app_parking/app_home/images/about_project/exmp/exmpl4.jpg" width="540px" style="border: 10px solid orange;"></a>
 
 ## Setup-Locally:
 1. The first thing to do is to clone the repository:
