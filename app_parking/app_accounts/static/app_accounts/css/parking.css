@@ -1,3 +1,4 @@
+/* Основные стили для навигации и фона */
 .navbar-brand {
     margin-left: 350px;
     font-size: 24px;
@@ -44,9 +45,9 @@
 
 /* Body styling */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7f6;
-    color: #333;
+    font-family: 'Poppins', sans-serif; /* Заменено на современный шрифт */
+    background: linear-gradient(to right, #243b55, #141e30); /* Градиентный фон */
+    color: #fff;
     margin: 0;
     padding: 0;
 }
@@ -58,7 +59,6 @@ body {
     align-items: center;
     background-color: transparent;
     padding: 10px 20px;
-    /* position: fixed; */
     top: 0;
     left: 0;
     width: 100%;
@@ -79,106 +79,63 @@ body {
     margin-right: 220px;
 }
 
-
+/* Основной контейнер для контента */
 .parking-container {
-    max-width: 900px;
+    max-width: 1000px; 
+    width: 90%; 
     margin: 100px auto 50px;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 40px; 
+    background: rgba(0, 0, 0, 0.7); 
+    border-radius: 20px; 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(10px); 
 }
 
-/* Основные стили для кнопок */
-.upload-button,
-.ok-button,
-.back-to-profile {
-    display: inline-block;
-    background: linear-gradient(45deg, #081f47, #2575fc);
-    color: #fff;
-    width: 140px;
-    height: 40px;
-    padding: 0;
-    line-height: 40px;
-    border: none;
-    border-radius: 30px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    transition: all 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-}
-
-.upload-button,
-.ok-button,
-.back-to-profile:hover {
-    background: linear-gradient(45deg, #081f47, #1ab1c5);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-}
-
-.upload-button,
-.ok-button,
-.back-to-profile:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/* .upload-button {
-    background-color: #007bff;
-} */
-
-.upload-button:disabled {
-    background: linear-gradient(45deg, #8198d3, #f5f5f7);
-    color: #ffffff;
-    cursor: pointer;
-}
-
-
-.ok-button {
-    display: none;
-    /* Скрыть кнопку по умолчанию */
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #28a745;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.ok-button:hover {
-    background-color: #218838;
-    transform: scale(1.05);
-}
-
-
-/* Стили для загрузки фото */
+/* Заголовок раздела */
 .photo-upload h2 {
     font-size: 24px;
     margin-bottom: 20px;
+    color: #1ab1c5;
 }
 
-.custom-file-upload {
+/* Стили для отображаемых фотографий */
+.uploaded-photos-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
+.uploaded-car-photo {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #1ab1c5; /* Добавлены границы для фото */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для загрузки файла */
+.custom-file-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
 .custom-file-label {
+    width: 140px;
     display: block;
     padding: 10px;
     background: linear-gradient(45deg, #081f47, #2575fc);
     color: white;
-    border-radius: 5px;
+    border-radius: 20px; /* Увеличены радиусы для большей округлости */
     cursor: pointer;
     text-align: center;
     margin-right: 10px;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    /* Добавим плавную анимацию перехода */
 }
 
 .custom-file-label:hover {
@@ -196,34 +153,138 @@ body {
     display: none;
 }
 
-
-.uploaded-photos-container {
+/* Стили для контейнера кнопок Save и Cancel */
+.button-container {
+    position: fixed; 
+    left: 20px;
+    bottom: 10px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 10px; 
+    align-items: center;
+    z-index: 100; 
 }
 
-.uploaded-car-photo {
-    width: 120px;
-    height: 80px;
-    border-radius: 5px;
-    object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Стили для контейнера кнопки Back to Profile */
+.back-to-profile-container {
+    position: fixed; 
+    right: 20px;
+    bottom: 10px;
+    z-index: 100; 
 }
 
-/* Стили для чекбоксов и секции тарифов */
+/* Основные стили для кнопок */
+.upload-button {
+    display: inline-block;
+    background: linear-gradient(45deg, #017c1e, #022c15); 
+    color: #fff;
+    width: 140px;
+    height: 40px;
+    padding: 0;
+    line-height: 40px;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.upload-button:hover {
+    background: linear-gradient(45deg, #022c15, #017c1e);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.upload-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.upload-button:disabled {
+    background: linear-gradient(45deg, #8198d3, #f5f5f7);
+    color: #ffffff;
+    cursor: not-allowed;
+}
+
+/* Стили для кнопки Cancel */
+.cancel-button {
+    
+    display: inline-block;
+    background: linear-gradient(45deg, #b60513, #470202); 
+    color: #fff;
+    width: 140px;
+    height: 40px;
+    padding: 0;
+    line-height: 40px;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background: linear-gradient(45deg, #470202, #b60513); 
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cancel-button:active {
+    transform: translateY(1px);
+}
+
+/* Стили для кнопки Back to Profile */
+.back-to-profile {
+    display: inline-block;
+    background: linear-gradient(45deg, #817576, #2b1e1e); 
+    color: #fff;
+    width: 140px;
+    height: 40px;
+    padding: 0;
+    line-height: 40px;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.back-to-profile:hover {
+    background: linear-gradient(45deg, #2b1e1e, #817576); 
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-profile:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Стили для секции с тарифами */
 .pricing-options {
-    z-index: 10;
-    position: relative;
     display: none;
-    /* Изначально скрыто */
     margin-top: 20px;
     margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    border-radius: 10px; /* Округление для современного вида */
+    background-color: rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1; /* Чтобы кнопки были поверх тарифов */
+}
+
+.pricing-options p {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #e0dfdf;
 }
 
 .pricing-options label {
@@ -236,7 +297,6 @@ body {
     margin-right: 10px;
     cursor: pointer;
 }
-
 /* Стили сообщений */
 .alert {
     padding: 15px;
@@ -264,7 +324,6 @@ body {
     background-color: #17a2b8;
     color: rgb(0, 0, 0);
 }
-
 
 .warning {
     background-color: #d8971e;

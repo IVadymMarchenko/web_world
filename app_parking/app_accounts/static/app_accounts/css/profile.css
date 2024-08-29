@@ -271,70 +271,107 @@ body {
 
 /* Top up button styling */
 .btn-top-up {
-    margin-top: 15px;
-    background-color: #28a745;
+    display: inline-block;
+    background: linear-gradient(45deg, #017c1e, #022c15); 
     color: #fff;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
     font-size: 16px;
+    margin-top: 15px;
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    cursor: pointer; 
+
+
 }
 
 .btn-top-up:hover {
-    background-color: #218838;
+    background: linear-gradient(45deg, #022c15, #017c1e);
+    transform: translateY(-3px);
+    color: #fff;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Top up form styling */
+/* Основные стили для формы */
 .top-up-form {
-    margin-top: 350px;
-    margin-right: 800px;
     display: none;
-    background-color: #6b6161;
-    padding: 15px;
-    border-radius: 5px;
+    margin-right: 830px;
+    margin-top: 410px;
+    background: linear-gradient(45deg, #3a3a3a, #2b2b2b); /* Темный градиент фона */
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: all 0.3s ease;
 }
 
+/* Стили для полей ввода в форме */
 .top-up-input {
     padding: 10px;
     width: calc(100% - 22px);
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: none;
+    border-radius: 20px;
     margin-bottom: 10px;
     font-size: 16px;
+    background: #f1f1f1; /* Светлый фон для контраста */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border 0.3s ease;
 }
 
+.top-up-input:focus {
+    outline: none;
+    border: 2px solid #017c1e; 
+}
+
+/* Стили для контейнера кнопок */
 .form-buttons {
     display: flex;
     gap: 10px;
+    justify-content: center; 
 }
 
+/* Стили для кнопки отправки формы */
 .btn-submit {
-    background-color: #007bff;
+    display: inline-block;
+    background: linear-gradient(45deg, #017c1e, #022c15); 
     color: #fff;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 20px;
+    text-align: center;
     font-size: 16px;
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 .btn-submit:hover {
-    background-color: #0056b3;
+    background: linear-gradient(45deg, #022c15, #017c1e);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Стили для кнопки отмены */
 .btn-cancel {
-    background-color: #dc3545;
+    display: inline-block;
+    background: linear-gradient(45deg, #dc3545, #640711);
     color: #fff;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 20px;
+    text-align: center;
     font-size: 16px;
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 .btn-cancel:hover {
-    background-color: #c82333;
+    background: linear-gradient(45deg, #640711, #dc3545);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Additional info styling */
