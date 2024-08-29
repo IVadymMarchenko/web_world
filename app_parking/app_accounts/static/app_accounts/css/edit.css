@@ -164,14 +164,14 @@ h4 {
 
 .btn-outline-primary {
     display: inline-block;
-    background: linear-gradient(45deg, #5c7db8, #1b627e);
+    background: linear-gradient(45deg, rgb(47, 101, 194), #04203b); 
     color: #fff;
     width: 140px;
     height: 40px;
     padding: 0;
     line-height: 40px;
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
     text-align: center;
     text-decoration: none;
     font-size: 14px;
@@ -181,7 +181,7 @@ h4 {
 }
 
 .btn-outline-primary:hover {
-    background: linear-gradient(45deg, #084739, #1ac5ae);
+    background: linear-gradient(45deg, #04203b, rgb(47, 101, 194));
     transform: translateY(-3px);
     color: white;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
@@ -190,14 +190,14 @@ h4 {
 /* Primary button styling */
 .btn-primary {
     display: inline-block;
-    background: linear-gradient(45deg, #5c7db8, #1b627e);
+    background: linear-gradient(45deg, #017c1e, #022c15); 
     color: #fff;
     width: 140px;
     height: 40px;
     padding: 0;
     line-height: 40px;
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
     text-align: center;
     text-decoration: none;
     font-size: 14px;
@@ -209,9 +209,8 @@ h4 {
 
 /* Hover state for primary button */
 .btn-primary:hover {
-    background: linear-gradient(45deg, #084739, #1ac5ae);
+    background: linear-gradient(45deg, #022c15, #017c1e);
     transform: translateY(-3px);
-    color: white;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -219,14 +218,14 @@ h4 {
 /* Default button styling */
 .btn-default {
     display: inline-block;
-    background: linear-gradient(45deg, #081f47, #2575fc);
+    background: linear-gradient(45deg, #817576, #2b1e1e); 
     color: #fff;
     width: 140px;
     height: 40px;
     padding: 0;
     line-height: 40px;
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
     text-align: center;
     text-decoration: none;
     font-size: 14px;
@@ -238,22 +237,22 @@ h4 {
 
 /* Hover state for default button */
 .btn-default:hover {
-    background: linear-gradient(45deg, #081f47, #1ab1c5);
+    background: linear-gradient(45deg, #2b1e1e, #817576); 
     transform: translateY(-3px);
-    color: white;
+    color: #fff;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn-default-save {
     display: inline-block;
-    background: linear-gradient(45deg, #5c7db8, #1b627e);
+    background: linear-gradient(45deg, #017c1e, #022c15); 
     color: #fff;
     width: 140px;
     height: 40px;
     padding: 0;
     line-height: 40px;
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
     text-align: center;
     text-decoration: none;
     font-size: 14px;
@@ -263,9 +262,8 @@ h4 {
 }
 
 .btn-default-save:hover {
-    background: linear-gradient(45deg, #084739, #1ac5ae);
+    background: linear-gradient(45deg, #022c15, #017c1e);
     transform: translateY(-3px);
-    color: white;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 

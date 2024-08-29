@@ -1065,16 +1065,28 @@ p {
 
 /* Styles for button mains */
 .mains-button {
-  background-color: #1ab1c5;
-  color: white;
-  border: 2px solid #1ab1c5;
+  display: inline-block;
+  background: linear-gradient(45deg, #3873da, #1ab1c5);
+  color: #fff;
   width: 100px;
   height: 40px;
+  padding: 0;
+  line-height: 40px;
+  border: none;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .mains-button:hover {
-  background-color: rgb(255, 255, 255);
-  color: #1ab1c5;
+  background: linear-gradient(45deg, #3873da, #295fbb);
+  transform: translateY(-3px);
+  color: rgb(201, 176, 162);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Styles for button Logout */
@@ -1104,24 +1116,49 @@ p {
 }
 
 .btn-registr {
-  background-color: #ff6f3c;
-  color: white;
-  border: 2px solid #ff6f3c;
+  display: inline-block;
+  background: linear-gradient(45deg, #ff6f3c, #ff9f1c);
+  color: #fff;
+  width: 140px;
+  height: 40px;
+  padding: 0;
+  line-height: 40px;
+  border: none;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 .btn-registr:hover {
-  background-color: rgb(255, 255, 255);
-  color: #ff6f3c;
+  background: linear-gradient(45deg, #ff9f1c, #ff6f3c);
+  transform: translateY(-3px);
+  color: rgb(187, 92, 37);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 
 .sign_in {
-  background-color: #ff6f3c;
-  color: white;
-  border: 2px solid #ff6f3c;
+  display: inline-block;
+  background: linear-gradient(45deg, #ff6f3c, #ff9f1c); 
+  color: #fff;
+  padding: 0;
+  border: none;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  cursor: pointer; 
 }
 
 .sign_in:hover {
-  background-color: rgb(255, 255, 255);
-  color: #ff6f3c;
+  background: linear-gradient(45deg, #696661, #c44416);
+  transform: translateY(-3px);
+  color: #fff;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }

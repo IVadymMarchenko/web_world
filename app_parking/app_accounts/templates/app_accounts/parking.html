@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="bg-box">
-        <img src="{% static 'slider-bg.jpg' %}" alt="">
+        <img src="{% static 'slider-bg.jpg' %}" alt="Background Image">
     </div>
     <div class="navbar">
         <a class="navbar-brand" href="/">
@@ -19,7 +19,6 @@
     </div>
 
     <div class="parking-container">
-        
         {% if messages %}
             {% for message in messages %}
                 {% if 'if_parking' in message.tags %}
@@ -30,7 +29,7 @@
             {% endfor %}
         {% endif %}
         <section class="photo-upload">
-            <h2>Car photo</h2>
+            <h2>Car parking</h2>
             <form method="POST" enctype="multipart/form-data" action="{% url 'app_photo:upload' %}">
                 {% csrf_token %}
                 {% if form.errors %}
@@ -47,7 +46,6 @@
                         </ul>
                     </div>
                 {% endif %}
-                
 
                 <div id="uploaded-car-photos" class="uploaded-photos-container">
                     {% if car_photos %}
@@ -58,31 +56,29 @@
                         <p>There are no uploaded photos.</p>
                     {% endif %}
                 </div>
-                
 
                 <div class="custom-file-upload">
-                    <label for="car-photo-upload" class="custom-file-label">Upload a new photo</label>
+                    <label for="car-photo-upload" class="custom-file-label">Park the car</label>
                     <input type="file" id="car-photo-upload" name="image" accept="image/*" class="custom-file-input">
                 </div>
-                
-
-                <button type="submit" class="upload-button" disabled>Save</button>
-                
+                <div class="button-container">
+                    <button type="submit" class="upload-button" disabled>Save</button>
+                    <button type="button" class="cancel-button" onclick="window.location.reload();">Cancel</button>
+                </div>
+                <div class="back-to-profile-container">              
+                    <a href="{% url 'app_accounts:profile' username=user.username %}" class="back-to-profile">Back to Profile</a>
+                </div>
 
                 <div class="pricing-options">
-                    <p>Select a parking rate:</p>
+                    <p>Select a Parking Rate:</p>
                     {% for rate in rates %}
                         <label>
                             <input type="radio" name="rate" value="{{ rate.id }}">
-                            {{ rate.rate_name }} $ {{ rate.rate_per_hour }}
+                            {{ rate.rate_name }} - ${{ rate.rate_per_hour }}
                         </label>
                     {% endfor %}
                 </div>
-                
 
-                {% comment %} <button type="button" id="ok-button" class="ok-button" style="display: none;">OK</button> {% endcomment %}
-                <a href="{% url 'app_accounts:profile' username=user.username %}" class="back-to-profile">Back to Profile</a>
-                
             </form>      
         </section>
     </div>

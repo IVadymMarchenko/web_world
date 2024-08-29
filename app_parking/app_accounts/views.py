@@ -34,6 +34,9 @@ from django.urls import reverse
 from .models import Profile
 from app_car_moderation.models import ParkingRecord
 from urllib.parse import unquote
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
 User = get_user_model()
 
 
@@ -343,3 +346,12 @@ def parking_view(request):
     return render(
         request, "app_accounts/parking.html", {"rates": rates, "car_photos": car_photos}
     )
+
+
+class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
+    template_name = "app_accounts/password_reset.html"
+    email_template_name = "app_accounts/password_reset_email.html"
+    html_email_template_name = "app_accounts/password_reset_email.html"
+    success_url = reverse_lazy("app_accounts:password_reset_done")
+    success_message = "An email with instructions to reset your password has been sent to %(email)s."
+    subject_template_name = "app_accounts/password_reset_subject.txt"
