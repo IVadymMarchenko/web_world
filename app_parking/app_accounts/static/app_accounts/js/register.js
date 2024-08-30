@@ -1,32 +1,33 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('registration-form');
     const registerButton = document.getElementById('register-now');
-    const inputs = document.querySelectorAll('input');
+    
+    // Находим все обязательные поля ввода формы
+    const requiredFields = Array.from(form.querySelectorAll('input[required]'));
 
-    // Функция для проверки, заполнены ли все обязательные поля
-    function checkInputs() {
-        let allFilled = true;
-        inputs.forEach(input => {
-            if (input.value.trim() === '') {
-                allFilled = false;
-            }
-        });
+    // Функция для переключения состояния кнопки
+    function toggleButtonState() {
+        // Проверяем, что все обязательные поля заполнены
+        const allFieldsFilled = requiredFields.every(field => field.value.trim() !== '');
 
-        if (allFilled) {
+        if (allFieldsFilled) {
+            registerButton.removeAttribute('disabled');
             registerButton.classList.remove('disabled-button');
-            registerButton.disabled = false;
+            registerButton.classList.add('register-button');
         } else {
+            registerButton.setAttribute('disabled', 'true');
             registerButton.classList.add('disabled-button');
-            registerButton.disabled = true;
+            registerButton.classList.remove('register-button');
         }
     }
 
-    // Событие ввода на всех полях формы
-    inputs.forEach(input => {
-        input.addEventListener('input', checkInputs);
+    // Добавляем слушатели событий 'input' для всех обязательных полей
+    requiredFields.forEach(field => {
+        field.addEventListener('input', toggleButtonState);
     });
 
-    // Начальная проверка на случай, если поля уже заполнены
-    checkInputs();
+    // Инициализация состояния кнопки при загрузке страницы
+    toggleButtonState();
 });
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -193,5 +194,20 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             confirmPasswordInput.style.borderColor = '#28a745'; // Зеленый, если пароли совпадают
         }
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordInput = document.getElementById('id_password');
+    const togglePasswordIcon = document.getElementById('toggle-password-icon');
+
+    togglePasswordIcon.addEventListener('click', function() {
+        // Переключаем тип поля ввода между "password" и "text"
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+
+        // Переключаем иконку
+        togglePasswordIcon.setAttribute('name', isPassword ? 'eye-sharp' : 'eye-off-sharp');
     });
 });

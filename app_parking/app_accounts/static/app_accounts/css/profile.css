@@ -6,11 +6,8 @@
     text-decoration: none;
 }
 
-.brand-text {
-    font-family: 'Poppins', sans-serif;
-}
 
-.navbar-brand:hover .brand-text {
+.navbar-brand:hover{
     color: #e0dfdf;
 }
 

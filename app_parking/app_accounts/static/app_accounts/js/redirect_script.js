@@ -15,6 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         setTimeout(function () {
             window.location.href = redirectUrl;
-        }, 3000);
+        }, 2000);
     }
 });

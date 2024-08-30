@@ -355,3 +355,9 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     success_url = reverse_lazy("app_accounts:password_reset_done")
     success_message = "An email with instructions to reset your password has been sent to %(email)s."
     subject_template_name = "app_accounts/password_reset_subject.txt"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user 
+        return context
+    

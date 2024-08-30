@@ -42,7 +42,8 @@
   <!-- <link href="css/responsive.css" rel="stylesheet" /> -->
 
   {% load static %}
-  <link rel="stylesheet" href="{% static 'app_home/main.css' %}">
+  <link rel="icon" href="{% static 'app_home/images/icons/favicon.ico' %}" type="image/x-icon">
+  <link rel="stylesheet" href="{% static 'app_home/css/main.css' %}">
 
 </head>
 
@@ -130,7 +131,7 @@
             <div class="form-row mb-3">
                 <div class="col-md-5 px-0">
                     <div class="form-group">
-                        <label for="identifier">Your Login or Email</label>
+                        <label for="identifier">Email or login</label>
                         <div class="input-group">
                             <input type="text" name="email" class="form-control" placeholder="Email or login" required />
                         </div>
@@ -138,9 +139,9 @@
                 </div>
                 <div class="col-md-5 px-0">
                     <div class="form-group">
-                        <label for="password">Your Password</label>
+                        <label for="password">Password</label>
                         <div class="input-group">
-                            <input type="password" name="password" class="form-control" placeholder="Enter Password" required />
+                            <input type="password" name="password" class="form-control" placeholder="Password" required />
                         </div>
                     </div>
                 </div>

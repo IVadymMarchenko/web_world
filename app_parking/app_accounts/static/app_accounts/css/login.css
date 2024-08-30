@@ -10,15 +10,14 @@
     font-weight: 600;
     color: white;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.brand-text {
-    font-family: 'Poppins', sans-serif;
+.navbar-brand:hover {
+    color: #b1afaf;
 }
 
-.navbar-brand:hover .brand-text {
-    color: #e0dfdf; 
-}
+
 /* Background style */
 .bg-box {
     position: absolute;
@@ -31,21 +30,21 @@
 }
 
 .bg-box img {
-width: 100%;
-height: 100%;
--o-object-fit: cover;
-object-fit: cover;
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
 }
 
 .bg-box::before {
-content: "";
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: -webkit-gradient(linear, left top, right top, from(rgba(21, 82, 99, 0.65)), to(rgba(21, 82, 99, 0.55)));
-background: linear-gradient(to right, rgba(21, 82, 99, 0.65), rgba(21, 82, 99, 0.55));
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: -webkit-gradient(linear, left top, right top, from(rgba(21, 82, 99, 0.65)), to(rgba(21, 82, 99, 0.55)));
+    background: linear-gradient(to right, rgba(21, 82, 99, 0.65), rgba(21, 82, 99, 0.55));
 }
 
 /* Defining root variables for consistent theming */
@@ -113,6 +112,7 @@ body {
 .input-group {
     position: relative;
     margin-bottom: 15px;
+    
 }
 
 
@@ -146,7 +146,28 @@ input {
     transition: border-color 0.3s ease; 
 }
 
+/* Основные стили для полей ввода */
+.input-group input {
+    border-radius: 15px;
+    outline: none;
+    transition: border-color 0.3s ease; 
+}
 
+/* Стили для пустого поля (красная граница) */
+.input-group input:invalid {
+    border-color: red;
+}
+
+/* Стили для заполненного поля (зеленая граница) */
+.input-group input:valid {
+    border-color: green;
+}
+
+/* Стили для поля при нажатии и наведении курсора (синяя граница) */
+.input-group input:focus,
+.input-group input:hover {
+    border-color: rgb(12, 84, 240);
+}
 /* Focus state for input fields */
 input:focus {
     border-color: var(--primary); 
@@ -155,47 +176,48 @@ input:focus {
 
 
 /* Основные стили для кнопок */
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 30px; 
-    background: linear-gradient(45deg, var(--primary), var(--btn-hvr)); 
-    color: var(--white);
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-}
-
-/* Button hover state */
-button:hover {
-    background: linear-gradient(45deg, var(--btn-hvr), var(--primary)); 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
-}
-
 .login-button {
+    width: 100%;
+    height: 50px;
     display: inline-block;
-    padding: 10px 20px;
+    padding: 12px 20px;
     margin-top: 10px;
-    background: linear-gradient(45deg, var(--primary), var(--btn-hvr));
+    border: none;
+    background: linear-gradient(#2464d1, #0846a3);
     color: var(--white);
+    cursor: pointer;
     text-align: center;
+    font-size: 16px;
     text-decoration: none;
     border-radius: 30px;
     font-weight: 600;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Button hover state */
+.login-button:hover {
+    background: linear-gradient(#0846a3, #2464d1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+}
 
 .disabled-button {
+    width: 100%;
+    height: 50px;
+    display: inline-block;
+    padding: 12px 20px;
+    margin-top: 10px;
+    border: none;
     background-color: grey;
+    color: #ddd;
     cursor: not-allowed;
     box-shadow: none;
-    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 16px;
 }
-
 
 .login-button:not(.disabled-button):hover {
     background: linear-gradient(45deg, var(--btn-hvr), var(--primary));
@@ -232,10 +254,6 @@ button:hover {
     margin-left: 5px;
 }
 
-.disabled-button {
-    background-color: grey;
-    cursor: not-allowed;
-}
 
 .close-btn {
     position: absolute;
@@ -319,3 +337,19 @@ button:hover {
     color: #0056b3;
 }
 
+
+.toggle-password {
+    position: absolute;
+    font-size: 22px;
+    right: 10px; /* Отступ справа */
+    top: 54px; /* Центрирование по вертикали */
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--grey); /* Цвет иконки */
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
