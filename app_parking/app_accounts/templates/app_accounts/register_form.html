@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
     {% load static %}
+    <link rel="icon" href="{% static 'app_accounts/images/icons/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'app_accounts/css/register.css' %}">
     <script src="{% static 'app_accounts/js/register.js' %}" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -84,6 +86,9 @@
 
                     <span class="validation-icon valid-icon">&#10004;</span>
                     <span class="validation-icon invalid-icon">&#10008;</span>
+                    <!-- <span class="toggle-password">
+                        <ion-icon name="eye-off-sharp" id="toggle-password-icon"></ion-icon>
+                    </span> -->
                     {% if form.password1.errors %}
                     <div class="error">
                         {{ form.password1.errors.as_text }}
@@ -98,6 +103,9 @@
 
                     <span class="validation-icon valid-icon">&#10004;</span>
                     <span class="validation-icon invalid-icon">&#10008;</span>
+                    <!-- <span class="toggle-password">
+                        <ion-icon name="eye-off-sharp" id="toggle-password-icon"></ion-icon>
+                    </span> -->
                     {% if form.password2.errors %}
                     <div class="error">
                         {{ form.password2.errors.as_text }}

@@ -1,17 +1,17 @@
 .navbar-brand {
+    position: absolute;
     margin-left: 350px;
+    top: 10px;
+    left: 10px;
     font-size: 24px;
     font-weight: 600;
     color: white;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.brand-text {
-    font-family: 'Poppins', sans-serif;
-}
-
-.navbar-brand:hover .brand-text {
-    color: #e0dfdf;
+.navbar-brand:hover {
+    color: #b1afaf;
 }
 
 /* Body styling */

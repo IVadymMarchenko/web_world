@@ -21583,6 +21583,7 @@ a.pswp__share--download:hover {
     opacity: 1;
   }
 }
+
 @keyframes customAnimationIn {
   from {
     transform-origin: center center;
@@ -21595,6 +21596,7 @@ a.pswp__share--download:hover {
     opacity: 1;
   }
 }
+
 @keyframes customAnimationOut {
   from {
     transform-origin: center center;
@@ -21607,6 +21609,7 @@ a.pswp__share--download:hover {
     opacity: var(--animation-custom_in-opacity);
   }
 }
+
 .customAnimationIn {
   animation-name: customAnimationIn;
 }
@@ -42982,7 +42985,7 @@ a.u-link.u-text-hover-grey-90:hover {
 .u-header .u-image-3 {
   width: 197px;
   height: 197px;
-  background-image: url("images/customer.jpg");
+  background-image: url("../images/customer.jpg");
   background-position: 50% 50%;
   margin: 0 auto;
 }
@@ -43030,7 +43033,7 @@ a.u-link.u-text-hover-grey-90:hover {
 .u-header .u-image-4 {
   width: 197px;
   height: 197px;
-  background-image: url("images/team_lead.jpg");
+  background-image: url("../images/team_lead.jpg");
   background-position: 50% 50%;
   margin: 0 auto;
 }
@@ -43078,7 +43081,7 @@ a.u-link.u-text-hover-grey-90:hover {
 .u-header .u-image-5 {
   width: 197px;
   height: 197px;
-  background-image: url("images/scrum_master-1.jpg");
+  background-image: url("../images/scrum_master-1.jpg");
   background-position: 50% 50%;
   margin: 0 auto;
 }
@@ -43126,7 +43129,7 @@ a.u-link.u-text-hover-grey-90:hover {
 .u-header .u-image-6 {
   width: 197px;
   height: 197px;
-  background-image: url("images/soft_dev.jpg");
+  background-image: url("../images/soft_dev.jpg");
   background-position: 50% 50%;
   margin: 0 auto;
 }

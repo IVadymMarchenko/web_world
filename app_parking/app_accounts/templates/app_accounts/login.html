@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
     {% load static %}
+    <link rel="icon" href="{% static 'app_accounts/images/icons/favicon.ico' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'app_accounts/css/login.css' %}">
     <script src="{% static 'app_accounts/js/login.js' %}" defer></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -40,28 +40,29 @@
                 {% csrf_token %}
 
                 <div class="input-group">
-                    <label for="identifier" class="required">Your Email or login</label>
-                    <input type="text" name="email" class="form-control" placeholder="Email or login" required />
+                    <label for="identifier" class="required">Email or login</label>
+                    <input type="text" name="email" class="form-control" id="id_email" placeholder="Email or login" required />
                     <span class="icon"><ion-icon name="person-sharp"></ion-icon></span>
                 </div>
-
                 <div class="input-group">
-                    <label for="password" class="required">Your Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Enter Password" required />
+                    <label for="password" class="required">Password</label>
+                    <input type="password" name="password" class="form-control" id="id_password" placeholder="Password" required />
                     <span class="icon"><ion-icon name="key-sharp"></ion-icon></span>
+                    <!-- Иконка для отображения пароля -->
+                    <span class="toggle-password">
+                        <ion-icon name="eye-off-sharp" id="toggle-password-icon"></ion-icon>
+                    </span>
                 </div>
-
 
                 <div class="button-wrapper">
-                    <button type="submit" class="button login-button disabled-button" disabled>Log In</button>
+                    <button type="submit" class="button disabled-button" disabled>Log In</button>
                 </div>
-
             </form>
-            <div class="forgot-password-link" id="forgot-password-link">
-                <a href="#" id="forgot-password-link">Forgot password?</a>
+            <div class="forgot-password-link">
+                <a href="{% url 'app_accounts:password_reset' %}" id="forgot-password-link">Forgot password?</a>
             </div>
-            <div class="signup-redirect" id="signup-redirect">
-                <p>New to W.W: Park-auto? <a href="{% url 'app_accounts:register_form' %}" id="signup-redirect">Sign Up</a></p>
+            <div class="signup-redirect">
+                <p>New to W.W: Park-auto? <a href="{% url 'app_accounts:register_form' %}" id="signup-link">Sign Up</a></p>
             </div>
         </div>
     </div>

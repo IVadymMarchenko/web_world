@@ -10,16 +10,12 @@
     font-weight: 600;
     color: white;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.brand-text {
-    font-family: 'Poppins', sans-serif;
+.navbar-brand:hover {
+    color: #b1afaf;
 }
-
-.navbar-brand:hover .brand-text {
-    color: #e0dfdf; 
-}
-
 /* Background container */
 .bg-box {
     position: fixed; 
@@ -171,7 +167,7 @@ html, body {
 input {
     width: 100%;
     padding: 10px 40px; 
-    border-radius: 5px;
+    border-radius: 15px;
     border: 1px solid var(--secondary); 
     background: var(--input-bg);
     transition: border-color 0.3s ease; 
@@ -192,32 +188,16 @@ input:focus {
 }
 
 /* Button styling with hover effects and transitions */
-button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 30px; 
-    background: linear-gradient(45deg, var(--primary), var(--btn-hvr)); 
-    color: var(--white);
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-}
-
-/* Button hover state */
-button:hover {
-    background: linear-gradient(45deg, var(--btn-hvr), var(--primary)); 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
-}
-
 /* Add styles for the registration button */
 /* Основные стили для кнопки регистрации */
 .register-button {
+    width: 100%;
     display: inline-block;
-    padding: 10px 20px;
+    padding: 12px 20px;
     margin-top: 10px;
-    background: linear-gradient(45deg, var(--primary), var(--btn-hvr));
+    border: none;
+    font-size: 16px;
+    background: linear-gradient(#2464d1, #0846a3);
     color: var(--white);
     text-align: center;
     text-decoration: none;
@@ -228,27 +208,43 @@ button:hover {
     cursor: pointer;
 }
 
-/* Стили для неактивного состояния кнопки */
+/* Button hover state */
+.register-button:hover {
+    background: linear-gradient(#0846a3, #2464d1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); 
+}
+
 .disabled-button {
+    width: 100%;
+    height: 50px;
+    display: inline-block;
+    padding: 12px 20px;
+    margin-top: 10px;
+    border: none;
     background-color: grey;
+    color: #ddd;
     cursor: not-allowed;
     box-shadow: none;
-    color: #ddd;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 16px;
 }
 
-/* Стили для активного состояния при наведении */
-.register-button:not(.disabled-button):hover {
+.login-button:not(.disabled-button):hover {
     background: linear-gradient(45deg, var(--btn-hvr), var(--primary));
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    transform: scale(1.05);
+
 }
 
-/* Стили для активного состояния при нажатии */
-.register-button:not(.disabled-button):active {
-    background: linear-gradient(45deg, var(--btn-hvr), var(--primary));
+
+.login-button:not(.disabled-button):active {
+    background: linear-gradient(45deg, var(--btn-hvr), var(--primary)); 
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-    transform: scale(0.98);
 }
+
+
 .required {
     color: red;
     font-weight: bold;
@@ -458,3 +454,18 @@ input[type="password"].match {
     border-color: #28a745;
 }
 
+.toggle-password {
+    position: absolute;
+    font-size: 22px;
+    right: 10px; /* Отступ справа */
+    top: 54px; /* Центрирование по вертикали */
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--grey); /* Цвет иконки */
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
